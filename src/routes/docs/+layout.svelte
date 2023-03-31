@@ -11,7 +11,7 @@
 	let collapsible = false;
 	const pages = getPages(import.meta.url, import.meta.glob('./**/*.svelte'))
 		.map((path) => path.split('/')[2])
-		.filter((name) => !name.startsWith('+'))
+		.filter((name) => !name?.startsWith('+'))
 		.reduce((acc, name) => {
 			if (!acc.includes(name)) {
 				acc.push(name);
