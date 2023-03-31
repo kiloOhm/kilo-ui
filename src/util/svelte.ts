@@ -6,6 +6,7 @@
  * @returns Paths to pages excluding routes with dynamic parameters
  */
 export const getPages = (url: string, modules: Record<string, unknown>): string[] => {
+	console.log({ url, modules });
 	/*
 	 * Possible url values
 	 * Server: file:///____/src/routes/index.svelte
