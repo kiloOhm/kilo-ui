@@ -5,12 +5,21 @@
 	import { goto } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import KPageTransitionProvider from '$lib/components/KPageTransitionProvider.svelte';
+	import { getPages } from '../../util/svelte';
 	export let data: LayoutData;
-
+	const pages = getPages(import.meta.url, import.meta.glob('./**/*.svelte'))
+		.map((path) => path.split('/')[2])
+		.filter((name) => !name.startsWith('+'))
+		.reduce((acc, name) => {
+			if (!acc.includes(name)) {
+				acc.push(name);
+			}
+			return acc;
+		}, [] as string[]);
 	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;
-	const items: AdaptiveNavItem[] = data.pages.map((name) => ({
+	const items: AdaptiveNavItem[] = pages.map((name) => ({
 		type: 'item',
 		key: name
 	}));
@@ -20,7 +29,7 @@
 		callback: () => void
 	) => void;
 	$: setHamBurgerClickCallback(() => (show = !show));
-	let active: string | null = data.pages.includes($page.route.id?.split('/')?.pop() ?? '')
+	let active: string | null = pages.includes($page.route.id?.split('/')?.pop() ?? '')
 		? $page.route.id?.split('/')?.pop() ?? null
 		: null;
 	$: (() => {

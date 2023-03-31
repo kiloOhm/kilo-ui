@@ -5,7 +5,6 @@
 	export let code: string;
 	export let language: string = 'javascript';
 	$: html = Prism.highlight('\r' + code, Prism.languages[language], language);
-	$: console.log(html);
 </script>
 
 <KCard bordered={false}>

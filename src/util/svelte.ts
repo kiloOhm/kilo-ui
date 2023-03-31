@@ -20,7 +20,7 @@ export const getPages = (url: string, modules: Record<string, unknown>): string[
 
 	const paths = Object.keys(modules)
 		// Convert relative path to absolute path
-		.map((path) => path.replace(/^(.)/, directory))
+		.map((path) => path.replace(/^(.\/)/, directory))
 		// Filter private modules (default regular expression in SvelteKit)
 		.filter((path) => !/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/.test(path))
 		// Filter paths with dynamic parameters (e.g. /blog/[slug].svelte)
