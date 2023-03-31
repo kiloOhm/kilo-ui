@@ -7,7 +7,8 @@
 	import KPageTransitionProvider from '$lib/components/KPageTransitionProvider.svelte';
 	import { getPages } from '../../util/svelte';
 	export let data: LayoutData;
-	const pages = getPages(import.meta.url, import.meta.glob('./**/*.svelte'))
+	const tree = getPages(import.meta.url, import.meta.glob('./**/*.svelte'));
+	const pages = tree
 		.map((path) => path.split('/')[2])
 		.filter((name) => !name?.startsWith('+'))
 		.reduce((acc, name) => {
@@ -16,6 +17,7 @@
 			}
 			return acc;
 		}, [] as string[]);
+	// console.log(pages);
 	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;

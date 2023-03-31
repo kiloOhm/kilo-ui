@@ -10,7 +10,6 @@
 	let show = false;
 	let collapsible = false;
 	const tree = getPages(import.meta.url, import.meta.glob('./**/*.svelte'));
-	console.log(tree);
 	const pages = tree
 		.map((path) => path.split('/')[2])
 		.filter((name) => !name?.startsWith('+'))

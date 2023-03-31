@@ -6,7 +6,7 @@
  * @returns Paths to pages excluding routes with dynamic parameters
  */
 export const getPages = (url: string, modules: Record<string, unknown>): string[] => {
-	console.log({ url, modules });
+	// console.log({ url, modules });
 	/*
 	 * Possible url values
 	 * Server: file:///____/src/routes/index.svelte
@@ -16,7 +16,7 @@ export const getPages = (url: string, modules: Record<string, unknown>): string[
 	const directory = url
 		.replace(/(.*?)\/src\/routes\//, '/')
 		.replace(/(.*?)\/immutable\/pages\//, '/')
-		.replace(/(.*?)\/var\/task\//, '/') // Vercel
+		.replace(/(.*?)\/var\/task/, '/') // Vercel
 		.replace(/\/([^/])*.svelte.*/, '/');
 
 	const paths = Object.keys(modules)
