@@ -36,15 +36,16 @@
 	],
 	"peerDependencies": {
 		"@popperjs/core": "^2.11.7",
+		"@sveltejs/kit": "1.5.0",
 		"color": "^4.2.3",
-		"svelte": "^3.54.0",
-		"@sveltejs/kit": "1.5.0"
+		"svelte": "^3.54.0"
 	},
 	"devDependencies": {
 		"@iconify-json/ion": "^1.1.9",
 		"@iconify-json/noto": "^1.1.11",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-cloudflare": "^2.2.0",
+		"@sveltejs/adapter-vercel": "^2.4.1",
 		"@sveltejs/package": "^2.0.0",
 		"@types/lodash-es": "^4.17.7",
 		"@types/prismjs": "^1.26.0",
