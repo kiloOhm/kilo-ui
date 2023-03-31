@@ -1,25 +1,16 @@
 <script lang="ts">
 	import { KAdaptiveNav, type AdaptiveNavItem } from '$lib';
 	import { getContext } from 'svelte';
-	import { getPages } from '../../util/svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import type { LayoutParentData } from './$types';
+	import type { LayoutData } from './$types';
 	import KPageTransitionProvider from '$lib/components/KPageTransitionProvider.svelte';
-	export let data: LayoutParentData;
+	export let data: LayoutData;
+
 	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;
-	const pages = getPages(import.meta.url, import.meta.glob('./**/*.svelte'))
-		.map((path) => path.split('/')[2])
-		.filter((name) => !name.startsWith('+'))
-		.reduce((acc, name) => {
-			if (!acc.includes(name)) {
-				acc.push(name);
-			}
-			return acc;
-		}, [] as string[]);
-	const items: AdaptiveNavItem[] = pages.map((name) => ({
+	const items: AdaptiveNavItem[] = data.pages.map((name) => ({
 		type: 'item',
 		key: name
 	}));
@@ -29,7 +20,7 @@
 		callback: () => void
 	) => void;
 	$: setHamBurgerClickCallback(() => (show = !show));
-	let active: string | null = pages.includes($page.route.id?.split('/')?.pop() ?? '')
+	let active: string | null = data.pages.includes($page.route.id?.split('/')?.pop() ?? '')
 		? $page.route.id?.split('/')?.pop() ?? null
 		: null;
 	$: (() => {
