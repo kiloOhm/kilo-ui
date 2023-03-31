@@ -9,7 +9,9 @@
 	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;
-	const pages = getPages(import.meta.url, import.meta.glob('./**/*.svelte'))
+	const tree = getPages(import.meta.url, import.meta.glob('./**/*.svelte'));
+	console.log(tree);
+	const pages = tree
 		.map((path) => path.split('/')[2])
 		.filter((name) => !name?.startsWith('+'))
 		.reduce((acc, name) => {
