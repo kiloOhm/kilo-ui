@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 400 400">
+	<g clip-path="url(#a)">
+		<circle cx="200" cy="200" r="200" fill="var(--k-colors-background-1)" />
+		<circle cx="200" cy="200" r="187.5" stroke="var(--k-colors-info)" stroke-width="25" />
+		<mask
+			id="b"
+			width="400"
+			height="400"
+			x="0"
+			y="0"
+			maskUnits="userSpaceOnUse"
+			style="mask-type:alpha"
+		>
+			<circle cx="200" cy="200" r="187.5" stroke="#000" stroke-width="25" />
+		</mask>
+		<g mask="url(#b)">
+			<path fill="var(--k-colors-success)" d="M0 0h200v200H0z" />
+		</g>
+		<path
+			fill="var(--k-colors-text-0)"
+			d="M84.908 273V127.545h30.753v64.134h1.917l52.344-64.134h36.861l-53.978 65.128L207.422 273h-36.79l-39.844-59.801-15.127 18.466V273H84.908Zm200.444-46.449v-62.642h30.255V273h-29.048v-19.815h-1.136c-2.463 6.392-6.558 11.529-12.287 15.412-5.682 3.882-12.619 5.823-20.81 5.823-7.292 0-13.707-1.657-19.247-4.971-5.54-3.315-9.872-8.026-12.997-14.134-3.078-6.108-4.64-13.423-4.688-21.946v-69.46h30.256v64.063c.047 6.439 1.775 11.529 5.185 15.269 3.409 3.741 7.978 5.611 13.707 5.611 3.646 0 7.055-.828 10.227-2.486 3.173-1.704 5.729-4.214 7.671-7.528 1.988-3.314 2.959-7.41 2.912-12.287Z"
+		/>
+		<circle cx="300" cy="139" r="18" fill="var(--k-colors-text-0)" />
+		<path
+			fill="var(--k-colors-success)"
+			fill-rule="evenodd"
+			d="M80 0H0v80h25V25h55V0Z"
+			clip-rule="evenodd"
+		/>
+		<path
+			fill="var(--k-colors-info)"
+			fill-rule="evenodd"
+			d="M0 320v80h80v-25H25v-55H0Z"
+			clip-rule="evenodd"
+		/>
+	</g>
+	<defs>
+		<clipPath id="a">
+			<path fill="#fff" d="M0 0h400v400H0z" />
+		</clipPath>
+	</defs>
+</svg>

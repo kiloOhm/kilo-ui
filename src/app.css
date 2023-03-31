@@ -1,4 +1,4 @@
 /* TEST WITH AND WITHOUT PREFLIGHT */
-/* @tailwind base; */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
