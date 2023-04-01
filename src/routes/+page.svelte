@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<title>Kilo-UI</title>
+	<meta name="description" content="WIP - A Svelte UI Component Library" />
 </svelte:head>
 
 <div class="w-full h-full relative">

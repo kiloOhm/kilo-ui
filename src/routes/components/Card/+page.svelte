@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<title>KUI Card</title>
+	<meta name="description" content="WIP - Kilo UI Card" />
 </svelte:head>
 
 <ComponentPage>

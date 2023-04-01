@@ -2,7 +2,7 @@
 	import { KAdaptiveNav, type AdaptiveNavItem } from '$lib';
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { goto, preloadData } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import KPageTransitionProvider from '$lib/components/KPageTransitionProvider.svelte';
 	export let data: LayoutData;
@@ -39,10 +39,19 @@
 			});
 		}
 	})();
+	function hover(key: string) {
+		preloadData(`/components/${key}`);
+	}
 </script>
 
 <div class="components-layout">
-	<KAdaptiveNav bind:collapsible bind:show {items} bind:active>
+	<KAdaptiveNav
+		bind:collapsible
+		bind:show
+		{items}
+		bind:active
+		on:hover={(e) => hover(e.detail.key)}
+	>
 		<div
 			class="w-full p-4 text-center cursor-pointer"
 			slot="before"

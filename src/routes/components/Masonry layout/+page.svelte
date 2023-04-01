@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<title>KUI Masonry layout</title>
+	<meta name="description" content="WIP - Kilo UI Masonry layout" />
 </svelte:head>
 
 <ComponentPage>

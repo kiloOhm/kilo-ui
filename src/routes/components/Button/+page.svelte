@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<title>KUI Button</title>
+	<meta name="description" content="WIP - Kilo UI Button" />
 </svelte:head>
 
 <ComponentPage>

@@ -5,6 +5,8 @@
 	import type { AdaptiveNavItem, AdaptiveNavStyle } from './KAdaptiveNav';
 	import KNavMenu from '../util/components/KNavMenu.svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	export let breakpoints: Record<number, AdaptiveNavStyle> = {
 		0: 'side-drawer-menu',
@@ -31,7 +33,7 @@
 <div class="k-adaptive-nav" data-style={currentStyle} data-direction={direction}>
 	{#if currentStyle === 'side-drawer-menu'}
 		<KDrawer bind:show direction="left">
-			<KNavMenu {items} bind:active>
+			<KNavMenu {items} bind:active on:hover={(e) => dispatch('hover', { key: e.detail.key })}>
 				<svelte:fragment slot="before">
 					{#if $$slots.before}
 						<slot name="before" />
@@ -45,7 +47,7 @@
 			</KNavMenu>
 		</KDrawer>
 	{:else if currentStyle === 'side-menu'}
-		<KNavMenu {items} bind:active>
+		<KNavMenu {items} bind:active on:hover={(e) => dispatch('hover', { key: e.detail.key })}>
 			<svelte:fragment slot="before">
 				{#if $$slots.before}
 					<slot name="before" />

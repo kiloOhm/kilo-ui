@@ -8,6 +8,7 @@
 
 <svelte:head>
 	<title>KUI Switch</title>
+	<meta name="description" content="WIP - Kilo UI Switch" />
 </svelte:head>
 
 <ComponentPage>

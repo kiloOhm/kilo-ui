@@ -4,11 +4,12 @@
 -->
 
 <script lang="ts">
-	import { type Color, type Size, Sizes, Colors } from '..';
+	import { type Color, type Size, Sizes, Colors, randomString } from '..';
 	import { createEventDispatcher } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
 	import { debounce } from 'lodash-es';
 	import type { ButtonPriority } from './KBtn';
+	const uid = randomString(8);
 
 	export let priority: ButtonPriority = 'first';
 	export let size: Size | string = 'md';
@@ -18,6 +19,7 @@
 	export let shape: 'pill' | 'circle' | 'sharp' | undefined = undefined;
 	export let disabled = false;
 	export let ripple = true;
+	export let ariaLabel: string | undefined = undefined;
 
 	let buttonRef: HTMLButtonElement;
 
@@ -30,7 +32,6 @@
 	let rippleShapeRef: HTMLDivElement;
 	const setRippleState = debounce(
 		(e: MouseEvent | KeyboardEvent | TouchEvent, color: boolean) => {
-			console.log('setRippleState', color);
 			if (disabled) return;
 			const buttonBBox = buttonRef?.getBoundingClientRect();
 			if (!buttonBBox) return;
@@ -75,6 +76,8 @@
 	bind:this={buttonRef}
 	data-priority={priority}
 	data-shape={shape}
+	aria-label={ariaLabel}
+	aria-labelledby={ariaLabel ? undefined : `k-btn-${uid}-content`}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
 	style:--color={!validColor
 		? color
@@ -90,12 +93,12 @@
 	on:mousedown={(e) => setRippleState(e, true)}
 	on:mouseup={(e) => setRippleState(e, false)}
 	on:mouseleave={(e) => setRippleState(e, false)}
-	on:touchstart={(e) => setRippleState(e, true)}
-	on:touchend={(e) => setRippleState(e, false)}
-	on:touchcancel={(e) => setRippleState(e, false)}
+	on:touchstart|passive={(e) => setRippleState(e, true)}
+	on:touchend|passive={(e) => setRippleState(e, false)}
+	on:touchcancel|passive={(e) => setRippleState(e, false)}
 >
 	<div class="background" />
-	<div class="content-container">
+	<div id={`k-btn-${uid}-content`} class="content-container">
 		<slot />
 	</div>
 	<div class="ripple-container">

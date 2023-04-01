@@ -2,6 +2,9 @@
 
 <script lang="ts">
 	import { KMenu, type AdaptiveNavItem } from '../../components';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
 	export let items: AdaptiveNavItem[] = [];
 	export let active: string | null = null;
 </script>
@@ -10,7 +13,7 @@
 	{#if $$slots.before}
 		<slot name="before" />
 	{/if}
-	<KMenu {items} bind:active />
+	<KMenu {items} bind:active on:hover={(e) => dispatch('hover', { key: e.detail.key })} />
 	{#if $$slots.after}
 		<slot name="after" />
 	{/if}

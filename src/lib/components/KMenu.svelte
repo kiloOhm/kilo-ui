@@ -3,6 +3,9 @@
 	import type { MenuItemMixed, MenuItem } from '.';
 	import { KMenu } from '.';
 	import { randomString } from '$lib/util';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
 	export let items: MenuItemMixed[];
 	export let active: string | null = null;
 	const uid = randomString(8);
@@ -56,6 +59,8 @@
 				class:active={active === key}
 				on:click={() => setActive(key)}
 				on:keypress={() => setActive(key)}
+				on:mouseenter={() => dispatch('hover', { key })}
+				on:touchstart={() => dispatch('hover', { key })}
 			>
 				{item.label ?? item.key}
 			</div>

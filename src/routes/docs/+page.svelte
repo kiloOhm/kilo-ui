@@ -1,5 +1,6 @@
 <svelte:head>
 	<title>KUI Docs</title>
+	<meta name="description" content="WIP - Kilo UI Documentation" />
 </svelte:head>
 
 <div class="p-4">
