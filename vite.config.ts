@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import Icons from 'unplugin-icons/vite';
+import { Sitemap } from 'vite-plugin-svelte-sitemap';
 
 export default defineConfig({
 	define: {
@@ -12,6 +13,9 @@ export default defineConfig({
 		Icons({
 			compiler: 'svelte',
 			autoInstall: true
+		}),
+		Sitemap({
+			baseurl: 'https://kiloui.com'
 		})
 	]
 });
