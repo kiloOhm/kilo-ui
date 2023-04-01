@@ -36,8 +36,8 @@
 			</KCard>
 		</div>
 		<div class="buttons mt-2 flex items-center gap-2">
-			<KBtn color="success" on:click={() => goto('/components')}>Components</KBtn>
-			<KBtn color="primary" ghost on:click={() => goto('/docs')}>Documentation</KBtn>
+			<KBtn color="success" on:click={() => goto('/components')} text="Components" />
+			<KBtn color="primary" ghost on:click={() => goto('/docs')} text="Documentation" />
 		</div>
 	</main>
 </div>

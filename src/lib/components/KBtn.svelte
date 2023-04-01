@@ -1,15 +1,9 @@
-<!-- TODO -->
-<!-- 
-	- [ ] types (submit, reset, anchor)
--->
-
 <script lang="ts">
 	import { type Color, type Size, Sizes, Colors, randomString } from '..';
 	import { createEventDispatcher } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
 	import { debounce } from 'lodash-es';
 	import type { ButtonPriority } from './KBtn';
-	const uid = randomString(8);
 
 	export let priority: ButtonPriority = 'first';
 	export let size: Size | string = 'md';
@@ -19,7 +13,11 @@
 	export let shape: 'pill' | 'circle' | 'sharp' | undefined = undefined;
 	export let disabled = false;
 	export let ripple = true;
+	export let text: string | undefined = undefined;
 	export let ariaLabel: string | undefined = undefined;
+	export let submit: boolean | undefined = undefined;
+	export let href: string | undefined = undefined;
+	export let target: string | undefined = undefined;
 
 	let buttonRef: HTMLButtonElement;
 
@@ -27,7 +25,13 @@
 	function click() {
 		if (!disabled) {
 			dispatch('click');
+			if (href) {
+				window.open(href, target);
+			}
 		}
+	}
+	function hover() {
+		dispatch('hover');
 	}
 	let rippleShapeRef: HTMLDivElement;
 	const setRippleState = debounce(
@@ -73,11 +77,12 @@
 
 <button
 	class="k-btn"
+	type={submit ? 'submit' : 'button'}
+	role={href ? 'link' : undefined}
 	bind:this={buttonRef}
 	data-priority={priority}
 	data-shape={shape}
-	aria-label={ariaLabel}
-	aria-labelledby={ariaLabel ? undefined : `k-btn-${uid}-content`}
+	aria-label={ariaLabel ?? text}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
 	style:--color={!validColor
 		? color
@@ -92,14 +97,22 @@
 	on:click={click}
 	on:mousedown={(e) => setRippleState(e, true)}
 	on:mouseup={(e) => setRippleState(e, false)}
+	on:mouseenter={() => hover()}
 	on:mouseleave={(e) => setRippleState(e, false)}
-	on:touchstart|passive={(e) => setRippleState(e, true)}
+	on:touchstart|passive={(e) => {
+		hover();
+		setRippleState(e, true);
+	}}
 	on:touchend|passive={(e) => setRippleState(e, false)}
 	on:touchcancel|passive={(e) => setRippleState(e, false)}
 >
 	<div class="background" />
-	<div id={`k-btn-${uid}-content`} class="content-container">
-		<slot />
+	<div class="content-container">
+		{#if $$slots.default}
+			<slot />
+		{:else if text}
+			<span class="text">{text}</span>
+		{/if}
 	</div>
 	<div class="ripple-container">
 		<div bind:this={rippleShapeRef} class="ripple-shape" />
@@ -250,5 +263,8 @@
 			justify-content: center;
 			z-index: 1;
 		}
+	}
+	.aria-label-helper {
+		display: none;
 	}
 </style>

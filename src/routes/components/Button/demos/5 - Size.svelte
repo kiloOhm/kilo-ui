@@ -3,34 +3,14 @@
 </script>
 
 <div class="flex flex-wrap gap-2 items-center">
-	<KBtn size="xs">
-		<span>XS</span>
-	</KBtn>
-	<KBtn size="sm">
-		<span>SM</span>
-	</KBtn>
-	<KBtn size="md">
-		<span>MD</span>
-	</KBtn>
-	<KBtn size="lg">
-		<span>LG</span>
-	</KBtn>
-	<KBtn size="xl">
-		<span>XL</span>
-	</KBtn>
-	<KBtn size="2xl">
-		<span>2XL</span>
-	</KBtn>
-	<KBtn size="3xl">
-		<span>3XL</span>
-	</KBtn>
-	<KBtn size="4xl">
-		<span>4XL</span>
-	</KBtn>
-	<KBtn size="5xl">
-		<span>5XL</span>
-	</KBtn>
-	<KBtn size="6xl">
-		<span>6XL</span>
-	</KBtn>
+	<KBtn size="xs" text="XS" />
+	<KBtn size="sm" text="SM" />
+	<KBtn size="md" text="MD" />
+	<KBtn size="lg" text="LG" />
+	<KBtn size="xl" text="XL" />
+	<KBtn size="2xl" text="2XL" />
+	<KBtn size="3xl" text="3XL" />
+	<KBtn size="4xl" text="4XL" />
+	<KBtn size="5xl" text="5XL" />
+	<KBtn size="6xl" text="6XL" />
 </div>

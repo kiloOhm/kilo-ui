@@ -64,6 +64,7 @@
 							size="sm"
 							priority="third"
 							shape="circle"
+							ariaLabel="open menu"
 							on:click={() => hamburgerClickSubscribers.map((fn) => fn?.())}
 						>
 							<IonMdList />

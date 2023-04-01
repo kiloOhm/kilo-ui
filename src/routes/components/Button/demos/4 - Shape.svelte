@@ -3,22 +3,10 @@
 </script>
 
 <div class="flex flex-wrap items-center gap-2">
-	<KBtn shape="sharp">
-		<span>sharp</span>
-	</KBtn>
-	<KBtn shape="pill">
-		<span>Pill</span>
-	</KBtn>
-	<KBtn shape="circle" size="xs">
-		<span>Circle</span>
-	</KBtn>
-	<KBtn ghost shape="sharp">
-		<span>sharp</span>
-	</KBtn>
-	<KBtn ghost shape="pill">
-		<span>Pill</span>
-	</KBtn>
-	<KBtn ghost shape="circle" size="xs">
-		<span>Circle</span>
-	</KBtn>
+	<KBtn shape="sharp" text="Sharp" />
+	<KBtn shape="pill" text="Pill" />
+	<KBtn shape="circle" size="xs" text="Circle" />
+	<KBtn ghost shape="sharp" text="Sharp" />
+	<KBtn ghost shape="pill" text="Pill" />
+	<KBtn ghost shape="circle" size="xs" text="Circle" />
 </div>
