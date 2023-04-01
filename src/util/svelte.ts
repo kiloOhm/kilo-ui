@@ -9,6 +9,7 @@ export const getPages = (url: string, modules: Record<string, unknown>): string[
 	console.log({ url, modules });
 	/*
 	 * Possible url values
+	 * Server: 'file:///var/task/.svelte-kit/output/server/entries/pages/components/_layout.svelte.js',
 	 * Server: file:///____/src/routes/index.svelte
 	 * Client(dev): http://127.0.0.1:____/src/routes/index.svelte?t=1658306082278
 	 * Client(preview): http://127.0.0.1:____/_app/immutable/pages/index.svelte-e7ea94ef.js

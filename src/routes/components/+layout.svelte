@@ -5,12 +5,10 @@
 	import { goto } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import KPageTransitionProvider from '$lib/components/KPageTransitionProvider.svelte';
-	import { getPages } from '../../util/svelte';
 	export let data: LayoutData;
-	const tree = getPages(import.meta.url, import.meta.glob('./**/*.svelte'));
-	const pages = tree
-		.map((path) => path.split('/')[2])
-		.filter((name) => !name?.startsWith('+'))
+	const pages = Object.entries(import.meta.glob('./**/*.svelte'))
+		.map(([path, _]) => path.split('/')[1])
+		.filter((name) => !name.startsWith('+'))
 		.reduce((acc, name) => {
 			if (!acc.includes(name)) {
 				acc.push(name);

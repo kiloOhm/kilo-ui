@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { KAdaptiveNav, type AdaptiveNavItem } from '$lib';
-	import { getPages } from '../../util/svelte';
 	import { goto } from '$app/navigation';
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
@@ -9,10 +8,9 @@
 	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;
-	const tree = getPages(import.meta.url, import.meta.glob('./**/*.svelte'));
-	const pages = tree
-		.map((path) => path.split('/')[2])
-		.filter((name) => !name?.startsWith('+'))
+	const pages = Object.entries(import.meta.glob('./**/*.svelte'))
+		.map(([path, _]) => path.split('/')[1])
+		.filter((name) => !name.startsWith('+'))
 		.reduce((acc, name) => {
 			if (!acc.includes(name)) {
 				acc.push(name);
