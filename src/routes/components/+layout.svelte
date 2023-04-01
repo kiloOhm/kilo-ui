@@ -17,7 +17,6 @@
 			}
 			return acc;
 		}, [] as string[]);
-	// console.log(pages);
 	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;

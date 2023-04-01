@@ -6,7 +6,7 @@
  * @returns Paths to pages excluding routes with dynamic parameters
  */
 export const getPages = (url: string, modules: Record<string, unknown>): string[] => {
-	// console.log({ url, modules });
+	console.log({ url, modules });
 	/*
 	 * Possible url values
 	 * Server: file:///____/src/routes/index.svelte
@@ -16,19 +16,19 @@ export const getPages = (url: string, modules: Record<string, unknown>): string[
 	const directory = url
 		.replace(/(.*?)\/src\/routes\//, '/')
 		.replace(/(.*?)\/immutable\/pages\//, '/')
-		.replace(/(.*?)\/var\/task/, '/') // Vercel
+		.replace(/(.*?)\/var\/task/, '/')
 		.replace(/\/([^/])*.svelte.*/, '/');
 
 	const paths = Object.keys(modules)
 		// Convert relative path to absolute path
 		.map((path) => path.replace(/^(.\/)/, directory))
-		// Filter private modules (default regular expression in SvelteKit)
-		.filter((path) => !/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/.test(path))
-		// Filter paths with dynamic parameters (e.g. /blog/[slug].svelte)
-		.filter((path) => !/\[.*\]/.test(path))
-		// Remove '/index', layout name (@___), and file extension (.svelte)
-		.map((path) => path.replace(/(\/index)?(@.*)?.svelte/, ''))
-		// Set empty path string to '/' ('./index.svelte' is converted to '')
+		// // Filter private modules (default regular expression in SvelteKit)
+		// .filter((path) => !/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/.test(path))
+		// // Filter paths with dynamic parameters (e.g. /blog/[slug].svelte)
+		// .filter((path) => !/\[.*\]/.test(path))
+		// // Remove '/index', layout name (@___), and file extension (.svelte)
+		// .map((path) => path.replace(/(\/index)?(@.*)?.svelte/, ''))
+		// // Set empty path string to '/' ('./index.svelte' is converted to '')
 		.map((path) => path || '/')
 		.sort();
 
