@@ -79,10 +79,10 @@
 			white-space: nowrap;
 			transition-property: background-color, color;
 			&:hover {
-				background: var(--k-colors-background-1);
+				background: var(--k-colors-background-2-lighten-1);
 			}
 			&.active {
-				color: var(--k-colors-info);
+				color: var(--k-colors-primary);
 			}
 		}
 		> .divider {
@@ -99,7 +99,7 @@
 		> .pointer {
 			position: absolute;
 			transition-property: left, top, opacity;
-			background-color: var(--k-colors-info);
+			background-color: var(--k-colors-primary-darken-2);
 			opacity: 0.2;
 			width: 100%;
 			border-radius: var(--k-menu-item-border-radius);

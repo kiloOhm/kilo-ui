@@ -3,13 +3,13 @@
 </script>
 
 <div class="flex flex-wrap gap-2">
-	<KBtn disabled state="info">
-		<span>Info</span>
+	<KBtn disabled color="secondary">
+		<span>Secondary</span>
 	</KBtn>
-	<KBtn disabled priority="secondary" state="success">
-		<span>Success secondary</span>
+	<KBtn disabled priority="second" color="success">
+		<span>Success second</span>
 	</KBtn>
-	<KBtn disabled priority="tertiary" state="error">
-		<span>Error tertiary</span>
+	<KBtn disabled priority="third" color="error">
+		<span>Error third</span>
 	</KBtn>
 </div>

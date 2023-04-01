@@ -3,31 +3,31 @@
 </script>
 
 <div class="flex flex-col gap-2">
-	<KCard state="neutral">
+	<KCard color="primary">
 		<header slot="header">
-			<h3>Neutral</h3>
+			<h3>Primary</h3>
 		</header>
 		<p>Shall I compare thee to a summer's day?</p>
 	</KCard>
-	<KCard state="info">
+	<KCard color="secondary">
 		<header slot="header">
-			<h3>Info</h3>
+			<h3>Secondary</h3>
 		</header>
 		<p>Thou art more lovely and more temperate:</p>
 	</KCard>
-	<KCard state="success">
+	<KCard color="success">
 		<header slot="header">
 			<h3>Success</h3>
 		</header>
 		<p>Rough winds do shake the darling buds of May,</p>
 	</KCard>
-	<KCard state="warning">
+	<KCard color="warning">
 		<header slot="header">
 			<h3>Warning</h3>
 		</header>
 		<p>And summer's lease hath all too short a date;</p>
 	</KCard>
-	<KCard state="error">
+	<KCard color="error">
 		<header slot="header">
 			<h3>Error</h3>
 		</header>

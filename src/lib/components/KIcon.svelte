@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { KThemeProvider } from '.';
-	import { Sizes, type Size, type State } from '..';
+	import { Sizes, type Size, type Color } from '..';
 	export let size: Size | string = 'medium';
-	export let state: State | undefined = undefined;
+	export let color: Color | undefined = undefined;
 	export let noColorCorrection: boolean = false;
 	$: validSize = Sizes.includes(size as Size);
 </script>
@@ -12,7 +12,7 @@
 <div
 	class="k-icon"
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={`var(--k-colors-${state}, currentColor)`}
+	style:--color={`var(--k-colors-${color}, currentColor)`}
 	class:noColorCorrection
 >
 	<slot />

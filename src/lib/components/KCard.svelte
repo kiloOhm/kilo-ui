@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { KThemeProvider } from '.';
-	import { Sizes, type Size, type State } from '..';
+	import { Sizes, type Size, type Color } from '..';
 	export let size: Size | string = 'medium';
-	export let state: State | undefined = undefined;
+	export let color: Color | undefined = undefined;
 	export let bordered = true;
 	$: validSize = Sizes.includes(size as Size);
 </script>
@@ -12,9 +12,8 @@
 <div
 	class="k-card"
 	data-bordered={bordered}
-	style:--text-color={state ? `var(--k-colors-background-0)` : 'var(--k-colors-text-0)'}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={`var(--k-colors-${state})`}
+	style:--color={`var(--k-colors-${color}-darken-4)`}
 >
 	{#if $$slots.header}
 		<header>
@@ -47,7 +46,6 @@
 			border-color: var(--color, var(--k-colors-border-0));
 		}
 		> header {
-			color: var(--text-color);
 			padding: var(--k-card-header-padding);
 			background-color: var(--color, var(--k-colors-border-0));
 		}

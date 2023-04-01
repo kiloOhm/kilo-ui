@@ -1,13 +1,16 @@
 <script lang="ts">
-	import { Sizes, type Size } from '..';
+	import { Colors, Sizes, type Color, type Size } from '..';
 	import KThemeProvider from './KThemeProvider.svelte';
 	const uid = crypto.randomUUID();
 	export let checked = false;
 	export let shape: 'round' | 'sharp' | undefined = undefined;
 	export let size: Size | string = 'medium';
-	export let checkedColor: string = 'var(--k-colors-success)';
+	export let checkedColor: Color | string = 'var(--k-colors-success-darken-4)';
 	export let uncheckedColor: string = 'var(--k-colors-background-2)';
 	$: validSize = Sizes.includes(size as Size);
+	$: _checkedColor = Colors.includes(checkedColor as Color)
+		? `var(--k-colors-${checkedColor}-darken-4)`
+		: checkedColor;
 </script>
 
 <KThemeProvider />
@@ -20,7 +23,7 @@
 		: shape === 'sharp'
 		? '0'
 		: 'var(--k-switch-border-radius)'}
-	style:--track-color={checked ? checkedColor : uncheckedColor}
+	style:--track-color={checked ? _checkedColor : uncheckedColor}
 	class:checked
 	on:click={() => (checked = !checked)}
 	on:keyup={(e) => {

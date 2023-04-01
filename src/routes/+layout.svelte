@@ -62,7 +62,7 @@
 					<div transition:fade={{ duration: 200 }} class="absolute left-2 top-1/2 -translate-y-1/2">
 						<KBtn
 							size="sm"
-							priority="tertiary"
+							priority="third"
 							shape="circle"
 							on:click={() => hamburgerClickSubscribers.map((fn) => fn?.())}
 						>

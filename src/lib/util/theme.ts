@@ -1,18 +1,68 @@
 import type { Size } from '$lib/types';
 import { memoize, merge } from 'lodash-es';
 import type { DeepPartial } from './types';
+import Color from 'color';
 
 export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 	const theme = defaultTheme;
 	if (overrides) {
 		merge(theme, overrides);
 	}
+	if (import.meta.env.DEV) {
+		// check for low contrast
+		for (const [key, value] of Object.entries(theme.colors)) {
+			const name = key as keyof typeof theme.colors;
+			if (name === 'text' || name === 'focus') {
+				continue;
+			}
+			let colors: Color[];
+			try {
+				if (Array.isArray(value)) {
+					colors = value.map((v) => Color(v));
+				} else {
+					colors = [Color(value as string)];
+				}
+			} catch {
+				continue;
+			}
+			for (const [i, color] of colors.entries()) {
+				const contrasts = [color.contrast(Color(theme.colors.text[0]))];
+				contrasts.map((c, j) => {
+					if (c < 4.5)
+						console.log(`Low contrast between ${name}-${i} and text-${j}: ${c.toFixed(2)};`);
+				});
+			}
+		}
+	}
 	function objToCSSVarsRecursively(obj: any, prefix = '--k-'): string[] {
 		return Object.entries(obj).reduce((acc, [key, value]) => {
 			if (typeof value === 'object') {
 				return [...acc, ...objToCSSVarsRecursively(value, `${prefix}${key}-`)];
 			} else if (typeof value === 'string' || typeof value === 'number') {
-				return [...acc, `${prefix}${key}: ${value};`];
+				const variants = new Map<string, string>();
+				variants.set(`${prefix}${key}`, `${value}`);
+				try {
+					if (typeof value === 'number') throw 'not a color';
+					const color = Color(value);
+					variants.set(`${prefix}${key}`, `${color.rgb().string()}`);
+					//lighten
+					variants.set(`${prefix}${key}-lighten-1`, `${color.lighten(0.2).rgb().string()}`);
+					variants.set(`${prefix}${key}-lighten-2`, `${color.lighten(0.4).rgb().string()}`);
+					variants.set(`${prefix}${key}-lighten-3`, `${color.lighten(0.6).rgb().string()}`);
+					//darken
+					variants.set(`${prefix}${key}-darken-2`, `${color.darken(0.2).rgb().string()}`);
+					variants.set(`${prefix}${key}-darken-4`, `${color.darken(0.4).rgb().string()}`);
+					variants.set(`${prefix}${key}-darken-6`, `${color.darken(0.6).rgb().string()}`);
+					//alpha
+					variants.set(`${prefix}${key}-alpha-2`, `${color.alpha(0.2).rgb().string()}`);
+					variants.set(`${prefix}${key}-alpha-4`, `${color.alpha(0.4).rgb().string()}`);
+					variants.set(`${prefix}${key}-alpha-6`, `${color.alpha(0.6).rgb().string()}`);
+					variants.set(`${prefix}${key}-alpha-8`, `${color.alpha(0.8).rgb().string()}`);
+				} catch {
+					//not a color
+				}
+				const _variants = [...variants.entries()].map(([key, value]) => `${key}: ${value};`);
+				return [...acc, ..._variants];
 			} else {
 				return acc;
 			}
@@ -41,18 +91,18 @@ export const defaultTheme = {
 		background: ['#030303', '#151515', '#272727'],
 		text: ['#EDEDED', '#A9A9A9', '#666666'],
 		focus: '#EDEDED',
-		neutral: '#EDEDED',
-		info: '#14A9DB',
+		primary: '#14A9DB',
+		secondary: '#9E05D6',
 		success: '#06D6A0',
-		warning: '#FFD166',
-		error: '#EF476F',
+		warning: '#D69E05',
+		error: '#D6053D',
 		border: ['#393939', '#4B4B4B', '#5D5D5D']
 	},
 	font: {
 		family: '"Arial", sans-serif'
 	},
 	icon: {
-		color: '#EDF1F2',
+		color: '#EDEDED',
 		size: '1.5em'
 	},
 	button: {
@@ -63,19 +113,19 @@ export const defaultTheme = {
 			style: 'solid'
 		},
 		ripple: {
-			alpha: 0.4,
+			alpha: 0.2,
 			duration: {
 				expand: 2.5,
-				fade: 2
+				fade: 1
 			},
-			color: '#EDF1F2'
+			color: '#EDEDED'
 		},
 		hover: {
 			brightness: 0.8,
 			scale: 0.97
 		},
 		active: {
-			brightness: 0.8,
+			brightness: 0.6,
 			scale: 0.94
 		},
 		disabled: {
@@ -110,7 +160,7 @@ export const defaultTheme = {
 		},
 		padding: '.25em .5em',
 		thumb: {
-			color: '#EDF1F2',
+			color: '#EDEDED',
 			padding: '.125em'
 		}
 	},

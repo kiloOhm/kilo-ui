@@ -30,12 +30,12 @@
 			outline-color: var(--k-colors-focus);
 		}
 		a {
-			color: var(--k-colors-info);
+			color: var(--k-colors-primary);
 			text-decoration: underline;
 			text-decoration-color: transparent;
 		}
 		a:hover {
-			text-decoration-color: var(--k-colors-info);
+			text-decoration-color: var(--k-colors-primary);
 		}
   </style>`;
 </script>

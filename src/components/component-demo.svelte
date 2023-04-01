@@ -11,7 +11,7 @@
 <KCard>
 	<header slot="header" class="flex flex-wrap gap-4 justify-between items-center">
 		<h2 class="text-lg">{title}</h2>
-		<KBtn shape="circle" priority="tertiary" size="xs" on:click={() => (showCode = !showCode)}>
+		<KBtn shape="circle" priority="third" size="xs" on:click={() => (showCode = !showCode)}>
 			<KIcon size="lg">
 				<IonCode />
 			</KIcon>

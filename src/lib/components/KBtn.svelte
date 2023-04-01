@@ -4,14 +4,16 @@
 -->
 
 <script lang="ts">
-	import { type State, type Priority, type Size, Sizes } from '..';
+	import { type Color, type Size, Sizes, Colors } from '..';
 	import { createEventDispatcher } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
-	import { debounce, defer } from 'lodash-es';
+	import { debounce } from 'lodash-es';
+	import type { ButtonPriority } from './KBtn';
 
-	export let priority: Priority = 'primary';
+	export let priority: ButtonPriority = 'first';
 	export let size: Size | string = 'md';
-	export let state: State = 'neutral';
+	export let color: Color | string | undefined = undefined;
+	export let textColor: string | undefined = undefined;
 	export let ghost = false;
 	export let shape: 'pill' | 'circle' | 'sharp' | undefined = undefined;
 	export let disabled = false;
@@ -27,7 +29,8 @@
 	}
 	let rippleShapeRef: HTMLDivElement;
 	const setRippleState = debounce(
-		(e: MouseEvent | KeyboardEvent | TouchEvent, state: boolean) => {
+		(e: MouseEvent | KeyboardEvent | TouchEvent, color: boolean) => {
+			console.log('setRippleState', color);
 			if (disabled) return;
 			const buttonBBox = buttonRef?.getBoundingClientRect();
 			if (!buttonBBox) return;
@@ -48,7 +51,7 @@
 					  };
 			rippleShapeRef.style.left = `${pos.x}px`;
 			rippleShapeRef.style.top = `${pos.y}px`;
-			if (state) {
+			if (color) {
 				rippleShapeRef.style.scale = '2.5';
 				const rippleAlpha =
 					getComputedStyle(rippleShapeRef).getPropertyValue('--k-button-ripple-alpha');
@@ -62,6 +65,7 @@
 		{ leading: true, trailing: true }
 	);
 	$: validSize = Sizes.includes(size as Size);
+	$: validColor = !color || Colors.includes(color as Color);
 </script>
 
 <KThemeProvider />
@@ -70,10 +74,15 @@
 	class="k-btn"
 	bind:this={buttonRef}
 	data-priority={priority}
-	data-state={state}
 	data-shape={shape}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={`var(--k-colors-${state}, --k-colors-neutral)`}
+	style:--color={!validColor
+		? color
+		: `var(--k-colors-${color}${
+				priority === 'first' && !ghost ? '-darken-4' : ''
+		  }, var(--k-colors-text-0))`}
+	style:--text-color={textColor ??
+		(color ? 'var(--k-colors-text-0)' : 'var(--k-colors-background-0)')}
 	class:ripple
 	class:ghost
 	{disabled}
@@ -100,6 +109,7 @@
 		overflow: hidden;
 		font-size: var(--size);
 		margin: 0;
+		color: var(--text-color);
 		padding: var(--k-button-padding);
 		border-radius: var(--k-button-border-radius);
 		transition-property: filter, background-color, border-color, outline-color, transform;
@@ -149,11 +159,10 @@
 			> .background {
 				border-width: var(--k-button-border-width);
 				border-style: var(--k-button-border-style);
-				color: var(--k-colors-text-1);
-				border-color: var(--k-colors-neutral);
+				border-color: var(--k-colors-primary);
 				background-color: transparent;
 			}
-			&[data-priority='primary'] {
+			&[data-priority='first'] {
 				color: var(--color);
 				> .background {
 					border-color: var(--color);
@@ -162,13 +171,13 @@
 					background-color: var(--color);
 				}
 			}
-			&[data-priority='secondary'] {
+			&[data-priority='second'] {
 				> .background {
 					border-color: var(--k-colors-border-1);
 				}
 				color: var(--color);
 			}
-			&[data-priority='tertiary'] {
+			&[data-priority='third'] {
 				> .background {
 					background-color: transparent;
 					border-color: transparent;
@@ -185,19 +194,18 @@
 			}
 		}
 		&:not(.ghost) {
-			&[data-priority='primary'] {
-				color: var(--k-colors-background-0);
+			&[data-priority='first'] {
 				> .background {
 					background-color: var(--color);
 				}
 			}
-			&[data-priority='secondary'] {
+			&[data-priority='second'] {
 				> .background {
 					background-color: var(--k-colors-background-2);
 				}
 				color: var(--color);
 			}
-			&[data-priority='tertiary'] {
+			&[data-priority='third'] {
 				> .background {
 					background-color: transparent;
 				}

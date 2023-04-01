@@ -4,32 +4,32 @@
 
 <div class="flex flex-wrap items-center gap-2">
 	<KBtnGroup>
-		<KBtn state="success">
+		<KBtn color="success">
 			<span>Shall I</span>
 		</KBtn>
-		<KBtn state="warning">
+		<KBtn color="warning">
 			<span>compare thee</span>
 		</KBtn>
-		<KBtn state="error">
+		<KBtn color="error">
 			<span>to a summer's day?</span>
 		</KBtn>
 	</KBtnGroup>
 	<KBtnGroup vertical>
-		<KBtn state="info">
+		<KBtn color="#0057B7" textColor="white">
 			<span>Stand with</span>
 		</KBtn>
-		<KBtn state="warning">
+		<KBtn color="#FFDD00" textColor="black">
 			<span>Ukraine</span>
 		</KBtn>
 	</KBtnGroup>
 	<KBtnGroup>
-		<KBtn shape="pill" ghost state="info">
+		<KBtn shape="pill" ghost color="secondary">
 			<span>Thou art</span>
 		</KBtn>
-		<KBtn ghost state="info">
+		<KBtn ghost color="secondary">
 			<span>more lovely</span>
 		</KBtn>
-		<KBtn shape="sharp" ghost state="info">
+		<KBtn shape="sharp" ghost color="secondary">
 			<span>and more temperate:</span>
 		</KBtn>
 	</KBtnGroup>
