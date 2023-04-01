@@ -52,6 +52,24 @@
 		return undefined;
 	}
 	$: path = data.pathname.split('/')[1];
+	let overlay: HTMLDivElement;
+	$: overlay
+		?.animate(
+			[
+				{
+					opacity: 1
+				},
+				{
+					opacity: 0
+				}
+			],
+			{
+				duration: 200,
+				easing: 'ease-in-out',
+				fill: 'forwards'
+			}
+		)
+		.commitStyles();
 </script>
 
 <KThemeProvider>
@@ -85,14 +103,29 @@
 					<span style="color: var(--k-colors-text-2)">v{APP_VERSION}</span>
 				</div>
 			</header>
-			<KPageTransitionProvider {ruleFn} {path}>
-				<slot />
-			</KPageTransitionProvider>
+			<main class="flex-grow overflow-hidden">
+				<KPageTransitionProvider {ruleFn} {path}>
+					<slot />
+				</KPageTransitionProvider>
+			</main>
 		</div>
 	</KDrawerProvider>
 </KThemeProvider>
 
-<style>
+<div bind:this={overlay} class="k-overlay">
+	<div class="blur-container">
+		<KIcon noColorCorrection size="9xl">
+			<KuiLogo />
+		</KIcon>
+	</div>
+	<div class="logo-container">
+		<KIcon noColorCorrection size="9xl">
+			<KuiLogo />
+		</KIcon>
+	</div>
+</div>
+
+<style lang="scss">
 	:global(body) {
 		margin: 0;
 		padding: 1rem;
@@ -100,5 +133,37 @@
 	header {
 		background-color: var(--k-colors-background-2);
 		border-bottom: 1px solid var(--k-colors-border-0);
+	}
+	.k-overlay {
+		position: fixed;
+		pointer-events: none;
+		inset: 0;
+		backdrop-filter: blur(10px) brightness(0.3);
+		z-index: 1000;
+		display: grid;
+		place-items: center;
+		> * {
+			position: absolute;
+		}
+		> .blur-container {
+			pointer-events: none;
+			scale: 1.1;
+			filter: blur(40px) brightness(1.5);
+			animation: 3s linear infinite bobbing;
+		}
+	}
+	@keyframes bobbing {
+		0% {
+			transform: translateY(0);
+		}
+		25% {
+			transform: translateY(-1rem);
+		}
+		75% {
+			transform: translateY(1rem);
+		}
+		100% {
+			transform: translateY(0);
+		}
 	}
 </style>
