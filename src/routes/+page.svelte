@@ -36,7 +36,7 @@
 		</div>
 		<div class="buttons mt-2 flex items-center gap-2">
 			<KBtn color="success" on:click={() => goto('/components')}>Components</KBtn>
-			<KBtn color="secondary" ghost on:click={() => goto('/docs')}>Documentation</KBtn>
+			<KBtn color="primary" ghost on:click={() => goto('/docs')}>Documentation</KBtn>
 		</div>
 	</main>
 </div>
