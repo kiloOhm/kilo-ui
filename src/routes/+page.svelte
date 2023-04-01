@@ -13,17 +13,17 @@
 </svelte:head>
 
 <div class="w-full h-full relative">
-	<figure class="blur-3xl absolute inset-0 flex justify-center items-center">
+	<figure class="blur-3xl absolute inset-0 flex justify-center items-center overflow-hidden">
 		<KIcon noColorCorrection size="20rem">
 			<KuiLogo />
 		</KIcon>
 	</figure>
 	<main class="absolute inset-0 flex flex-col justify-center items-center">
-		<h1 class="text-9xl">Kilo UI</h1>
-		<h2 class="text-2xl">A Svelte UI Component Library</h2>
+		<h1 class="text-8xl">Kilo UI</h1>
+		<h2 class="text-xl">A Svelte UI Component Library</h2>
 		<div class="WIP my-4">
 			<KCard color="warning">
-				<div slot="header" class="p-4 flex items-center justify-center gap-4">
+				<div slot="header" class="p-2 flex items-center justify-center gap-4">
 					<KIcon size="xl">
 						<NotoConstruction />
 					</KIcon>
