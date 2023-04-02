@@ -31,6 +31,8 @@
 				void child.offsetHeight; // force reflow
 				columnHeights[column] += child.offsetHeight + (i === numChildren - 1 ? 0 : rowGap);
 			}
+			const maxHeight = Math.max(...columnHeights);
+			wrapperRef.style.height = `${maxHeight}px`;
 		},
 		16,
 		{

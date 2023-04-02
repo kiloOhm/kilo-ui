@@ -46,9 +46,9 @@ export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 					const color = Color(value);
 					variants.set(`${prefix}${key}`, `${color.rgb().string()}`);
 					//lighten
-					variants.set(`${prefix}${key}-lighten-1`, `${color.lighten(0.2).rgb().string()}`);
-					variants.set(`${prefix}${key}-lighten-2`, `${color.lighten(0.4).rgb().string()}`);
-					variants.set(`${prefix}${key}-lighten-3`, `${color.lighten(0.6).rgb().string()}`);
+					variants.set(`${prefix}${key}-lighten-2`, `${color.lighten(0.2).rgb().string()}`);
+					variants.set(`${prefix}${key}-lighten-4`, `${color.lighten(0.4).rgb().string()}`);
+					variants.set(`${prefix}${key}-lighten-6`, `${color.lighten(0.6).rgb().string()}`);
 					//darken
 					variants.set(`${prefix}${key}-darken-2`, `${color.darken(0.2).rgb().string()}`);
 					variants.set(`${prefix}${key}-darken-4`, `${color.darken(0.4).rgb().string()}`);

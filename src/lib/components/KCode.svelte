@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { KCard } from '.';
 	import Prism from 'prismjs';
-	import 'prismjs/themes/prism-tomorrow.min.css';
+	import '../util/PrismTheme.css';
 	export let code: string;
 	export let language: string = 'javascript';
 	$: html = Prism.highlight('\r' + code, Prism.languages[language], language);

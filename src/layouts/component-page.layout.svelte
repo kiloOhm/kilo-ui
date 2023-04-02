@@ -21,7 +21,7 @@
 		</div>
 	{/if}
 
-	<main>
+	<main class="pb-10 h-full">
 		<KMasonryLayout minColumnWidth={500} animated={false}>
 			<slot />
 		</KMasonryLayout>
