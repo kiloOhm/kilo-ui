@@ -7,7 +7,9 @@ export default defineConfig({
 	define: {
 		APP_VERSION: JSON.stringify(process.env.npm_package_version)
 	},
-	publicDir: 'static',
+	server: {
+		host: true
+	},
 	plugins: [
 		sveltekit(),
 		Icons({

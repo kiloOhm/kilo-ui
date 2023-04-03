@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { KCard, KBtn, KIcon, KCode } from '$lib';
+	import { KCard, KBtn, KIcon, KCode, KAnchor } from '$lib';
 	import { fade } from 'svelte/transition';
 	import IonCode from '~icons/ion/code';
 	export let title = 'Demo';
@@ -10,10 +10,10 @@
 
 <KCard>
 	<header slot="header" class="flex flex-wrap gap-4 justify-between items-center">
-		<h2 class="text-lg">{title}</h2>
+		<KAnchor hash={title} />
 		<KBtn
 			shape="circle"
-			priority="third"
+			priority="tertiary"
 			size="xs"
 			on:click={() => (showCode = !showCode)}
 			ariaLabel="show code"

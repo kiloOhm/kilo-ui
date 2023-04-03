@@ -11,12 +11,22 @@
     </url>
 
     <url>
+      <loc>https://kiloui.com/components/Anchor</loc>
+      <lastmod>2023-04-03</lastmod>
+    </url>
+
+    <url>
       <loc>https://kiloui.com/components/Button</loc>
       <lastmod>2023-04-03</lastmod>
     </url>
 
     <url>
       <loc>https://kiloui.com/components/Card</loc>
+      <lastmod>2023-04-03</lastmod>
+    </url>
+
+    <url>
+      <loc>https://kiloui.com/components/Divider</loc>
       <lastmod>2023-04-03</lastmod>
     </url>
 
@@ -32,6 +42,11 @@
 
     <url>
       <loc>https://kiloui.com/components/Switch</loc>
+      <lastmod>2023-04-03</lastmod>
+    </url>
+
+    <url>
+      <loc>https://kiloui.com/components/Table</loc>
       <lastmod>2023-04-03</lastmod>
     </url>
 

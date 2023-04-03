@@ -3,8 +3,9 @@
 	"version": "0.0.2",
 	"repository": "https://github.com/kiloOhm/kilo-ui-svelte",
 	"homepage": "https://kiloui.com",
+	"license": "MIT",
 	"author": {
-		"name": "Lukas Wicke AKA kiloOhm",
+		"name": "Lukas Wicke",
 		"email": "wicke.lukas@gmail.com"
 	},
 	"description": "A great component library for svelte",

@@ -5,7 +5,7 @@
 	import { debounce } from 'lodash-es';
 	import type { ButtonPriority } from './KBtn';
 
-	export let priority: ButtonPriority = 'first';
+	export let priority: ButtonPriority = 'primary';
 	export let size: Size | string = 'md';
 	export let color: Color | string | undefined = undefined;
 	export let textColor: string | undefined = undefined;
@@ -87,7 +87,7 @@
 	style:--color={!validColor
 		? color
 		: `var(--k-colors-${color}${
-				priority === 'first' && !ghost ? '-darken-4' : ''
+				priority === 'primary' && !ghost ? '-darken-4' : ''
 		  }, var(--k-colors-text-0))`}
 	style:--text-color={textColor ??
 		(color ? 'var(--k-colors-text-0)' : 'var(--k-colors-background-0)')}
@@ -156,7 +156,7 @@
 		}
 		&:disabled {
 			cursor: not-allowed;
-			filter: brightness(var(--k-button-disabled-brightness));
+			opacity: var(--k-button-disabled-alpha);
 		}
 		&:hover:not(:disabled) {
 			cursor: pointer;
@@ -178,7 +178,7 @@
 				border-color: var(--k-colors-blue);
 				background-color: transparent;
 			}
-			&[data-priority='first'] {
+			&[data-priority='primary'] {
 				color: var(--color);
 				> .background {
 					border-color: var(--color);
@@ -187,41 +187,38 @@
 					background-color: var(--color);
 				}
 			}
-			&[data-priority='second'] {
+			&[data-priority='secondary'] {
 				> .background {
 					border-color: var(--k-colors-border-1);
 				}
 				color: var(--color);
 			}
-			&[data-priority='third'] {
+			&[data-priority='tertiary'] {
 				> .background {
 					background-color: transparent;
 					border-color: transparent;
 				}
 				&:hover {
 					> .background {
-						border-color: var(--color);
+						border-color: var(--k-colors-border-1);
 					}
 				}
 				color: var(--color);
-				> .ripple-container > .ripple-shape {
-					background-color: var(--color);
-				}
 			}
 		}
 		&:not(.ghost) {
-			&[data-priority='first'] {
+			&[data-priority='primary'] {
 				> .background {
 					background-color: var(--color);
 				}
 			}
-			&[data-priority='second'] {
+			&[data-priority='secondary'] {
 				> .background {
 					background-color: var(--k-colors-background-2);
 				}
 				color: var(--color);
 			}
-			&[data-priority='third'] {
+			&[data-priority='tertiary'] {
 				> .background {
 					background-color: transparent;
 				}

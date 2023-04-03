@@ -35,7 +35,7 @@
 			text-decoration-color: transparent;
 		}
 		a:hover {
-			text-decoration-color: var(--k-colors-blue);
+			text-decoration-color: currentcolor;
 		}
   </style>`;
 </script>

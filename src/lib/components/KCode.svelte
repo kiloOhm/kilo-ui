@@ -9,6 +9,8 @@
 	export let language: string = 'javascript';
 	export let wrap: boolean = false;
 	export let tabSize: number = 2;
+	export let showLanguage = true;
+	export let showCopy = true;
 	$: html = Prism.highlight('\r' + code, Prism.languages[language], language);
 	function copy() {
 		return navigator.clipboard.writeText(code);
@@ -17,16 +19,20 @@
 
 <KCard>
 	<div class="wrapper">
-		<header>
-			<span class="language-name">{language}</span>
-			{#if navigator.clipboard}
-				<KBtn priority="third" shape="circle" size="xs" on:click={() => copy()}>
-					<KIcon>
-						<IonCopyOutline />
-					</KIcon>
-				</KBtn>
-			{/if}
-		</header>
+		{#if showLanguage || (navigator.clipboard && showCopy)}
+			<header>
+				{#if showLanguage}
+					<span class="language-name">{language}</span>
+				{/if}
+				{#if navigator.clipboard && showCopy}
+					<KBtn priority="tertiary" shape="circle" size="xs" on:click={() => copy()}>
+						<KIcon>
+							<IonCopyOutline />
+						</KIcon>
+					</KBtn>
+				{/if}
+			</header>
+		{/if}
 		<pre>
 			<code
 				style:white-space={wrap ? 'pre-wrap' : 'pre'}

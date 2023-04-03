@@ -40,7 +40,7 @@
 
 <div class="flex flex-col items-center gap-4">
 	<KBtn
-		priority="second"
+		priority="secondary"
 		shape="circle"
 		ariaLabel="Generate new rectangles"
 		on:click={() => {

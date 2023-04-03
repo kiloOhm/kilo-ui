@@ -1,5 +1,6 @@
 export { default as KThemeProvider } from './KThemeProvider.svelte';
 export { default as KBtn } from './KBtn.svelte';
+export * from './KBtn.d';
 export { default as KBtnGroup } from './KBtnGroup.svelte';
 export { default as KCard } from './KCard.svelte';
 export { default as KIcon } from './KIcon.svelte';
@@ -16,3 +17,6 @@ export * from './KAdaptiveNav.d';
 export { default as KPageTransitionProvider } from './KPageTransitionProvider.svelte';
 export * from './KPageTransitionProvider.d';
 export { default as KCode } from './KCode.svelte';
+export { default as KAnchor } from './KAnchor.svelte';
+export { default as KDivider } from './KDivider.svelte';
+export { default as KTable } from './KTable.svelte';

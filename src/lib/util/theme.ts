@@ -129,7 +129,7 @@ export const defaultTheme = {
 			scale: 0.94
 		},
 		disabled: {
-			brightness: 0.6
+			alpha: 0.4
 		}
 	},
 	card: {
@@ -180,6 +180,24 @@ export const defaultTheme = {
 			border: {
 				radius: '.5em'
 			}
+		}
+	},
+	table: {
+		border: {
+			width: '1px',
+			radius: '1em'
+		},
+		caption: {
+			padding: '.5em 1em'
+		},
+		header: {
+			padding: '1em'
+		},
+		body: {
+			padding: '.5em 1em'
+		},
+		footer: {
+			padding: '1em'
 		}
 	},
 	transition: {
