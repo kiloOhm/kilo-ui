@@ -20,3 +20,5 @@ export { default as KCode } from './KCode.svelte';
 export { default as KAnchor } from './KAnchor.svelte';
 export { default as KDivider } from './KDivider.svelte';
 export { default as KTable } from './KTable.svelte';
+export { default as KCollapse } from './KCollapse.svelte';
+export { default as KCheckbox } from './KCheckbox.svelte';

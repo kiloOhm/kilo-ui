@@ -5,6 +5,7 @@
 	import KuiLogo from '../components/themed-kui-logo.svelte';
 	import NotoConstruction from '~icons/noto/construction';
 	import IonCoffee from '~icons/ion/coffee';
+	import KDivider from '$lib/components/KDivider.svelte';
 	const setHamburger = getContext('header-set-hamburger') as (show: boolean) => void;
 	$: setHamburger(false);
 </script>
@@ -42,9 +43,12 @@
 		</div>
 	</main>
 	<footer>
-		<a target="_blank" href="https://github.com/kiloOhm/kilo-ui-svelte/blob/main/LICENSE.md"
-			>MIT License</a
-		>
+		<div class="flex items-end">
+			<a target="_blank" href="https://github.com/kiloOhm/kilo-ui-svelte/blob/main/LICENSE.md"
+				>MIT License</a
+			>
+		</div>
+		<KDivider vertical />
 		<div class="flex items-end gap-1">
 			<span>Made with</span>
 			<KIcon size="lg">
@@ -64,7 +68,7 @@
 		}
 	}
 	footer {
-		@apply absolute bottom-0 left-0 right-0 flex justify-center items-center gap-4 p-2;
+		@apply absolute bottom-0 left-0 right-0 flex justify-center items-stretch gap-4 p-2;
 		background-color: var(--k-colors-background-2);
 		border-top: 1px solid var(--k-colors-border-0);
 	}

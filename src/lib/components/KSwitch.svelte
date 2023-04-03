@@ -3,6 +3,7 @@
 	import KThemeProvider from './KThemeProvider.svelte';
 	const uid = crypto.randomUUID();
 	export let checked = false;
+	export let disabled = false;
 	export let shape: 'round' | 'sharp' | undefined = undefined;
 	export let size: Size | string = 'medium';
 	export let checkedColor: Color | string = 'var(--k-colors-green-darken-4)';
@@ -11,6 +12,10 @@
 	$: _checkedColor = Colors.includes(checkedColor as Color)
 		? `var(--k-colors-${checkedColor}-darken-4)`
 		: checkedColor;
+	function toggle() {
+		if (disabled) return;
+		checked = !checked;
+	}
 </script>
 
 <KThemeProvider />
@@ -25,19 +30,28 @@
 		: 'var(--k-switch-border-radius)'}
 	style:--track-color={checked ? _checkedColor : uncheckedColor}
 	class:checked
-	on:click={() => (checked = !checked)}
+	class:disabled
+	on:click={() => toggle()}
 	on:keyup={(e) => {
 		if (e.key === 'Enter') {
-			checked = !checked;
+			toggle();
 		}
 	}}
 >
 	{#if $$slots.label}
-		<label for={uid}>
+		<label
+			for={uid}
+			on:click={() => toggle()}
+			on:keyup={(e) => {
+				if (e.key === 'Enter') {
+					toggle();
+				}
+			}}
+		>
 			<slot name="label" />
 		</label>
 	{/if}
-	<input type="checkbox" class="k-switch__input" id={uid} bind:checked />
+	<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />
 	<div class="track">
 		{#if $$slots.checked}
 			<slot name="checked" />
@@ -64,6 +78,7 @@
 		cursor: pointer;
 		user-select: none;
 		> label {
+			cursor: pointer;
 			margin-right: 0.5rem;
 		}
 		> .track {
@@ -92,6 +107,13 @@
 				> .thumb {
 					transform: translateX(100%);
 				}
+			}
+		}
+		&.disabled {
+			cursor: not-allowed;
+			opacity: var(--k-switch-disabled-alpha);
+			> label {
+				cursor: not-allowed;
 			}
 		}
 	}

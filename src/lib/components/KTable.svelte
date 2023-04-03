@@ -39,6 +39,7 @@
 		font-size: var(--size);
 		border-collapse: separate;
 		border-spacing: 0;
+		background-color: var(--color);
 		overflow: hidden;
 		padding: 0;
 		width: 100%;
@@ -123,6 +124,7 @@
 			> :global(tr) {
 				> :global(td) {
 					padding: var(--k-table-body-padding);
+					background-color: var(--k-colors-background-1);
 				}
 			}
 		}

@@ -6,6 +6,7 @@
 	export let code = '';
 	let showCode = false;
 	import 'prism-svelte';
+	import KCollapse from '$lib/components/KCollapse.svelte';
 </script>
 
 <KCard>
@@ -24,11 +25,9 @@
 		</KBtn>
 	</header>
 	<slot />
-	<footer>
-		{#if showCode}
-			<div class="m-2 mt-4" transition:fade={{ duration: 200 }}>
-				<KCode {code} language="svelte" />
-			</div>
-		{/if}
+	<footer class="pt-4">
+		<KCollapse show={showCode}>
+			<KCode {code} language="svelte" />
+		</KCollapse>
 	</footer>
 </KCard>

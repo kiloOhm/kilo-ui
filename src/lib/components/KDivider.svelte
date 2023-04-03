@@ -19,11 +19,11 @@
 <style lang="scss">
 	.k-divider {
 		display: flex;
+		justify-content: stretch;
 		align-items: center;
 		gap: 0.5rem;
 		color: var(--k-colors-text-2);
 		.line {
-			display: block;
 			width: 100%;
 			height: var(--line-width);
 			background-color: var(--k-colors-border-0);

@@ -162,6 +162,23 @@ export const defaultTheme = {
 		thumb: {
 			color: '#EDEDED',
 			padding: '.125em'
+		},
+		disabled: {
+			alpha: 0.4
+		}
+	},
+	checkbox: {
+		size: '1.25em',
+		border: {
+			width: '1px',
+			radius: '.25em'
+		},
+		mark: {
+			color: '#EDEDED',
+			scale: '.6em'
+		},
+		disabled: {
+			alpha: 0.4
 		}
 	},
 	drawer: {
