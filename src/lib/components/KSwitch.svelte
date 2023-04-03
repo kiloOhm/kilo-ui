@@ -5,7 +5,7 @@
 	export let checked = false;
 	export let shape: 'round' | 'sharp' | undefined = undefined;
 	export let size: Size | string = 'medium';
-	export let checkedColor: Color | string = 'var(--k-colors-success-darken-4)';
+	export let checkedColor: Color | string = 'var(--k-colors-green-darken-4)';
 	export let uncheckedColor: string = 'var(--k-colors-background-2)';
 	$: validSize = Sizes.includes(size as Size);
 	$: _checkedColor = Colors.includes(checkedColor as Color)

@@ -23,7 +23,7 @@
 		<h1 class="text-8xl">Kilo UI</h1>
 		<h2 class="text-xl">A Svelte UI Component Library</h2>
 		<div class="WIP my-4">
-			<KCard color="warning">
+			<KCard color="yellow">
 				<div slot="header" class="p-2 flex items-center justify-center gap-4">
 					<KIcon size="xl">
 						<NotoConstruction />
@@ -36,8 +36,8 @@
 			</KCard>
 		</div>
 		<div class="buttons mt-2 flex items-center gap-2">
-			<KBtn color="success" on:click={() => goto('/components')} text="Components" />
-			<KBtn color="primary" ghost on:click={() => goto('/docs')} text="Documentation" />
+			<KBtn color="green" on:click={() => goto('/components')} text="Components" />
+			<KBtn color="blue" ghost on:click={() => goto('/docs')} text="Documentation" />
 		</div>
 	</main>
 </div>

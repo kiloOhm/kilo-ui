@@ -175,7 +175,7 @@
 			> .background {
 				border-width: var(--k-button-border-width);
 				border-style: var(--k-button-border-style);
-				border-color: var(--k-colors-primary);
+				border-color: var(--k-colors-blue);
 				background-color: transparent;
 			}
 			&[data-priority='first'] {

@@ -15,7 +15,7 @@ export const Sizes = [
 ] as const;
 export type Size = (typeof Sizes)[number];
 
-export const Colors = ['primary', 'secondary', 'success', 'warning', 'error'] as const;
+export const Colors = ['blue', 'purple', 'green', 'yellow', 'red'] as const;
 export type Color = (typeof Colors)[number];
 
 export const Directions = ['top', 'right', 'bottom', 'left'] as const;

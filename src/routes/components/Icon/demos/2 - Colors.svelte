@@ -11,19 +11,19 @@
 	<KIcon size="2xl">
 		<IonBonfire />
 	</KIcon>
-	<KIcon size="2xl" color="primary">
+	<KIcon size="2xl" color="blue">
 		<IonBonfire />
 	</KIcon>
-	<KIcon size="2xl" color="secondary">
+	<KIcon size="2xl" color="purple">
 		<IonBonfire />
 	</KIcon>
-	<KIcon size="2xl" color="success">
+	<KIcon size="2xl" color="green">
 		<IonBonfire />
 	</KIcon>
-	<KIcon size="2xl" color="warning">
+	<KIcon size="2xl" color="yellow">
 		<IonBonfire />
 	</KIcon>
-	<KIcon size="2xl" color="error">
+	<KIcon size="2xl" color="red">
 		<IonBonfire />
 	</KIcon>
 </div>

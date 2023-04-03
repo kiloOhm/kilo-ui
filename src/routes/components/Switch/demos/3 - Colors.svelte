@@ -3,19 +3,19 @@
 </script>
 
 <div class="flex flex-wrap gap-2">
-	<KSwitch checkedColor="primary" checked>
-		<span slot="label">Primary</span>
+	<KSwitch checkedColor="blue" checked>
+		<span slot="label">Blue</span>
 	</KSwitch>
-	<KSwitch checkedColor="secondary" checked>
-		<span slot="label">Secondary</span>
+	<KSwitch checkedColor="purple" checked>
+		<span slot="label">Purple</span>
 	</KSwitch>
-	<KSwitch checkedColor="success" checked>
-		<span slot="label">Success</span>
+	<KSwitch checkedColor="green" checked>
+		<span slot="label">Green</span>
 	</KSwitch>
-	<KSwitch checkedColor="warning" checked>
-		<span slot="label">Warning</span>
+	<KSwitch checkedColor="yellow" checked>
+		<span slot="label">Yellow</span>
 	</KSwitch>
-	<KSwitch checkedColor="error" checked>
-		<span slot="label">Error</span>
+	<KSwitch checkedColor="red" checked>
+		<span slot="label">Red</span>
 	</KSwitch>
 </div>

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 400 400">
 	<g clip-path="url(#a)">
 		<circle cx="200" cy="200" r="200" fill="var(--k-colors-background-1)" />
-		<circle cx="200" cy="200" r="187.5" stroke="var(--k-colors-primary)" stroke-width="25" />
+		<circle cx="200" cy="200" r="187.5" stroke="var(--k-colors-blue)" stroke-width="25" />
 		<mask
 			id="b"
 			width="400"
@@ -14,7 +14,7 @@
 			<circle cx="200" cy="200" r="187.5" stroke="#000" stroke-width="25" />
 		</mask>
 		<g mask="url(#b)">
-			<path fill="var(--k-colors-success)" d="M0 0h200v200H0z" />
+			<path fill="var(--k-colors-green)" d="M0 0h200v200H0z" />
 		</g>
 		<path
 			fill="var(--k-colors-text-0)"
@@ -22,13 +22,13 @@
 		/>
 		<circle cx="300" cy="139" r="18" fill="var(--k-colors-text-0)" />
 		<path
-			fill="var(--k-colors-success)"
+			fill="var(--k-colors-green)"
 			fill-rule="evenodd"
 			d="M80 0H0v80h25V25h55V0Z"
 			clip-rule="evenodd"
 		/>
 		<path
-			fill="var(--k-colors-primary)"
+			fill="var(--k-colors-blue)"
 			fill-rule="evenodd"
 			d="M0 320v80h80v-25H25v-55H0Z"
 			clip-rule="evenodd"

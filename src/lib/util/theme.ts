@@ -91,11 +91,11 @@ export const defaultTheme = {
 		background: ['#030303', '#151515', '#272727'],
 		text: ['#EDEDED', '#A9A9A9', '#666666'],
 		focus: '#EDEDED',
-		primary: '#14A9DB',
-		secondary: '#9E05D6',
-		success: '#06D6A0',
-		warning: '#D69E05',
-		error: '#D6053D',
+		blue: '#14A9DB',
+		purple: '#9E05D6',
+		green: '#06D6A0',
+		yellow: '#D69E05',
+		red: '#D6053D',
 		border: ['#393939', '#4B4B4B', '#5D5D5D']
 	},
 	font: {

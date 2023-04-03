@@ -3,24 +3,25 @@
 </script>
 
 <div class="flex flex-wrap gap-2">
+	<!-- first -->
 	<KBtn text="Neutral" />
-	<KBtn color="primary" text="Primary" />
-	<KBtn color="secondary" text="Secondary" />
-	<KBtn color="success" text="Success" />
-	<KBtn color="warning" text="Warning" />
-	<KBtn color="error" text="Error" />
-	<!-- secondary -->
+	<KBtn color="blue" text="Blue" />
+	<KBtn color="purple" text="Purple" />
+	<KBtn color="green" text="Green" />
+	<KBtn color="yellow" text="Yellow" />
+	<KBtn color="red" text="Red" />
+	<!-- second -->
 	<KBtn priority="second" text="Neutral second" />
-	<KBtn priority="second" color="primary" text="Primary second" />
-	<KBtn priority="second" color="secondary" text="Secondary second" />
-	<KBtn priority="second" color="success" text="Success second" />
-	<KBtn priority="second" color="warning" text="Warning second" />
-	<KBtn priority="second" color="error" text="Error second" />
-	<!-- tertiary -->
+	<KBtn priority="second" color="blue" text="Blue second" />
+	<KBtn priority="second" color="purple" text="Purple second" />
+	<KBtn priority="second" color="green" text="Green second" />
+	<KBtn priority="second" color="yellow" text="Yellow second" />
+	<KBtn priority="second" color="red" text="Red second" />
+	<!-- third -->
 	<KBtn priority="third" text="Neutral third" />
-	<KBtn priority="third" color="primary" text="Primary third" />
-	<KBtn priority="third" color="secondary" text="Secondary third" />
-	<KBtn priority="third" color="success" text="Success third" />
-	<KBtn priority="third" color="warning" text="Warning third" />
-	<KBtn priority="third" color="error" text="Error third" />
+	<KBtn priority="third" color="blue" text="Blue third" />
+	<KBtn priority="third" color="purple" text="Purple third" />
+	<KBtn priority="third" color="green" text="Green third" />
+	<KBtn priority="third" color="yellow" text="Yellow third" />
+	<KBtn priority="third" color="red" text="Red third" />
 </div>

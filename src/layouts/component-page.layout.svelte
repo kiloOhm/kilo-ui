@@ -22,7 +22,7 @@
 	{/if}
 
 	<main class="pb-10 h-full">
-		<KMasonryLayout minColumnWidth={500} animated={false}>
+		<KMasonryLayout minColumnWidth={400} animated={false}>
 			<slot />
 		</KMasonryLayout>
 	</main>
