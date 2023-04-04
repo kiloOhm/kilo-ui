@@ -31,6 +31,11 @@
     </url>
 
     <url>
+      <loc>https://kiloui.com/components/Code</loc>
+      <lastmod>2023-04-04</lastmod>
+    </url>
+
+    <url>
       <loc>https://kiloui.com/components/Divider</loc>
       <lastmod>2023-04-04</lastmod>
     </url>
@@ -42,6 +47,11 @@
 
     <url>
       <loc>https://kiloui.com/components/Masonry layout</loc>
+      <lastmod>2023-04-04</lastmod>
+    </url>
+
+    <url>
+      <loc>https://kiloui.com/components/Popover</loc>
       <lastmod>2023-04-04</lastmod>
     </url>
 

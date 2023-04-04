@@ -10,6 +10,9 @@ export default defineConfig({
 	server: {
 		host: true
 	},
+	ssr: {
+		noExternal: ['@popperjs/core']
+	},
 	plugins: [
 		sveltekit(),
 		Icons({

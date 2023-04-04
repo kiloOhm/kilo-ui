@@ -217,6 +217,15 @@ export const defaultTheme = {
 			padding: '1em'
 		}
 	},
+	popover: {
+		padding: '.5em 1em',
+		border: {
+			radius: '.5em'
+		},
+		arrow: {
+			size: '1em'
+		}
+	},
 	transition: {
 		function: 'cubic-bezier(0.4, 0, 0.2, 1)',
 		duration: 200

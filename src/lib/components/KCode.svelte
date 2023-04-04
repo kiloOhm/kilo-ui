@@ -11,7 +11,11 @@
 	export let tabSize: number = 2;
 	export let showLanguage = true;
 	export let showCopy = true;
-	$: html = Prism.highlight('\r' + code, Prism.languages[language], language);
+	$: html = Prism.highlight(
+		'\r' + code,
+		Prism.languages[language.toLowerCase()],
+		language.toLowerCase()
+	);
 	function copy() {
 		return navigator.clipboard.writeText(code);
 	}

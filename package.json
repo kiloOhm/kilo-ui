@@ -36,19 +36,18 @@
 		"dist"
 	],
 	"peerDependencies": {
-		"@popperjs/core": "^2.11.7",
 		"@sveltejs/kit": "1.5.0",
 		"color": "^4.2.3",
-		"svelte": "^3.54.0",
 		"lodash-es": "^4.17.21",
-		"prism-svelte": "^0.5.0",
-		"prismjs": "^1.29.0"
+		"prismjs": "^1.29.0",
+		"svelte": "^3.54.0"
 	},
 	"devDependencies": {
 		"@iconify-json/ion": "^1.1.9",
 		"@iconify-json/noto": "^1.1.11",
 		"@sveltejs/adapter-cloudflare": "^2.2.0",
 		"@sveltejs/package": "^2.0.0",
+		"@types/color": "^3.0.3",
 		"@types/lodash-es": "^4.17.7",
 		"@types/prismjs": "^1.26.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
@@ -60,6 +59,7 @@
 		"postcss": "^8.4.21",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
+		"prism-svelte": "^0.5.0",
 		"publint": "^0.1.9",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -71,10 +71,12 @@
 		"typescript": "^5.0.0",
 		"unplugin-icons": "^0.15.3",
 		"vite": "^4.2.0",
-		"vite-plugin-svelte-sitemap": "^1.0.3",
-		"@types/color": "^3.0.3"
+		"vite-plugin-svelte-sitemap": "^1.0.3"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@floating-ui/dom": "^1.2.5"
+	}
 }

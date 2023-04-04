@@ -27,7 +27,7 @@
 	<slot />
 	<footer class="pt-4">
 		<KCollapse show={showCode}>
-			<KCode {code} language="svelte" />
+			<KCode {code} language="Svelte" />
 		</KCollapse>
 	</footer>
 </KCard>
