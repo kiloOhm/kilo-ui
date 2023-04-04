@@ -46,7 +46,9 @@
 		&[data-zebra='true'] {
 			> :global(tbody) {
 				> :global(tr:nth-child(even)) {
-					background-color: var(--color);
+					> :global(td) {
+						background-color: var(--color);
+					}
 				}
 			}
 		}

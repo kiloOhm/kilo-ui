@@ -3,7 +3,7 @@
 </script>
 
 <div class="flex flex-col gap-2">
-	<KTable zebra>
+	<KTable zebra={true}>
 		<thead>
 			<tr>
 				<th>First Name</th>
