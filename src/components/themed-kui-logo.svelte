@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 400 400">
 	<g clip-path="url(#a)">
 		<circle cx="200" cy="200" r="200" fill="var(--k-colors-background-1)" />
-		<circle cx="200" cy="200" r="187.5" stroke="var(--k-colors-blue)" stroke-width="25" />
+		<circle cx="200" cy="200" r="187.5" stroke="var(--k-colors-blue-darken-2)" stroke-width="25" />
 		<mask
 			id="b"
 			width="400"
@@ -28,7 +28,7 @@
 			clip-rule="evenodd"
 		/>
 		<path
-			fill="var(--k-colors-blue)"
+			fill="var(--k-colors-blue-darken-2)"
 			fill-rule="evenodd"
 			d="M0 320v80h80v-25H25v-55H0Z"
 			clip-rule="evenodd"
