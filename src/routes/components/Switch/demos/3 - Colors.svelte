@@ -4,18 +4,18 @@
 
 <div class="flex flex-wrap gap-2">
 	<KSwitch checkedColor="blue" checked>
-		<span slot="label">Blue</span>
+		<span>Blue</span>
 	</KSwitch>
 	<KSwitch checkedColor="purple" checked>
-		<span slot="label">Purple</span>
+		<span>Purple</span>
 	</KSwitch>
 	<KSwitch checkedColor="green" checked>
-		<span slot="label">Green</span>
+		<span>Green</span>
 	</KSwitch>
 	<KSwitch checkedColor="yellow" checked>
-		<span slot="label">Yellow</span>
+		<span>Yellow</span>
 	</KSwitch>
 	<KSwitch checkedColor="red" checked>
-		<span slot="label">Red</span>
+		<span>Red</span>
 	</KSwitch>
 </div>

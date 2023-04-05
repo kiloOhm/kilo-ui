@@ -4,12 +4,12 @@
 
 <div class="flex flex-wrap gap-2">
 	<KSwitch>
-		<span slot="label">Default</span>
+		<span>Default</span>
 	</KSwitch>
 	<KSwitch shape="round">
-		<span slot="label">Round</span>
+		<span>Round</span>
 	</KSwitch>
 	<KSwitch shape="sharp">
-		<span slot="label">Sharp</span>
+		<span>Sharp</span>
 	</KSwitch>
 </div>

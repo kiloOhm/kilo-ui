@@ -38,7 +38,7 @@
 		}
 	}}
 >
-	{#if $$slots.label}
+	{#if $$slots.default}
 		<label
 			for={uid}
 			on:click={() => toggle()}
@@ -48,7 +48,7 @@
 				}
 			}}
 		>
-			<slot name="label" />
+			<slot />
 		</label>
 	{/if}
 	<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />

@@ -55,7 +55,7 @@
 		bind:active
 		on:hover={(e) => hover(e.detail.key)}
 	>
-		<div class="flex-grow overflow-auto">
+		<div class="flex-grow h-full overflow-auto">
 			<slot />
 		</div>
 	</KAdaptiveNav>
@@ -64,5 +64,8 @@
 <style lang="scss">
 	.components-layout {
 		@apply h-full w-full;
+		> :global(*) {
+			@apply h-full;
+		}
 	}
 </style>
