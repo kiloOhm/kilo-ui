@@ -1,10 +1,6 @@
 <script>
 	import IonBonfire from '~icons/ion/bonfire';
 	import { KIcon } from '$lib';
-	// Test Comment
-	function test() {
-		console.log('test' + 'test');
-	}
 </script>
 
 <div class="flex flex-wrap gap-2">

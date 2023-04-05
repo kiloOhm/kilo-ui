@@ -2,11 +2,8 @@
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
 	import { goto, preloadData } from '$app/navigation';
-	import type { LayoutData } from './$types';
-	import KPageTransitionProvider from '../../components/KPageTransitionProvider.svelte';
 	import type { AdaptiveNavItem } from '../../components/KAdaptiveNav';
 	import KAdaptiveNav from '../../components/KAdaptiveNav.svelte';
-	export let data: LayoutData;
 	const pages = Object.entries(import.meta.glob('./**/*.svelte'))
 		.map(([path, _]) => path.split('/')[1])
 		.filter((name) => !name.startsWith('+'))
@@ -16,7 +13,6 @@
 			}
 			return acc;
 		}, [] as string[]);
-	$: path = data.pathname.split('/')[2];
 	let show = false;
 	let collapsible = false;
 	const items: AdaptiveNavItem[] = pages.map((name) => ({
@@ -29,9 +25,11 @@
 		callback: () => void
 	) => void;
 	$: setHamBurgerClickCallback(() => (show = !show));
-	let active: string | null = pages.includes($page.route.id?.split('/')?.pop() ?? '')
-		? $page.route.id?.split('/')?.pop() ?? null
-		: null;
+	let active: string[] = pages.includes($page.route.id?.split('/')?.pop() ?? '')
+		? $page.route.id?.split('/')?.pop()
+			? [$page.route.id?.split('/')?.pop()!]
+			: ['Button']
+		: ['Button'];
 	$: (() => {
 		if (typeof window === 'undefined') return;
 		if (active) {
@@ -57,28 +55,14 @@
 		bind:active
 		on:hover={(e) => hover(e.detail.key)}
 	>
-		<div
-			class="w-full p-4 text-center cursor-pointer"
-			slot="before"
-			on:click={() => {
-				active = null;
-				goto('/components');
-			}}
-			on:keypress={() => {
-				active = null;
-				goto('/components');
-			}}
-		>
-			<h1 class="text-lg" style="color: var(--k-colors-text-1)">Components</h1>
-		</div>
-		<KPageTransitionProvider {path}>
+		<div class="flex-grow overflow-auto">
 			<slot />
-		</KPageTransitionProvider>
+		</div>
 	</KAdaptiveNav>
 </div>
 
 <style lang="scss">
 	.components-layout {
-		@apply h-full w-full grid;
+		@apply h-full w-full;
 	}
 </style>

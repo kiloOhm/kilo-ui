@@ -11,7 +11,9 @@
 >
 	<hr />
 	{#if $$slots.default}
-		<slot />
+		<div class="content-container">
+			<slot />
+		</div>
 		<hr />
 	{/if}
 </div>
@@ -21,7 +23,6 @@
 		display: flex;
 		justify-content: stretch;
 		align-items: center;
-		gap: 0.5rem;
 		color: var(--k-colors-text-2);
 		hr {
 			width: 100%;
@@ -29,10 +30,16 @@
 			background-color: var(--k-colors-border-0);
 			border: none;
 		}
+		> .content-container {
+			padding: 0 0.5em;
+		}
 		&.vertical {
 			> hr {
 				width: var(--line-width);
 				height: 100%;
+			}
+			> .content-container {
+				padding: 0.5em 0;
 			}
 		}
 	}

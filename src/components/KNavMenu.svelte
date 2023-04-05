@@ -1,19 +1,25 @@
 <!-- FOR USE IN k-adaptive-nav because drawer only works with encapsulated styles -->
 
 <script lang="ts">
-	import { KMenu, type AdaptiveNavItem } from '../../components';
+	import { KMenu } from '$lib';
 	import { createEventDispatcher } from 'svelte';
+	import type { AdaptiveNavItem } from './KAdaptiveNav';
 	const dispatch = createEventDispatcher();
 
 	export let items: AdaptiveNavItem[] = [];
-	export let active: string | null = null;
+	export let active: string[] | null = null;
 </script>
 
-<nav>
+<nav class="py-8 px-2 overflow-auto">
 	{#if $$slots.before}
 		<slot name="before" />
 	{/if}
-	<KMenu {items} bind:active on:hover={(e) => dispatch('hover', { key: e.detail.key })} />
+	<KMenu
+		{items}
+		{active}
+		on:transitionend={({ detail }) => (active = detail)}
+		on:hover={(e) => dispatch('hover', { key: e.detail.key })}
+	/>
 	{#if $$slots.after}
 		<slot name="after" />
 	{/if}

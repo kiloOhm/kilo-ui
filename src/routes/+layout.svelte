@@ -16,10 +16,6 @@
 		const hash = window.location.hash;
 		if (hash) {
 			const el = document.getElementById(decodeURIComponent(hash.slice(1)));
-			console.log({
-				hash,
-				el
-			});
 			if (el) {
 				el.scrollIntoView();
 				el.focus();

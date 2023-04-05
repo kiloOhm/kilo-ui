@@ -1,11 +1,10 @@
 <script lang="ts">
 	import type { Direction } from '$lib/types';
-	import { fly } from 'svelte/transition';
 	import type { AdaptiveNavItem, AdaptiveNavStyle } from './KAdaptiveNav';
 	import { createEventDispatcher } from 'svelte';
 	import { KThemeProvider } from '$lib';
 	import KDrawer from './KDrawer.svelte';
-	import KNavMenu from '$lib/util/components/KNavMenu.svelte';
+	import KNavMenu from './KNavMenu.svelte';
 	const dispatch = createEventDispatcher();
 
 	export let breakpoints: Record<number, AdaptiveNavStyle> = {
@@ -16,7 +15,7 @@
 	export let direction: Direction = 'left';
 	export let show = false;
 	export let collapsible = false;
-	export let active: string | null = null;
+	export let active: string[] | null = null;
 
 	let currentWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
 	$: currentStyle =

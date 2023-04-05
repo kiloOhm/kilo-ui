@@ -7,12 +7,12 @@ export type MenuItem = {
 	iconHTML?: string;
 };
 
-export type MenuCategory = {
-	type: 'category';
-	key: string;
-	label?: string;
-	items: MenuItem[];
-};
+// export type MenuCategory = {
+// 	type: 'category';
+// 	key: string;
+// 	label?: string;
+// 	items: MenuItem[];
+// };
 
 export type MenuDivider = {
 	type: 'divider';
