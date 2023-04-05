@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { Direction } from '../types';
+	import { KThemeProvider, type Direction } from '$lib';
 	import { getContext } from 'svelte';
-	import { KThemeProvider } from '.';
 	export let show = false;
 	export let direction: Direction = 'bottom';
 	const setActiveDrawer = getContext('--k-set-active-drawer') as (

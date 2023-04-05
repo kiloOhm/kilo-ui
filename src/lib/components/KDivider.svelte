@@ -9,10 +9,10 @@
 	style:flex-direction={vertical ? 'column' : 'row'}
 	style:--line-width={width}
 >
-	<div class="line" />
+	<hr />
 	{#if $$slots.default}
 		<slot />
-		<div class="line" />
+		<hr />
 	{/if}
 </div>
 
@@ -23,13 +23,14 @@
 		align-items: center;
 		gap: 0.5rem;
 		color: var(--k-colors-text-2);
-		.line {
+		hr {
 			width: 100%;
 			height: var(--line-width);
 			background-color: var(--k-colors-border-0);
+			border: none;
 		}
 		&.vertical {
-			> .line {
+			> hr {
 				width: var(--line-width);
 				height: 100%;
 			}

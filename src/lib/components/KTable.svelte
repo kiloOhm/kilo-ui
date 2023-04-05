@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Colors, Sizes, type Color, type Size } from '../types.d';
+	import KThemeProvider from './KThemeProvider.svelte';
 
 	export let size: Size | string = 'md';
 	export let bordered = true;
@@ -14,6 +15,8 @@
 	$: validSize = Sizes.includes(size as Size);
 	$: validColor = !color || Colors.includes(color as Color);
 </script>
+
+<KThemeProvider />
 
 <table
 	class="k-table"

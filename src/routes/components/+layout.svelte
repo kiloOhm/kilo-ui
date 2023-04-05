@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { KAdaptiveNav, type AdaptiveNavItem } from '$lib';
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
 	import { goto, preloadData } from '$app/navigation';
 	import type { LayoutData } from './$types';
-	import KPageTransitionProvider from '$lib/components/KPageTransitionProvider.svelte';
+	import KPageTransitionProvider from '../../components/KPageTransitionProvider.svelte';
+	import type { AdaptiveNavItem } from '../../components/KAdaptiveNav';
+	import KAdaptiveNav from '../../components/KAdaptiveNav.svelte';
 	export let data: LayoutData;
 	const pages = Object.entries(import.meta.glob('./**/*.svelte'))
 		.map(([path, _]) => path.split('/')[1])
@@ -39,8 +40,12 @@
 			});
 		}
 	})();
+	const loaded = new Set();
 	function hover(key: string) {
-		preloadData(`/components/${key}`);
+		if (loaded.has(key)) return;
+		preloadData(`/components/${key}`).then(() => {
+			loaded.add(key);
+		});
 	}
 </script>
 

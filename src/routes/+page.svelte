@@ -59,7 +59,7 @@
 
 <style lang="scss">
 	.construction {
-		@apply absolute top-10 left-0 right-0 p-10 overflow-hidden;
+		@apply absolute top-20 left-0 right-0 p-10 overflow-hidden;
 		background-color: var(--k-colors-yellow-darken-4);
 		> .stripes {
 			@apply absolute inset-0;

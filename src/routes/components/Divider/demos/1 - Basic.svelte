@@ -15,7 +15,7 @@
 		<p>Sometime too hot the eye of heaven shines,</p>
 		<p>And often is his gold complexion dimm'd;</p>
 		<KDivider width="5px">
-			<span style="white-space: nowrap;"> thicc horizontal </span>
+			<span style="white-space: nowrap;"> thicc </span>
 		</KDivider>
 		<p>And every fair from fair sometime declines,</p>
 		<p>By chance, or nature's changing course untrimm'd;</p>

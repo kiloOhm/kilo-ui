@@ -3,6 +3,7 @@
 	import { useFloatingUi } from '$lib/util/floating-ui';
 	import type { Placement } from '@floating-ui/dom';
 	import { onDestroy } from 'svelte';
+	import { KThemeProvider } from '.';
 
 	export let placement: Placement = 'top';
 	export let trigger: 'hover' | 'manual' = 'hover';
@@ -59,6 +60,8 @@
 		leaveTimeout = setTimeout(() => (show = false), leaveDelay);
 	}
 </script>
+
+<KThemeProvider />
 
 <div class="k-popover">
 	<div

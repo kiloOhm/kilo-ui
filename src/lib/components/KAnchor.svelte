@@ -2,6 +2,7 @@
 	import KIcon from './KIcon.svelte';
 	import IonLinkOutline from '~icons/ion/link-outline';
 	import KBtn from './KBtn.svelte';
+	import { KThemeProvider } from '.';
 	export let hash: string = '';
 	$: href = '#' + encodeURIComponent(hash);
 	function copy() {
@@ -9,6 +10,8 @@
 		return navigator.clipboard?.writeText(loc + href);
 	}
 </script>
+
+<KThemeProvider />
 
 <div class="k-anchor" id={hash} tabindex="-1">
 	<KBtn priority="tertiary" size="xs" shape="circle" on:click={() => copy()}>

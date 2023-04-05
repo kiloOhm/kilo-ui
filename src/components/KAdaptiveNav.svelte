@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Direction } from '$lib/types';
-	import { KDrawer } from '.';
 	import { fly } from 'svelte/transition';
 	import type { AdaptiveNavItem, AdaptiveNavStyle } from './KAdaptiveNav';
-	import KNavMenu from '../util/components/KNavMenu.svelte';
-	import KThemeProvider from './KThemeProvider.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { KThemeProvider } from '$lib';
+	import KDrawer from './KDrawer.svelte';
+	import KNavMenu from '$lib/util/components/KNavMenu.svelte';
 	const dispatch = createEventDispatcher();
 
 	export let breakpoints: Record<number, AdaptiveNavStyle> = {

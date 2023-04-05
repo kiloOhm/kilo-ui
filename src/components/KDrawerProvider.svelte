@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Direction } from '../types';
+	import type { Direction } from '../lib/types';
 	import { setContext } from 'svelte';
-	import { KThemeProvider } from '.';
+	import { KThemeProvider } from '../lib/components';
 	let active = false;
 	let drawerContainerRef: HTMLElement;
 	let originalDirection: Direction = 'bottom';

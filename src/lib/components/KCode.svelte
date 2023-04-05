@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { KCard } from '.';
+	import { KCard, KThemeProvider } from '.';
 	import Prism from 'prismjs';
 	import '../util/PrismTheme.css';
 	import IonCopyOutline from '~icons/ion/copy-outline';
@@ -20,6 +20,8 @@
 		return navigator.clipboard.writeText(code);
 	}
 </script>
+
+<KThemeProvider />
 
 <KCard>
 	<div class="wrapper">

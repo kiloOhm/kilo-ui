@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { KThemeProvider, KBtn, KIcon, KPageTransitionProvider } from '$lib';
-	import KDrawerProvider from '$lib/components/KDrawerProvider.svelte';
+	import { KThemeProvider, KBtn, KIcon } from '$lib';
+	import KDrawerProvider from '../components/KDrawerProvider.svelte';
 	import '../app.css';
 	import IonMdList from '~icons/ion/md-list';
 	import { fade } from 'svelte/transition';
 	import { setContext } from 'svelte';
 	import { afterNavigate, goto } from '$app/navigation';
 	import KuiLogo from '../components/themed-kui-logo.svelte';
-	import type { Transition } from '$lib/components/KPageTransitionProvider';
 	import type { LayoutServerData } from './$types';
+	import type { Transition } from '../components/KPageTransitionProvider';
+	import KPageTransitionProvider from '../components/KPageTransitionProvider.svelte';
 	export let data: LayoutServerData;
 
 	afterNavigate(() => {
