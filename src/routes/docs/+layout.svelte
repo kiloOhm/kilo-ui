@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { KAdaptiveNav, type AdaptiveNavItem } from '$lib';
 	import { goto } from '$app/navigation';
 	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
 	import type { LayoutParentData } from './$types';
+	import type { AdaptiveNavItem } from '../../components/KAdaptiveNav';
+	import KAdaptiveNav from '../../components/KAdaptiveNav.svelte';
 	export let data: LayoutParentData;
 	$: path = data.pathname.split('/')[2];
 	let show = false;
