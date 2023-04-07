@@ -11,6 +11,7 @@
 	export let tabSize: number = 2;
 	export let showLanguage = true;
 	export let showCopy = true;
+	export let bordered = true;
 	$: html = Prism.highlight(
 		'\r' + code,
 		Prism.languages[language.toLowerCase()],
@@ -23,7 +24,7 @@
 
 <KThemeProvider />
 
-<KCard>
+<div class="k-code" class:bordered>
 	<div class="wrapper">
 		{#if showLanguage || (navigator.clipboard && showCopy)}
 			<header>
@@ -40,40 +41,49 @@
 			</header>
 		{/if}
 		<pre>
-			<code
+				<code
 				style:white-space={wrap ? 'pre-wrap' : 'pre'}
 				style:tab-size={tabSize}
 				style:-moz-tab-size={tabSize}
 				style:-o-tab-size={tabSize}
 				class={`language-${language}`}>
-				{@html html}
-			</code>
-		</pre>
+					{@html html}
+				</code>
+			</pre>
 	</div>
-</KCard>
+</div>
 
 <style lang="scss">
-	.wrapper {
-		position: relative;
-		header {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			gap: 1rem;
-			.language-name {
-				color: var(--k-colors-text-2);
-			}
+	.k-code {
+		padding: var(--k-card-main-padding);
+		background-color: var(--k-colors-background-0);
+		border-radius: var(--k-card-border-radius);
+		&.bordered {
+			border-width: var(--k-card-border-width);
+			border-color: var(--k-colors-border-0);
 		}
-		pre {
-			overflow: auto;
-			> code {
-				display: block;
-				padding: 0;
-				margin: 0;
+		.wrapper {
+			position: relative;
+			header {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 1rem;
+				.language-name {
+					color: var(--k-colors-text-2);
+				}
+			}
+			pre {
+				overflow: auto;
+				> code {
+					display: block;
+					padding: 0;
+					margin: 0;
+				}
 			}
 		}
 	}
