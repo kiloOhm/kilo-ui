@@ -2,12 +2,12 @@
 	import { KPopover, KBtn } from '$lib';
 </script>
 
-<div class="pt-12 flex justify-between">
-	<KPopover show trigger="manual">
+<div class="pt-12 flex justify-between overflow-hidden">
+	<KPopover shift show trigger="manual">
 		<KBtn slot="trigger">smol</KBtn>
 		<span>looooooooong</span>
 	</KPopover>
-	<KPopover show trigger="manual">
+	<KPopover shift show trigger="manual">
 		<KBtn slot="trigger">smol</KBtn>
 		<span>looooooooong</span>
 	</KPopover>

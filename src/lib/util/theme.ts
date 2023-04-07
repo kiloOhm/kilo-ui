@@ -185,7 +185,8 @@ export const defaultTheme = {
 		item: {
 			border: {
 				radius: '.5em'
-			}
+			},
+			padding: '0.25em 1em'
 		}
 	},
 	table: {

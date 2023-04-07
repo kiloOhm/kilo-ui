@@ -10,7 +10,7 @@
 	export let active: string[] | null = null;
 </script>
 
-<nav class="py-8 px-2 overflow-auto">
+<nav class="py-8 pl-2 pr-12 overflow-auto">
 	{#if $$slots.before}
 		<slot name="before" />
 	{/if}

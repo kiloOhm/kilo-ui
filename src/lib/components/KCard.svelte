@@ -40,7 +40,6 @@
 		font-size: var(--size);
 		background-color: var(--k-colors-background-1);
 		border-radius: var(--k-card-border-radius);
-		overflow: hidden;
 		&[data-bordered='true'] {
 			border-style: solid;
 			border-width: var(--k-card-border-width);

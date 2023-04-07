@@ -25,6 +25,7 @@
 			if (active?.includes(key) && (active.length > 1 || nullable)) {
 				active = active.filter((k) => k !== key);
 			} else if (!active?.includes(key)) {
+				dispatch('select', key);
 				active = [...(active ?? []), key];
 			}
 			if (active.length === 0 && nullable) {
@@ -34,6 +35,7 @@
 			if (active?.includes(key) && nullable) {
 				active = null;
 			} else {
+				dispatch('select', key);
 				active = [key];
 			}
 		}
@@ -174,8 +176,7 @@
 		> .category,
 		.item {
 			position: relative;
-			padding: 0.25em 1em;
-			margin: 0 0.5em;
+			padding: var(--k-menu-item-padding);
 			border-radius: var(--k-menu-item-border-radius);
 			cursor: pointer;
 			white-space: nowrap;

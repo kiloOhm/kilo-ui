@@ -2,7 +2,7 @@
 	import { randomString } from '$lib/util';
 	import { useFloatingUi } from '$lib/util/floating-ui';
 	import type { Placement } from '@floating-ui/dom';
-	import { onDestroy } from 'svelte';
+	import { getContext, onDestroy } from 'svelte';
 	import { KThemeProvider } from '.';
 
 	export let placement: Placement = 'top';
@@ -10,25 +10,45 @@
 	export let enterDelay: number = 200;
 	export let leaveDelay: number = 200;
 	export let show = false;
+	export let sameWidth = false;
+	export let flip = false;
+	export let shift = false;
+	export let arrow = true;
+	export let offset = 8;
 
 	const uid = randomString(8);
 	let triggerRef: HTMLElement;
 	let contentRef: HTMLElement;
 	let arrowRef: HTMLElement;
 
+	const comboboxCtx = getContext('k-combobox-ctx');
+
 	let cleanup: (() => void) | undefined;
 	onDestroy(() => cleanup?.());
 	$: (() => {
 		if (!triggerRef || !contentRef || cleanup) return;
-		cleanup = useFloatingUi(triggerRef, contentRef, arrowRef, placement, (visible: boolean) => {
-			if (visible) _show();
-			else _hide();
-		});
+		cleanup = useFloatingUi(
+			triggerRef,
+			contentRef,
+			arrowRef,
+			(visible: boolean) => {
+				if (visible) _show();
+				else _hide();
+			},
+			{
+				placement,
+				sameWidth,
+				flip,
+				shift,
+				offset
+			}
+		);
 	})();
 
 	$: (() => {
 		if (!contentRef) return;
 		contentRef.style.opacity = show ? '1' : '0';
+		contentRef.style.pointerEvents = show ? 'auto' : 'none';
 	})();
 
 	function _show() {
@@ -88,9 +108,10 @@
 		id={`k-popover_${uid}_content`}
 		role="tooltip"
 		bind:this={contentRef}
+		style:padding={comboboxCtx ? '0' : undefined}
 	>
 		<slot />
-		<div class="arrow" bind:this={arrowRef} />
+		<div class="arrow" style:display={arrow ? 'block' : 'none'} bind:this={arrowRef} />
 	</div>
 </div>
 
@@ -106,14 +127,14 @@
 			left: 0;
 			top: 0;
 			z-index: 2;
-			background-color: var(--k-colors-background-1);
+			background-color: var(--k-colors-background-2);
 			padding: var(--k-popover-padding);
 			border-radius: var(--k-popover-border-radius);
 			> .arrow {
 				position: absolute;
 				width: 8px;
 				height: 8px;
-				background-color: var(--k-colors-background-1);
+				background-color: var(--k-colors-background-2);
 				transform: rotate(45deg);
 				z-index: 1;
 			}

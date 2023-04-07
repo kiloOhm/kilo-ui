@@ -19,3 +19,4 @@ export { default as KPopover } from './KPopover.svelte';
 export { default as KAnchor } from './KAnchor.svelte';
 export { default as KAccordion } from './KAccordion.svelte';
 export { default as KInput } from './KInput.svelte';
+export { default as KCombobox } from './KCombobox.svelte';

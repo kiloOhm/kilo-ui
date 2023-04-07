@@ -37,6 +37,16 @@
 	export let clearable: boolean = false;
 	export let copyable: boolean = false;
 
+	export function focus() {
+		if (inputRef) inputRef.focus();
+		if (textareaRef) textareaRef.focus();
+	}
+
+	export function blur() {
+		if (inputRef) inputRef.blur();
+		if (textareaRef) textareaRef.blur();
+	}
+
 	$: if ((maxRows ?? 1) < 1) throw new KUIError('maxRows must be greater than 0');
 
 	const dispatch = createEventDispatcher();
@@ -136,6 +146,7 @@
 	}
 
 	function clear() {
+		dispatch('clear');
 		value = '';
 	}
 
@@ -149,6 +160,15 @@
 				}, 2000);
 			});
 		}
+	}
+
+	function _focus(e: FocusEvent) {
+		focussed = true;
+		dispatch('focus', e);
+	}
+	function _blur(e: FocusEvent) {
+		focussed = false;
+		dispatch('blur', e);
 	}
 </script>
 
@@ -189,8 +209,8 @@
 				{autocapitalize}
 				rows={minRows}
 				on:input={handleInput}
-				on:focus={() => (focussed = true)}
-				on:blur={() => (focussed = false)}
+				on:focus={_focus}
+				on:blur={_blur}
 			/>
 		{:else}
 			<input
@@ -204,8 +224,8 @@
 				{autocomplete}
 				{autocapitalize}
 				on:input={handleInput}
-				on:focus={() => (focussed = true)}
-				on:blur={() => (focussed = false)}
+				on:focus={_focus}
+				on:blur={_blur}
 			/>
 		{/if}
 		{#if $$slots.after || type === 'number' || type === 'password' || copyable || clearable || max !== null}
