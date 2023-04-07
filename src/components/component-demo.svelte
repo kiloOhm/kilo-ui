@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { KCard, KBtn, KIcon, KCode, KAnchor } from '$lib';
-	import { fade } from 'svelte/transition';
 	import IonCode from '~icons/ion/code';
 	export let title = 'Demo';
 	export let code = '';
 	let showCode = false;
 	import 'prism-svelte';
 	import KCollapse from '$lib/components/KCollapse.svelte';
+	let footerRef: HTMLElement;
 </script>
 
 <KCard>
@@ -16,7 +16,10 @@
 			shape="circle"
 			priority="tertiary"
 			size="xs"
-			on:click={() => (showCode = !showCode)}
+			on:click={() => {
+				showCode = !showCode;
+				if (showCode) footerRef.scrollIntoView({ behavior: 'smooth' });
+			}}
 			ariaLabel="show code"
 		>
 			<KIcon size="lg">
@@ -25,7 +28,7 @@
 		</KBtn>
 	</header>
 	<slot />
-	<footer class="pt-4">
+	<footer bind:this={footerRef} class="pt-4">
 		<KCollapse show={showCode}>
 			<KCode {code} language="Svelte" />
 		</KCollapse>
