@@ -29,7 +29,7 @@
 	nav {
 		display: flex;
 		flex-direction: column;
-		background-color: var(--k-colors-background-2);
+		background-color: var(--k-colors-background-1);
 		border-color: var(--k-colors-border-0);
 		border-right-width: 1px;
 		border-style: solid;

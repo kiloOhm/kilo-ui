@@ -86,7 +86,7 @@
 	}
 	footer {
 		@apply w-full flex justify-center items-stretch gap-4 p-2;
-		background-color: var(--k-colors-background-2);
+		background-color: var(--k-colors-background-1);
 		border-top: 1px solid var(--k-colors-border-0);
 	}
 </style>

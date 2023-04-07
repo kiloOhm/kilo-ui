@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { KThemeProvider } from '.';
 	import { Sizes, type Size, type Color, Colors } from '..';
+	export let bordered = true;
 	export let size: Size | string = 'md';
 	export let color: Color | string | undefined = undefined;
-	export let bordered = true;
 	$: validSize = Sizes.includes(size as Size);
 	$: validColor = !color || Colors.includes(color as Color);
 </script>

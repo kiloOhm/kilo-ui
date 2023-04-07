@@ -8,7 +8,7 @@
 		direction?: Direction,
 		closeCallback?: () => void
 	) => void;
-	const subscribeBackgroundClick = getContext('--k-subscribe-background-click') as (
+	const subscribeBackgroundClick = getContext('--k-subscribe-background-0-click') as (
 		callback: () => void
 	) => () => void;
 	const handleBackgroundClick = () => {

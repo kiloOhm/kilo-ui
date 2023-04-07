@@ -182,7 +182,7 @@
 			user-select: none;
 			transition-property: background-color, color;
 			&:hover {
-				background: var(--k-colors-background-2-lighten-1);
+				background: var(--k-colors-background-1-lighten-1);
 			}
 			&.active {
 				color: var(--color);

@@ -1,4 +1,6 @@
 export const Sizes = [
+	'3xs',
+	'2xs',
 	'xs',
 	'sm',
 	'md',

@@ -9,28 +9,15 @@ export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 		merge(theme, overrides);
 	}
 	if (import.meta.env.DEV) {
-		// check for low contrast
-		for (const [key, value] of Object.entries(theme.colors)) {
-			const name = key as keyof typeof theme.colors;
-			if (name === 'text' || name === 'focus') {
-				continue;
-			}
-			let colors: Color[];
-			try {
-				if (Array.isArray(value)) {
-					colors = value.map((v) => Color(v));
-				} else {
-					colors = [Color(value as string)];
+		// check for low contrast between text and background colors
+		for (let i = 0; i < theme.colors.background.length; i++) {
+			for (let j = 0; j < theme.colors.text.length; j++) {
+				const contrast = Color(theme.colors.background[i]).contrast(Color(theme.colors.text[j]));
+				if (contrast < 4.5) {
+					console.warn(
+						`Low contrast between background color ${theme.colors.background[i]} and text color ${theme.colors.text[j]}: ${contrast}`
+					);
 				}
-			} catch {
-				continue;
-			}
-			for (const [i, color] of colors.entries()) {
-				const contrasts = [color.contrast(Color(theme.colors.text[0]))];
-				contrasts.map((c, j) => {
-					if (c < 4.5)
-						console.log(`Low contrast between ${name}-${i} and text-${j}: ${c.toFixed(2)};`);
-				});
 			}
 		}
 	}
@@ -73,6 +60,8 @@ export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 
 export const defaultTheme = {
 	size: {
+		'3xs': '0.25rem',
+		'2xs': '0.5rem',
 		xs: '0.75rem',
 		sm: '0.875rem',
 		md: '1rem',
@@ -109,7 +98,7 @@ export const defaultTheme = {
 		padding: '.5em 1em',
 		border: {
 			radius: '.5em',
-			width: '1px',
+			width: '2px',
 			style: 'solid'
 		},
 		ripple: {
@@ -144,7 +133,7 @@ export const defaultTheme = {
 		},
 		border: {
 			radius: '.5em',
-			width: '1px'
+			width: '2px'
 		}
 	},
 	'masonry-layout': {
@@ -170,7 +159,7 @@ export const defaultTheme = {
 	checkbox: {
 		size: '1.25em',
 		border: {
-			width: '1px',
+			width: '2px',
 			radius: '.25em'
 		},
 		mark: {
@@ -201,7 +190,7 @@ export const defaultTheme = {
 	},
 	table: {
 		border: {
-			width: '1px',
+			width: '2px',
 			radius: '1em'
 		},
 		caption: {
@@ -224,6 +213,33 @@ export const defaultTheme = {
 		},
 		arrow: {
 			size: '1em'
+		}
+	},
+	collapse: {
+		header: {
+			padding: '.5em 1em',
+			border: {
+				radius: '.5em',
+				width: '1px'
+			}
+		}
+	},
+	accordion: {
+		gap: '2px'
+	},
+	input: {
+		padding: '.5em 1em',
+		border: {
+			radius: '.5em'
+		},
+		outline: {
+			width: '2px'
+		},
+		disabled: {
+			alpha: 0.4
+		},
+		slots: {
+			gap: '.125em'
 		}
 	},
 	transition: {

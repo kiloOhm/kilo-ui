@@ -106,14 +106,14 @@
 			left: 0;
 			top: 0;
 			z-index: 2;
-			background-color: var(--k-colors-background-2);
+			background-color: var(--k-colors-background-1);
 			padding: var(--k-popover-padding);
 			border-radius: var(--k-popover-border-radius);
 			> .arrow {
 				position: absolute;
 				width: 8px;
 				height: 8px;
-				background-color: var(--k-colors-background-2);
+				background-color: var(--k-colors-background-1);
 				transform: rotate(45deg);
 				z-index: 1;
 			}

@@ -65,7 +65,7 @@
 	.components-layout {
 		@apply h-full flex flex-col;
 		> header {
-			background-color: var(--k-colors-background-2);
+			background-color: var(--k-colors-background-1);
 			border-bottom: 1px solid var(--k-colors-border-0);
 		}
 	}

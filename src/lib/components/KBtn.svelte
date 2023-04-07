@@ -33,6 +33,14 @@
 	function hover() {
 		dispatch('hover');
 	}
+	function down(e: MouseEvent | KeyboardEvent | TouchEvent) {
+		setRippleState(e, true);
+		dispatch('down');
+	}
+	function up(e: MouseEvent | KeyboardEvent | TouchEvent) {
+		setRippleState(e, false);
+		dispatch('up');
+	}
 	let rippleShapeRef: HTMLDivElement;
 	const setRippleState = debounce(
 		(e: MouseEvent | KeyboardEvent | TouchEvent, color: boolean) => {
@@ -95,16 +103,16 @@
 	class:ghost
 	{disabled}
 	on:click={click}
-	on:mousedown={(e) => setRippleState(e, true)}
-	on:mouseup={(e) => setRippleState(e, false)}
+	on:mousedown={down}
+	on:mouseup={up}
 	on:mouseenter={() => hover()}
-	on:mouseleave={(e) => setRippleState(e, false)}
+	on:mouseleave={up}
 	on:touchstart|passive={(e) => {
 		hover();
-		setRippleState(e, true);
+		down(e);
 	}}
-	on:touchend|passive={(e) => setRippleState(e, false)}
-	on:touchcancel|passive={(e) => setRippleState(e, false)}
+	on:touchend|passive={up}
+	on:touchcancel|passive={up}
 >
 	<div class="background" />
 	<div class="content-container">
@@ -214,7 +222,7 @@
 			}
 			&[data-priority='secondary'] {
 				> .background {
-					background-color: var(--k-colors-background-2);
+					background-color: var(--k-colors-background-1);
 				}
 				color: var(--color);
 			}
@@ -224,7 +232,7 @@
 				}
 				&:hover:not(:disabled) {
 					> .background {
-						background-color: var(--k-colors-background-2);
+						background-color: var(--k-colors-background-1);
 					}
 				}
 				color: var(--color);

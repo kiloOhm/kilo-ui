@@ -20,10 +20,13 @@
 
 <style lang="scss">
 	.k-icon {
+		line-height: 1;
 		font-size: var(--size);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
+		width: var(--k-icon-size);
+		height: var(--k-icon-size);
 		&:not(.noColorCorrection) > :global(svg) {
 			color: var(--color);
 			fill: var(--color);

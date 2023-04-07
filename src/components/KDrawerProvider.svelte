@@ -101,7 +101,7 @@
 		}
 	);
 	const subscribers: (() => void)[] = [];
-	setContext('--k-subscribe-background-click', (callback: () => void) => {
+	setContext('--k-subscribe-background-0-click', (callback: () => void) => {
 		subscribers.push(callback);
 		return () => {
 			const index = subscribers.indexOf(callback);

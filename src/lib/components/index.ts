@@ -17,3 +17,5 @@ export { default as KCollapse } from './KCollapse.svelte';
 export { default as KCheckbox } from './KCheckbox.svelte';
 export { default as KPopover } from './KPopover.svelte';
 export { default as KAnchor } from './KAnchor.svelte';
+export { default as KAccordion } from './KAccordion.svelte';
+export { default as KInput } from './KInput.svelte';
