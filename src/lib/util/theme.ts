@@ -15,7 +15,7 @@ export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 				const contrast = Color(theme.colors.background[i]).contrast(Color(theme.colors.text[j]));
 				if (contrast < 4.5) {
 					console.warn(
-						`Low contrast between background color ${theme.colors.background[i]} and text color ${theme.colors.text[j]}: ${contrast}`
+						`Low contrast between background color ${i} ${theme.colors.background[i]} and text color ${j} ${theme.colors.text[j]}: ${contrast}`
 					);
 				}
 			}
@@ -78,8 +78,8 @@ export const defaultTheme = {
 	} as Record<Size, string>,
 	colors: {
 		background: ['#030303', '#151515', '#272727'],
-		text: ['#EDEDED', '#A9A9A9', '#666666'],
-		focus: '#EDEDED',
+		text: ['#EEEEEE', '#CBCBCB', '#A9A9A9'],
+		focus: '#EEEEEE',
 		blue: '#6CCFF6',
 		purple: '#9368B7',
 		green: '#57CC99',
@@ -91,7 +91,7 @@ export const defaultTheme = {
 		family: '"Arial", sans-serif'
 	},
 	icon: {
-		color: '#EDEDED',
+		color: '#EEEEEE',
 		size: '1.5em'
 	},
 	button: {
@@ -107,7 +107,7 @@ export const defaultTheme = {
 				expand: 2.5,
 				fade: 1
 			},
-			color: '#EDEDED'
+			color: '#EEEEEE'
 		},
 		hover: {
 			brightness: 0.8,
@@ -149,7 +149,7 @@ export const defaultTheme = {
 		},
 		padding: '.25em .5em',
 		thumb: {
-			color: '#EDEDED',
+			color: '#EEEEEE',
 			padding: '.125em'
 		},
 		disabled: {
@@ -163,7 +163,7 @@ export const defaultTheme = {
 			radius: '.25em'
 		},
 		mark: {
-			color: '#EDEDED',
+			color: '#EEEEEE',
 			scale: '.6em'
 		},
 		disabled: {

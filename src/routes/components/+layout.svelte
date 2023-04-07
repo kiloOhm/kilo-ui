@@ -4,6 +4,8 @@
 	import { goto, preloadData } from '$app/navigation';
 	import type { AdaptiveNavItem } from '../../components/KAdaptiveNav';
 	import KAdaptiveNav from '../../components/KAdaptiveNav.svelte';
+	import KPageTransitionProvider from '../../components/KPageTransitionProvider.svelte';
+	import type { LayoutData } from './$types';
 	const pages = Object.entries(import.meta.glob('./**/*.svelte'))
 		.map(([path, _]) => path.split('/')[1])
 		.filter((name) => !name.startsWith('+'))
@@ -45,6 +47,8 @@
 			loaded.add(key);
 		});
 	}
+	export let data: LayoutData;
+	$: path = data.pathname.split('/')[2];
 </script>
 
 <div class="components-layout">
@@ -55,9 +59,9 @@
 		bind:active
 		on:hover={(e) => hover(e.detail.key)}
 	>
-		<div class="flex-grow h-full overflow-auto">
+		<KPageTransitionProvider {path}>
 			<slot />
-		</div>
+		</KPageTransitionProvider>
 	</KAdaptiveNav>
 </div>
 

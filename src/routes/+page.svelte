@@ -34,7 +34,7 @@
 			<h1 class="text-8xl">Kilo UI</h1>
 			<h2 class="text-xl">A Svelte UI Component Library</h2>
 			<div class="buttons mt-2 flex items-center gap-2">
-				<KBtn color="green" on:click={() => goto('/components')} text="Components" />
+				<KBtn color="green" on:click={() => goto('/components/Button')} text="Components" />
 				<KBtn color="blue" ghost on:click={() => goto('/docs')} text="Documentation" />
 			</div>
 		</div>

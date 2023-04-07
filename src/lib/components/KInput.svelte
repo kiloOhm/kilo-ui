@@ -217,7 +217,13 @@
 			>
 				{#if type === 'number'}
 					<div class="num-controls">
-						<KBtn shape="pill" priority="tertiary" size="3xs" on:click={increment}>
+						<KBtn
+							ariaLabel={`add ${step}`}
+							shape="pill"
+							priority="tertiary"
+							size="3xs"
+							on:click={increment}
+						>
 							{#if $$slots.plus}
 								<slot name="plus" />
 							{:else}
@@ -226,7 +232,13 @@
 								</KIcon>
 							{/if}
 						</KBtn>
-						<KBtn shape="pill" priority="tertiary" size="3xs" on:click={decrement}>
+						<KBtn
+							ariaLabel={`subtract ${step}`}
+							shape="pill"
+							priority="tertiary"
+							size="3xs"
+							on:click={decrement}
+						>
 							{#if $$slots.minus}
 								<slot name="minus" />
 							{:else}
@@ -239,7 +251,13 @@
 				{:else if type === 'password'}
 					<div class="password-controls">
 						{#if showPassword}
-							<KBtn shape="pill" priority="tertiary" size="3xs" on:click={hidePassword}>
+							<KBtn
+								ariaLabel="hide password"
+								shape="pill"
+								priority="tertiary"
+								size="3xs"
+								on:click={hidePassword}
+							>
 								{#if $$slots['pw-visible']}
 									<slot name="pw-visible" />
 								{:else}
@@ -249,7 +267,13 @@
 								{/if}
 							</KBtn>
 						{:else}
-							<KBtn shape="pill" priority="tertiary" size="3xs" on:click={_showPassword}>
+							<KBtn
+								ariaLabel="show password"
+								shape="pill"
+								priority="tertiary"
+								size="3xs"
+								on:click={_showPassword}
+							>
 								{#if $$slots['pw-hidden']}
 									<slot name="pw-hidden" />
 								{:else}
@@ -263,7 +287,13 @@
 				{/if}
 				{#if clearable && value}
 					<div class="clear-controls">
-						<KBtn shape="pill" priority="tertiary" size="3xs" on:click={clear}>
+						<KBtn
+							ariaLabel="clear input"
+							shape="pill"
+							priority="tertiary"
+							size="3xs"
+							on:click={clear}
+						>
 							{#if $$slots.clear}
 								<slot name="clear" />
 							{:else}
@@ -277,7 +307,13 @@
 				{#if copyable && value && navigator?.clipboard}
 					<div class="copy-controls">
 						{#if !copied}
-							<KBtn shape="pill" priority="tertiary" size="3xs" on:click={copy}>
+							<KBtn
+								ariaLabel="copy to clipboard"
+								shape="pill"
+								priority="tertiary"
+								size="3xs"
+								on:click={copy}
+							>
 								{#if $$slots.copy}
 									<slot name="copy" />
 								{:else}

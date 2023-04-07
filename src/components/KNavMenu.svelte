@@ -14,12 +14,7 @@
 	{#if $$slots.before}
 		<slot name="before" />
 	{/if}
-	<KMenu
-		{items}
-		{active}
-		on:transitionend={({ detail }) => (active = detail)}
-		on:hover={(e) => dispatch('hover', { key: e.detail.key })}
-	/>
+	<KMenu {items} bind:active on:hover={(e) => dispatch('hover', { key: e.detail.key })} />
 	{#if $$slots.after}
 		<slot name="after" />
 	{/if}

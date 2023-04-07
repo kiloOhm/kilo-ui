@@ -14,7 +14,7 @@
 <KThemeProvider />
 
 <div class="k-anchor" id={hash} tabindex="-1">
-	<KBtn priority="tertiary" size="xs" shape="circle" on:click={() => copy()}>
+	<KBtn priority="tertiary" ariaLabel="copy link" size="xs" shape="circle" on:click={() => copy()}>
 		{#if $$slots.icon}
 			<slot name="icon" />
 		{:else}
