@@ -222,7 +222,7 @@
 			}
 			&[data-priority='secondary'] {
 				> .background {
-					background-color: var(--k-colors-background-1);
+					background-color: var(--k-colors-background-2);
 				}
 				color: var(--color);
 			}
@@ -232,7 +232,7 @@
 				}
 				&:hover:not(:disabled) {
 					> .background {
-						background-color: var(--k-colors-background-1);
+						background-color: var(--k-colors-background-2);
 					}
 				}
 				color: var(--color);

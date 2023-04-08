@@ -120,7 +120,9 @@
 	{#each items as item}
 		{#if item.type === 'category'}
 			<div class="category">
-				{item.label ?? item.key}
+				<span>
+					{item.label ?? item.key}
+				</span>
 			</div>
 		{:else if item.type === 'divider'}
 			{#if item.label}
@@ -141,7 +143,9 @@
 				on:mouseenter={() => dispatch('hover', { key })}
 				on:touchstart={() => dispatch('hover', { key })}
 			>
-				{item.label ?? item.key}
+				<span>
+					{item.label ?? item.key}
+				</span>
 				{#if multiple}
 					{#if backgroundPointer}
 						<div class="pointer bg" on:transitionend={transitionEnd} />
@@ -169,6 +173,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
+		overflow: hidden;
 		&.tabs {
 			flex-direction: row;
 		}

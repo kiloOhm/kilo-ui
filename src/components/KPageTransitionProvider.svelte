@@ -101,7 +101,7 @@
 <style lang="scss">
 	.page-container {
 		position: relative;
-		width: 100%;
+		flex-grow: 1;
 		height: 100%;
 		overflow: auto;
 		> .transition-wrapper {
