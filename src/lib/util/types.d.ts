@@ -6,3 +6,17 @@ export interface SvelteAction {
 		destroy?: () => void;
 	} | void;
 }
+
+export type Key =
+	| 'Enter'
+	| 'Space'
+	| 'Escape'
+	| 'ArrowUp'
+	| 'ArrowDown'
+	| 'ArrowLeft'
+	| 'ArrowRight'
+	| 'Home'
+	| 'End'
+	| 'PageUp'
+	| 'PageDown'
+	| 'Tab';

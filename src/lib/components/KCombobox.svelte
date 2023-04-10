@@ -1,88 +1,202 @@
 <script lang="ts">
+	/**
+	 * @event {{ key: string }} select
+	 * @event {{ key: string }} deselect
+	 * @event {null} clear - clears all values
+	 */
 	import type { Placement } from '@floating-ui/dom';
 	import { setContext } from 'svelte';
 	import { KInput, KPopover, type MenuItemMixed, KMenu, KBtn, KIcon } from '.';
 	import IonClose from '~icons/ion/close';
 	import IonIosArrowUp from '~icons/ion/ios-arrow-up';
+	import { extractIfSingle } from '$lib/util/arrays';
+	import { keypress, outclick, type Color, type Size } from '..';
+	import KChip from './KChip.svelte';
+	import Fuse from 'fuse.js';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
+	/**
+	 * @type {'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'}
+	 */
 	export let placement: Placement = 'bottom';
 	export let sameWidth = true;
+	/**
+	 * @type {({type: 'item', key: string, label?: string} | {type: 'divider', label?: string})[]}
+	 */
 	export let items: MenuItemMixed[];
 	export let show = false;
 	export let multiple = false;
 	export let clearable = false;
-	export let readonly = false;
+	/**
+	 * @type {string | string[] | null}
+	 */
 	export let selected: string | string[] | null = null;
+	/**
+	 * defaults to `selected` if `multiple` is false
+	 * @type {string}
+	 * @default ''
+	 */
 	export let inputValue: string = !multiple && selected !== null ? (selected as string) : '';
+	export let placeholder: string = 'Select a value';
+	export let searchable = false;
 	export let allowNew = false;
 	export let showCaret = true;
+	/**
+	 * @type {string | null}
+	 */
+	export let label: string | null = null;
+	/**
+	 * @type {string | null}
+	 */
+	export let message: string | null = null;
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
+	export let size: Size | string = 'md';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
+	export let color: Color | string | undefined = 'blue';
+	/**
+	 * @type {'pill' | 'sharp' | undefined}
+	 */
+	export let shape: 'pill' | 'sharp' | undefined = undefined;
 
+	$: readonly = !searchable && !allowNew;
 	let active: string[] | null = null;
 	let newValues: string[] = [];
+	function moveNewValues() {
+		const _new = active?.find?.((x) => x === '__new__');
+		if (_new) {
+			newValues = [...newValues, inputValue];
+			active = active?.filter((x) => x !== '__new__') ?? null;
+		}
+	}
+	$: (() => {
+		if (active?.length) {
+			moveNewValues();
+		}
+	})();
+	let _placeholder = placeholder;
 
 	$: (() => {
-		if (!multiple && selected) {
-			inputValue = selected as string;
+		if (!multiple) {
+			if (selected) {
+				if (show) {
+					_placeholder = selected as string;
+					inputValue = '';
+				} else {
+					inputValue = selected as string;
+					_placeholder = placeholder;
+				}
+			}
 		}
 	})();
 
-	$: selected = [...(active ?? []), ...newValues];
+	$: fuse = !searchable ? null : new Fuse(items, { keys: ['key', 'label'] });
+
+	let searchResults: MenuItemMixed[] = [];
+	$: (() => {
+		if (!show || !inputValue || !fuse) {
+			searchResults = items;
+		} else {
+			searchResults = fuse.search(inputValue).map((x) => x.item);
+		}
+		if (allowNew && inputValue) {
+			searchResults = [{ type: 'item', key: '__new__', label: inputValue }, ...searchResults];
+		}
+	})();
+	$: selected = extractIfSingle([...(active ?? []), ...newValues]) ?? null;
+
+	$: chips = multiple
+		? (selected ? (Array.isArray(selected) ? selected : [selected]) : null)?.map?.((x) => {
+				const item = items.find((y) => (y as any).key === x);
+				return {
+					key: x,
+					label: item ? (item as any).label : x
+				};
+		  })
+		: null;
 
 	let inputRef: InstanceType<typeof KInput> | null = null;
+	let menuWrapperRef: HTMLElement | null = null;
+	let menuRef: InstanceType<typeof KMenu> | null = null;
 
 	setContext('k-combobox-ctx', {});
 
-	let hoveringPopover = false;
-	function enterPopover() {
-		hoveringPopover = true;
-	}
-	function leavePopover() {
-		hoveringPopover = false;
-	}
-	function blur(e: FocusEvent) {
-		if (hoveringPopover) {
-			inputRef?.focus();
-			return;
-		}
-		show = false;
-	}
 	function select(key: string) {
 		if (!multiple) {
 			show = false;
 		}
+		dispatch('select', key);
+	}
+	function deselect(key: string) {
+		active = active?.filter((x) => x !== key) ?? null;
+		newValues = newValues.filter((x) => x !== key);
+		dispatch('deselect', key);
 	}
 	function clear() {
 		selected = null;
 		active = null;
 		inputValue = '';
+		dispatch('clear');
 	}
-	function click() {
-		if (!show && !hoveringPopover) {
-			show = true;
+
+	function toggle() {
+		show = !show;
+		if (show) {
 			inputRef?.focus();
 		}
 	}
+
+	function _outclick(e: MouseEvent | TouchEvent) {
+		const normal = e instanceof TouchEvent ? e.touches[0] : e;
+		const target = normal.target as HTMLElement;
+		if (menuWrapperRef?.contains(target)) {
+			return;
+		}
+		show = false;
+	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
-<div class="k-combobox" on:click={click} on:keypress={click}>
+<div
+	class="k-combobox {restClass ?? ''}"
+	{...restProps}
+	use:outclick={_outclick}
+	style:--cursor={searchable || allowNew ? undefined : 'pointer'}
+>
 	<KPopover {show} {placement} {sameWidth} arrow={false} trigger="manual">
-		<KInput
-			slot="trigger"
-			bind:value={inputValue}
-			bind:this={inputRef}
-			on:blur={({ detail }) => blur(detail)}
-			{readonly}
-		>
-			<div class="before" slot="before">
-				{#if selected && multiple}
-					{#each Array.isArray(selected) ? selected : [selected] as key}
-						<span>
-							{key}
-						</span>
-					{/each}
-				{/if}
-			</div>
-			<div class="after" slot="after">
+		<!-- svelte-ignore a11y-click-events-have-key-events - using custom keypress action -->
+		<div class="input-wrapper" slot="trigger" on:click={toggle} use:keypress={{ Enter: toggle }}>
+			<KInput
+				focusTrap={show}
+				bind:value={inputValue}
+				bind:this={inputRef}
+				placeholder={_placeholder}
+				{readonly}
+				autosize="horizontal"
+				{label}
+				{message}
+				{color}
+				{size}
+				{shape}
+			>
+				<div class="before" slot="before">
+					{#if chips}
+						{#each chips as i}
+							<KChip text={i.label} size="xs" ghost on:close={() => deselect(i.key)} />
+						{/each}
+					{/if}
+				</div>
+			</KInput>
+			<div class="after">
 				{#if clearable && selected?.length}
 					<KBtn priority="tertiary" shape="pill" size="3xs" on:click={clear}>
 						<KIcon size="xs">
@@ -98,42 +212,67 @@
 					</div>
 				{/if}
 			</div>
-		</KInput>
-		<div
-			class="menu-wrapper"
-			on:mouseenter={enterPopover}
-			on:mouseleave={leavePopover}
-			on:touchstart={enterPopover}
-			on:touchend={leavePopover}
-			on:touchcancel={leavePopover}
-		>
-			<KMenu {items} bind:active on:select={({ detail }) => select(detail)} {multiple} nullable />
+		</div>
+		<div class="menu-wrapper" bind:this={menuWrapperRef}>
+			<KMenu
+				bind:this={menuRef}
+				items={searchResults}
+				bind:active
+				on:select={({ detail }) => select(detail)}
+				multiple
+				nullable
+				maxSelected={multiple ? undefined : 1}
+				{color}
+				{size}
+				{shape}
+			/>
 		</div>
 	</KPopover>
 </div>
 
 <style lang="scss">
+	.menu-wrapper {
+		padding: 0.25rem;
+	}
 	.k-combobox {
-		width: max-content;
-		.menu-wrapper {
-			padding: 0.5rem;
+		min-width: none;
+		// width: max-content;
+		cursor: var(--cursor);
+		:global(.k-popover) {
+			width: 100%;
+		}
+		:global(.k-input) {
+			flex-grow: 1;
 		}
 		.before {
 			display: flex;
 			align-items: center;
-			justify-content: center;
+			flex-wrap: wrap;
 			gap: 0.25em;
 		}
-		.after {
+		.input-wrapper {
+			width: 100%;
+			position: relative;
 			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 0.25em;
-			.caret {
+			.after {
+				position: absolute;
+				right: 0.5em;
+				top: 0;
+				bottom: 0;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				gap: 0.25em;
+				.caret {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
 			}
 		}
+	}
+	:global(input),
+	:global(textarea) {
+		cursor: var(--cursor);
 	}
 </style>

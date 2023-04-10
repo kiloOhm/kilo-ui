@@ -6,8 +6,6 @@ import {
 	shift,
 	offset,
 	arrow as _arrow,
-	type ReferenceElement,
-	type FloatingElement,
 	hide,
 	inline
 } from '@floating-ui/dom';
@@ -21,12 +19,14 @@ export type FloatingUiOptions = {
 };
 
 export function useFloatingUi(
-	reference: ReferenceElement,
-	floating: FloatingElement,
+	reference: HTMLElement,
+	floating: HTMLElement,
 	arrow: HTMLElement,
 	onVisibilityChange?: (visible: boolean) => void,
 	options?: FloatingUiOptions
 ) {
+	document.body.appendChild(floating);
+	floating.style.position = 'fixed';
 	let visible = true;
 	function updatePosition() {
 		let middleware = [_arrow({ element: arrow }), hide(), inline()];
@@ -41,7 +41,8 @@ export function useFloatingUi(
 		}
 		computePosition(reference, floating, {
 			placement: options?.placement ?? 'top',
-			middleware
+			middleware,
+			strategy: 'fixed'
 		}).then(({ x, y, placement, middlewareData }) => {
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			//@ts-ignore - middlewareData is not typed
@@ -74,10 +75,14 @@ export function useFloatingUi(
 			});
 		});
 	}
-	return autoUpdate(reference, floating, updatePosition, {
+	const auCleanup = autoUpdate(reference, floating, updatePosition, {
 		animationFrame: true,
 		ancestorResize: true,
 		elementResize: true,
 		ancestorScroll: true
 	});
+	return () => {
+		auCleanup();
+		floating.remove();
+	};
 }

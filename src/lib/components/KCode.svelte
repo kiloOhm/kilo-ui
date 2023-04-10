@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { KCard, KThemeProvider } from '.';
+	import { KThemeProvider } from '.';
 	import Prism from 'prismjs';
 	import '../util/PrismTheme.css';
 	import IonCopyOutline from '~icons/ion/copy-outline';
 	import KBtn from './KBtn.svelte';
 	import KIcon from './KIcon.svelte';
 	export let code: string;
+	/**
+	 * for use with prismjs, make sure to import language first
+	 */
 	export let language: string = 'javascript';
 	export let wrap: boolean = false;
 	export let tabSize: number = 2;
@@ -20,11 +23,17 @@
 	function copy() {
 		return navigator.clipboard.writeText(code);
 	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
-<div class="k-code" class:bordered>
+<div class="k-code {restClass ?? ''}" {...restProps} class:bordered>
 	<div class="wrapper">
 		{#if showLanguage || (navigator.clipboard && showCopy)}
 			<header>

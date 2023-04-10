@@ -1,4 +1,4 @@
-export type MenuItemMixed = MenuItem | MenuCategory | MenuDivider;
+export type MenuItemMixed = MenuItem | MenuDivider;
 
 export type MenuItem = {
 	type: 'item';

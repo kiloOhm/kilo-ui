@@ -6,10 +6,23 @@
 	import KThemeProvider from './KThemeProvider.svelte';
 
 	export let show = true;
+	/**
+	 * if defined, prepends header with caret and title
+	 * @type {string | null}
+	 */
 	export let title: string | null = null;
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
 	export let size: Size | string = 'xl';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
 	export let color: Color | string | undefined = undefined;
 	export let bordered = false;
+	/**
+	 * @type {'start' | 'end' }
+	 */
 	export let caretPosition: 'start' | 'end' = 'end';
 	let ref: HTMLElement;
 	let offscreenRef: HTMLElement;
@@ -58,12 +71,19 @@
 		onDestroy(cleanup);
 		ctxToggle = _toggle;
 	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
 <div
-	class="k-collapse"
+	class="k-collapse {restClass ?? ''}"
+	{...restProps}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
 	style:--color={!validColor ? color : `var(--k-colors-${color}-darken-4, var(--k-colors-border-0)`}
 	style:border-color={bordered && (show || title || $$slots.header)

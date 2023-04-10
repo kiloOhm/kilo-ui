@@ -4,31 +4,53 @@
 	const uid = crypto.randomUUID();
 	export let checked = false;
 	export let disabled = false;
-	export let shape: 'round' | 'sharp' | undefined = undefined;
+	/**
+	 * @type {'pill' | 'circle' | 'sharp' | undefined}
+	 */
+	export let shape: 'pill' | 'sharp' | undefined = undefined;
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
 	export let size: Size | string = 'medium';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
 	export let checkedColor: Color | string = 'var(--k-colors-green-darken-4)';
-	export let uncheckedColor: string = 'var(--k-colors-background-2)';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
+	export let uncheckedColor: Color | string = 'var(--k-colors-background-2)';
 	$: validSize = Sizes.includes(size as Size);
 	$: _checkedColor = Colors.includes(checkedColor as Color)
 		? `var(--k-colors-${checkedColor}-darken-4)`
 		: checkedColor;
+	$: _uncheckedColor = Colors.includes(uncheckedColor as Color)
+		? `var(--k-colors-${uncheckedColor}-darken-4)`
+		: uncheckedColor;
 	function toggle() {
 		if (disabled) return;
 		checked = !checked;
 	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
 <div
-	class="k-switch"
+	class="k-switch {restClass ?? ''}"
+	{...restProps}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--border-radius={shape === 'round'
+	style:--border-radius={shape === 'pill'
 		? '9999px'
 		: shape === 'sharp'
 		? '0'
 		: 'var(--k-switch-border-radius)'}
-	style:--track-color={checked ? _checkedColor : uncheckedColor}
+	style:--track-color={checked ? _checkedColor : _uncheckedColor}
 	class:checked
 	class:disabled
 	on:click={() => toggle()}
@@ -53,17 +75,11 @@
 	{/if}
 	<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />
 	<div class="track">
-		{#if $$slots.checked}
-			<slot name="checked" />
-		{/if}
 		<div class="thumb">
 			{#if $$slots.thumb}
 				<slot name="thumb" />
 			{/if}
 		</div>
-		{#if $$slots.unchecked}
-			<slot name="unchecked" />
-		{/if}
 	</div>
 </div>
 

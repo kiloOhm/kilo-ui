@@ -42,23 +42,7 @@
 </script>
 
 <div class="components-layout">
-	<KAdaptiveNav bind:collapsible bind:show {items}>
-		<div
-			class="w-full p-4 text-center cursor-pointer"
-			slot="before"
-			on:click={() => {
-				active = null;
-				goto('/docs');
-			}}
-			on:keypress={() => {
-				active = null;
-				goto('/docs');
-			}}
-		>
-			<h1 class="text-lg" style="color: var(--k-colors-text-1)">Docs</h1>
-		</div>
-		<slot />
-	</KAdaptiveNav>
+	<slot />
 </div>
 
 <style lang="scss">

@@ -3,6 +3,9 @@
 	import { setContext } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
 
+	/**
+	 * @type {number[] | null}
+	 */
 	export let active: number[] | null = [];
 	export let minActive: number = 1;
 	export let maxActive: number = 1;
@@ -47,11 +50,17 @@
 			subscriber?.(active === null ? false : active.includes(i))
 		);
 	})();
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
-<div class="k-accordion">
+<div class="k-accordion {restClass ?? ''}" {...restProps}>
 	<slot />
 </div>
 

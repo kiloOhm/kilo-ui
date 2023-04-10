@@ -1,8 +1,14 @@
-<script>
+<script lang="ts">
 	export let vertical = false;
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
-<div class="k-btn-group" class:vertical>
+<div class="k-btn-group {restClass ?? ''}" {...restProps} class:vertical>
 	<slot />
 </div>
 

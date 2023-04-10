@@ -1,4 +1,10 @@
 <script lang="ts">
+	//Events
+	/**
+	 * @event {null} clear
+	 * @event {FocusEvent} focus
+	 * @event {FocusEvent} blur
+	 */
 	import { randomString } from '$lib/util';
 	import { Colors, Sizes, type Color, type Size } from '../types.d';
 	import KBtn from './KBtn.svelte';
@@ -12,36 +18,74 @@
 	import { KIcon } from '.';
 	import { createEventDispatcher } from 'svelte';
 	import { KUIError } from '$lib/util/console';
+	import { focusTrap as _focusTrap } from '..';
 	const uid = randomString(8);
 
 	export let value = '';
 	export let placeholder = '';
+	/**
+	 * @type {'text' | 'password' | 'email' | 'number'}
+	 */
 	export let type: 'text' | 'password' | 'email' | 'number' = 'text';
 	export let textarea = false;
+	/**
+	 * @type {'vertical' | 'horizontal' | 'both' | 'none'}
+	 */
 	export let autosize: 'vertical' | 'horizontal' | 'both' | 'none' = 'none';
 	export let minRows = 3;
+	/**
+	 * @type {number | null}
+	 */
 	export let maxRows: number | null = 5;
 	export let disabled = false;
 	export let readonly = false;
+	/**
+	 * @type {string | null}
+	 */
 	export let label: string | null = null;
+	/**
+	 * @type {string | null}
+	 */
 	export let message: string | null = null;
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
 	export let size: Size | string = 'md';
-	export let color: Color | string | undefined = 'blue';
-	export let autocomplete: string | undefined | null = 'off';
-	export let autocapitalize: string | undefined | null = 'off';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
+	export let color: Color | string = 'blue';
+	/**
+	 * @type {'pill' | 'sharp' | undefined}
+	 */
 	export let shape: 'pill' | 'sharp' | undefined = undefined;
+	/**
+	 * @type {string | undefined | null}
+	 */
+	export let autocomplete: string | undefined | null = 'off';
+	/**
+	 * @type {string | undefined | null}
+	 */
+	export let autocapitalize: string | undefined | null = 'off';
 	export let min: number | null = null;
 	export let max: number | null = null;
 	export let step: number = 1;
 	export let showPassword: boolean = false;
 	export let clearable: boolean = false;
 	export let copyable: boolean = false;
+	export let focusTrap: boolean = false;
 
+	/**
+	 * @type {() => void}
+	 */
 	export function focus() {
 		if (inputRef) inputRef.focus();
 		if (textareaRef) textareaRef.focus();
 	}
 
+	/**
+	 * @type {() => void}
+	 */
 	export function blur() {
 		if (inputRef) inputRef.blur();
 		if (textareaRef) textareaRef.blur();
@@ -73,18 +117,6 @@
 	let inputRef: HTMLInputElement;
 	let textareaRef: HTMLTextAreaElement;
 
-	let margin: { top: number; right: number; bottom: number; left: number };
-	$: (() => {
-		if (!inputRef && !textareaRef) return;
-		const el = inputRef || textareaRef;
-		const style = getComputedStyle(el);
-		const top = parseInt(style.marginTop);
-		const right = parseInt(style.marginRight);
-		const bottom = parseInt(style.marginBottom);
-		const left = parseInt(style.marginLeft);
-		margin = { top, right, bottom, left };
-	})();
-
 	function handleInput(e: Event) {
 		value = (e.target as HTMLInputElement).value;
 		if (maxRows) {
@@ -93,14 +125,24 @@
 				value = (e.target as HTMLTextAreaElement).value.split('\n').slice(0, maxRows).join('\n');
 			}
 		}
+		autoSize();
+	}
+
+	function autoSize() {
 		if (autosize !== 'none') {
 			if (autosize === 'both' || autosize === 'horizontal') {
 				if (inputRef) {
-					inputRef.style.width = 'auto';
+					let reset = false;
+					if (!inputRef.value) {
+						inputRef.value = inputRef.placeholder;
+						reset = true;
+					}
+					inputRef.style.width = '0';
 					const width = inputRef.scrollWidth;
 					inputRef.style.width = `${width}px`;
+					if (reset) inputRef.value = '';
 				} else if (textareaRef) {
-					textareaRef.style.width = 'auto';
+					textareaRef.style.width = '0';
 					const width = textareaRef.scrollWidth;
 					textareaRef.style.width = `${width}px`;
 				}
@@ -117,6 +159,10 @@
 				}
 			}
 		}
+	}
+
+	$: if (inputRef || textareaRef) {
+		autoSize();
 	}
 
 	function increment() {
@@ -167,13 +213,27 @@
 		dispatch('focus', e);
 	}
 	function _blur(e: FocusEvent) {
+		if (focusTrap) {
+			focus();
+			return;
+		}
 		focussed = false;
 		dispatch('blur', e);
 	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <div
-	class="k-input"
+	class="k-input {restClass ?? ''}"
+	{...restProps}
+	on:click
+	on:keypress
+	use:_focusTrap={focusTrap}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
 	style:--color={!validColor
 		? color
@@ -188,12 +248,7 @@
 	{/if}
 	<div class="input-wrapper">
 		{#if $$slots.before}
-			<div
-				style:margin-left={`${margin?.left ?? 0}px`}
-				style:margin-top={`${margin?.top ?? 0}px`}
-				style:margin-bottom={`${margin?.bottom ?? 0}px`}
-				class="before"
-			>
+			<div class="before" style:align-items={textarea ? 'start' : 'center'}>
 				<slot name="before" />
 			</div>
 		{/if}
@@ -229,12 +284,7 @@
 			/>
 		{/if}
 		{#if $$slots.after || type === 'number' || type === 'password' || copyable || clearable || max !== null}
-			<div
-				style:margin-right={`${margin?.right ?? 0}px`}
-				style:margin-top={`${margin?.top ?? 0}px`}
-				style:margin-bottom={`${margin?.bottom ?? 0}px`}
-				class="after"
-			>
+			<div class="after" style:align-items={textarea ? 'start' : 'center'}>
 				{#if type === 'number'}
 					<div class="num-controls">
 						<KBtn
@@ -377,20 +427,28 @@
 		}
 		&.disabled > .input-wrapper {
 			opacity: var(--k-input-disabled-alpha);
-			> input {
+			> input,
+			> textarea {
 				cursor: not-allowed;
 			}
 		}
 		&[data-autosize='horizontal'],
 		&[data-autosize='both'] {
 			display: inline-block;
-			> .input-wrapper > textarea {
-				white-space: nowrap;
+			> .input-wrapper {
+				flex-grow: unset;
+				display: inline-flex;
+				> input,
+				> textarea {
+					white-space: nowrap;
+				}
 			}
 		}
 		> .input-wrapper {
+			width: 100%;
 			position: relative;
 			display: flex;
+			flex-wrap: wrap;
 			align-items: stretch;
 			gap: var(--k-input-slots-gap);
 			border-radius: var(--k-input-border-radius);
@@ -398,11 +456,13 @@
 			background-color: var(--k-colors-background-2);
 			overflow: hidden;
 			outline-color: transparent;
+			padding: var(--k-input-padding);
 			> input,
 			> textarea {
-				margin: var(--k-input-padding);
+				transition: none;
 				position: relative;
-				width: 100%;
+				flex-grow: 1;
+				min-width: 1px;
 				background: none;
 				outline: none;
 				/* Chrome, Safari, Edge, Opera */
@@ -440,7 +500,6 @@
 			> .before,
 			> .after {
 				display: flex;
-				align-items: start;
 				gap: var(--k-input-slots-gap);
 			}
 			> .after {

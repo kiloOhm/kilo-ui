@@ -2,6 +2,7 @@
 	import ComponentDemo from '../../../components/component-demo.svelte';
 	import ComponentPage from '../../../layouts/component-page.layout.svelte';
 	import type { PageData } from './$types';
+	import sveld from '$lib/components/KIcon.svelte?raw&sveld';
 
 	export let data: PageData;
 </script>
@@ -11,7 +12,7 @@
 	<meta name="description" content="WIP - Kilo UI Icon" />
 </svelte:head>
 
-<ComponentPage>
+<ComponentPage {sveld}>
 	<svelte:fragment slot="header">Icon</svelte:fragment>
 	<p slot="comment">
 		This component "normalizes" svg icons. It overrides color and size to match the design system. I

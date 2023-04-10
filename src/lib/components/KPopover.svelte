@@ -5,7 +5,13 @@
 	import { getContext, onDestroy } from 'svelte';
 	import { KThemeProvider } from '.';
 
+	/**
+	 * @type {'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end'}
+	 */
 	export let placement: Placement = 'top';
+	/**
+	 * @type {'hover' | 'manual'}
+	 */
 	export let trigger: 'hover' | 'manual' = 'hover';
 	export let enterDelay: number = 200;
 	export let leaveDelay: number = 200;
@@ -24,7 +30,14 @@
 	const comboboxCtx = getContext('k-combobox-ctx');
 
 	let cleanup: (() => void) | undefined;
-	onDestroy(() => cleanup?.());
+	onDestroy(() => {
+		show = false;
+		cleanup?.();
+	});
+	let triggerHidden = false;
+	function setTriggerHidden(hidden: boolean) {
+		triggerHidden = hidden;
+	}
 	$: (() => {
 		if (!triggerRef || !contentRef || cleanup) return;
 		cleanup = useFloatingUi(
@@ -32,8 +45,11 @@
 			contentRef,
 			arrowRef,
 			(visible: boolean) => {
-				if (visible) _show();
-				else _hide();
+				if (!visible) {
+					setTriggerHidden(true);
+				} else {
+					setTriggerHidden(false);
+				}
 			},
 			{
 				placement,
@@ -47,18 +63,9 @@
 
 	$: (() => {
 		if (!contentRef) return;
-		contentRef.style.opacity = show ? '1' : '0';
+		contentRef.style.opacity = show && !triggerHidden ? '1' : '0';
 		contentRef.style.pointerEvents = show ? 'auto' : 'none';
 	})();
-
-	function _show() {
-		if (trigger !== 'manual') return;
-		show = true;
-	}
-	function _hide() {
-		if (trigger !== 'manual') return;
-		show = false;
-	}
 
 	let enterTimeout: NodeJS.Timeout;
 	function enter() {
@@ -79,11 +86,17 @@
 		}
 		leaveTimeout = setTimeout(() => (show = false), leaveDelay);
 	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
-<div class="k-popover">
+<div class="k-popover {restClass ?? ''}" {...restProps}>
 	<div
 		class="trigger"
 		on:mouseenter={enter}
@@ -121,23 +134,24 @@
 		> .trigger {
 			display: block;
 		}
-		> .content {
-			width: max-content;
-			position: absolute;
-			left: 0;
-			top: 0;
-			z-index: 2;
+	}
+	// No nesting, because content will be portalled to body
+	.content {
+		width: max-content;
+		position: fixed;
+		left: 0;
+		top: 0;
+		z-index: 101;
+		background-color: var(--k-colors-background-2);
+		padding: var(--k-popover-padding);
+		border-radius: var(--k-popover-border-radius);
+		> .arrow {
+			position: fixed;
+			width: 8px;
+			height: 8px;
 			background-color: var(--k-colors-background-2);
-			padding: var(--k-popover-padding);
-			border-radius: var(--k-popover-border-radius);
-			> .arrow {
-				position: absolute;
-				width: 8px;
-				height: 8px;
-				background-color: var(--k-colors-background-2);
-				transform: rotate(45deg);
-				z-index: 1;
-			}
+			transform: rotate(45deg);
+			z-index: 100;
 		}
 	}
 </style>

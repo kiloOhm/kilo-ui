@@ -186,7 +186,11 @@ export const defaultTheme = {
 			border: {
 				radius: '.5em'
 			},
-			padding: '0.25em 1em'
+			padding: '0.25em 1em',
+			gap: '.25em'
+		},
+		edge: {
+			width: '2px'
 		}
 	},
 	table: {
@@ -240,7 +244,15 @@ export const defaultTheme = {
 			alpha: 0.4
 		},
 		slots: {
-			gap: '.125em'
+			gap: '.25em'
+		}
+	},
+	chip: {
+		padding: '.125em .25em .125em .5em',
+		gap: '.25em',
+		border: {
+			radius: '.5em',
+			width: '1px'
 		}
 	},
 	transition: {

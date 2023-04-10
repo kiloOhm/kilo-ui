@@ -16,4 +16,7 @@
 	];
 </script>
 
-<KMenu {items} tabs edgePosition="end" edgePointer backgroundPointer={false} />
+<div class="flex flex-col gap-2">
+	<KMenu {items} tabs edgePosition="end" edgePointer backgroundPointer={false} />
+	<KMenu {items} tabs edgePosition="end" />
+</div>

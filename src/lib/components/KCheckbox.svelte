@@ -4,19 +4,38 @@
 	import IonMinusRound from '~icons/ion/minus-round';
 	import IonCheckmark from '~icons/ion/checkmark';
 	const uid = crypto.randomUUID();
+	/**
+	 * @type {boolean | null}
+	 */
 	export let checked: boolean | null = false;
 	export let disabled: boolean = false;
+	/**
+	 * @type {'pill' | 'circle' | 'sharp' | undefined}
+	 */
 	export let shape: 'round' | 'sharp' | undefined = undefined;
-	export let size: Size | string = 'medium';
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
+	export let size: Size | string = 'md';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
 	export let color: Color | string = 'var(--k-colors-green-darken-4)';
 	$: validSize = Sizes.includes(size as Size);
 	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
 <div
-	class="k-checkbox"
+	class="k-checkbox {restClass ?? ''}"
+	{...restProps}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
 	style:--border-radius={shape === 'round'
 		? '9999px'

@@ -2,6 +2,7 @@
 	import ComponentPage from '../../../layouts/component-page.layout.svelte';
 	import ComponentDemo from '../../../components/component-demo.svelte';
 	import type { PageData } from './$types';
+	import sveld from '$lib/components/KInput.svelte?raw&sveld';
 
 	export let data: PageData;
 </script>
@@ -11,7 +12,7 @@
 	<meta name="description" content="WIP - Kilo UI Input" />
 </svelte:head>
 
-<ComponentPage>
+<ComponentPage {sveld}>
 	<svelte:fragment slot="header">Input</svelte:fragment>
 	{#each data.demos as demo}
 		<ComponentDemo title={demo.path.split('/').pop()?.split('.').shift()} code={demo.code}>

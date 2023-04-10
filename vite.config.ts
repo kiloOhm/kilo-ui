@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import Icons from 'unplugin-icons/vite';
+import sveld from 'vite-plugin-sveld';
 import { Sitemap } from 'vite-plugin-svelte-sitemap';
 
 export default defineConfig({
@@ -15,6 +16,7 @@ export default defineConfig({
 	},
 	plugins: [
 		sveltekit(),
+		sveld(),
 		Icons({
 			compiler: 'svelte',
 			autoInstall: true

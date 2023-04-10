@@ -1,5 +1,8 @@
-[![npm version](https://badge.fury.io/js/kilo-ui.svg)](https://badge.fury.io/js/kilo-ui)
+[![NPM][npm]][npm-url]
 
 # WIP
 
 ## A great svelte component library is under construction here
+
+[npm]: https://img.shields.io/npm/v/kilo-ui.svg?color=57CC99&style=for-the-badge
+[npm-url]: https://npmjs.com/package/kilo-ui

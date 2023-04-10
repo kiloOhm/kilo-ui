@@ -1,28 +1,64 @@
 <script lang="ts">
-	import { type Color, type Size, Sizes, Colors, randomString } from '..';
+	//Events
+	/**
+	 * @event {MouseEvent} click
+	 * @event {null} hover - fires when the mouse enters the button, useful for preloading
+	 * @event {MouseEvent | TouchEvent | KeyboardEvent} down - fires on MouseDown, TouchStart and Keydown
+	 * @event {MouseEvent | TouchEvent | KeyboardEvent} up - fires on MouseUp, MouseLeave, TouchEnd and Keyup
+	 */
+	import { type Color, type Size, Sizes, Colors } from '..';
 	import { createEventDispatcher } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
 	import { debounce } from 'lodash-es';
 	import type { ButtonPriority } from './KBtn';
 
+	/**
+	 * @type {'primary' | 'secondary' | 'tertiary'}
+	 */
 	export let priority: ButtonPriority = 'primary';
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
 	export let size: Size | string = 'md';
-	export let color: Color | string | undefined = undefined;
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
+	export let color: Color | string = 'var(--k-colors-text-0)';
+	/**
+	 * @type {string | undefined}
+	 */
 	export let textColor: string | undefined = undefined;
 	export let ghost = false;
+	/**
+	 * @type {'pill' | 'circle' | 'sharp' | undefined}
+	 */
 	export let shape: 'pill' | 'circle' | 'sharp' | undefined = undefined;
 	export let disabled = false;
 	export let ripple = true;
+	/**
+	 * if you want only text inside the default slot, use this, as it will also set the aria-label
+	 * @type {string | undefined}
+	 */
 	export let text: string | undefined = undefined;
-	export let ariaLabel: string | undefined = undefined;
+	/**
+	 * @type {string | undefined}
+	 */
 	export let submit: boolean | undefined = undefined;
+	/**
+	 * if defined, button will act like a link
+	 * @type {string | undefined}
+	 */
 	export let href: string | undefined = undefined;
+	/**
+	 * for use with href
+	 * @type {string | undefined}
+	 */
 	export let target: string | undefined = undefined;
 
 	let buttonRef: HTMLButtonElement;
 
 	const dispatch = createEventDispatcher();
-	function click() {
+	function click(e: MouseEvent) {
 		if (!disabled) {
 			dispatch('click');
 			if (href) {
@@ -35,11 +71,11 @@
 	}
 	function down(e: MouseEvent | KeyboardEvent | TouchEvent) {
 		setRippleState(e, true);
-		dispatch('down');
+		dispatch('down', e);
 	}
 	function up(e: MouseEvent | KeyboardEvent | TouchEvent) {
 		setRippleState(e, false);
-		dispatch('up');
+		dispatch('up', e);
 	}
 	let rippleShapeRef: HTMLDivElement;
 	const setRippleState = debounce(
@@ -78,33 +114,41 @@
 		{ leading: true, trailing: true }
 	);
 	$: validSize = Sizes.includes(size as Size);
-	$: validColor = !color || Colors.includes(color as Color);
+	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
+	let restAriaLabel: string, restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ariaLabel, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+		restAriaLabel = ariaLabel;
+	})();
 </script>
 
 <KThemeProvider />
 
 <button
-	class="k-btn"
+	class="k-btn {restClass ?? ''}"
+	{...restProps}
 	type={submit ? 'submit' : 'button'}
 	role={href ? 'link' : undefined}
 	bind:this={buttonRef}
 	data-priority={priority}
 	data-shape={shape}
-	aria-label={ariaLabel ?? text}
+	aria-label={restAriaLabel ?? text}
 	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={!validColor
-		? color
-		: `var(--k-colors-${color}${
-				priority === 'primary' && !ghost ? '-darken-4' : ''
-		  }, var(--k-colors-text-0))`}
+	style:--color={_color}
 	style:--text-color={textColor ??
-		(color ? 'var(--k-colors-text-0)' : 'var(--k-colors-background-0)')}
+		(color !== 'var(--k-colors-text-0)'
+			? 'var(--k-colors-text-0)'
+			: 'var(--k-colors-background-0)')}
 	class:ripple
 	class:ghost
 	{disabled}
 	on:click={click}
 	on:mousedown={down}
+	on:keydown={down}
 	on:mouseup={up}
+	on:keyup={up}
 	on:mouseenter={() => hover()}
 	on:mouseleave={up}
 	on:touchstart|passive={(e) => {

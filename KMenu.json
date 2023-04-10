@@ -1,0 +1,313 @@
+{
+  "filePath": "inline.tsx",
+  "rootPath": "/",
+  "start": 0,
+  "end": 3682,
+  "imports": [
+    {
+      "libraryName": "./KThemeProvider.svelte",
+      "start": 0,
+      "end": 53,
+      "specifiers": [],
+      "defaultAlias": "KThemeProvider"
+    },
+    {
+      "libraryName": ".",
+      "start": 54,
+      "end": 83,
+      "specifiers": [
+        {
+          "specifier": "KDivider"
+        }
+      ]
+    },
+    {
+      "libraryName": "svelte",
+      "start": 84,
+      "end": 131,
+      "specifiers": [
+        {
+          "specifier": "createEventDispatcher"
+        }
+      ]
+    },
+    {
+      "libraryName": "../types.d",
+      "start": 132,
+      "end": 175,
+      "specifiers": [
+        {
+          "specifier": "Colors"
+        },
+        {
+          "specifier": "Sizes"
+        }
+      ]
+    }
+  ],
+  "exports": [],
+  "declarations": [
+    {
+      "name": "dispatch",
+      "isConst": true,
+      "isExported": false,
+      "start": 176,
+      "end": 217
+    },
+    {
+      "name": "items",
+      "isConst": false,
+      "isExported": true,
+      "start": 218,
+      "end": 235
+    },
+    {
+      "name": "active",
+      "isConst": false,
+      "isExported": true,
+      "start": 313,
+      "end": 336
+    },
+    {
+      "name": "multiple",
+      "isConst": false,
+      "isExported": true,
+      "start": 337,
+      "end": 365
+    },
+    {
+      "name": "maxSelected",
+      "isConst": false,
+      "isExported": true,
+      "start": 366,
+      "end": 396
+    },
+    {
+      "name": "nullable",
+      "isConst": false,
+      "isExported": true,
+      "start": 397,
+      "end": 425
+    },
+    {
+      "name": "tabs",
+      "isConst": false,
+      "isExported": true,
+      "start": 426,
+      "end": 450
+    },
+    {
+      "name": "backgroundPointer",
+      "isConst": false,
+      "isExported": true,
+      "start": 451,
+      "end": 487
+    },
+    {
+      "name": "edgePointer",
+      "isConst": false,
+      "isExported": true,
+      "start": 488,
+      "end": 519
+    },
+    {
+      "name": "edgePosition",
+      "isConst": false,
+      "isExported": true,
+      "start": 520,
+      "end": 554
+    },
+    {
+      "name": "color",
+      "isConst": false,
+      "isExported": true,
+      "start": 555,
+      "end": 581
+    },
+    {
+      "name": "size",
+      "isConst": false,
+      "isExported": true,
+      "start": 582,
+      "end": 605
+    },
+    {
+      "name": "shape",
+      "isConst": false,
+      "isExported": true,
+      "start": 606,
+      "end": 632
+    },
+    {
+      "name": "menuRef",
+      "isConst": false,
+      "isExported": false,
+      "start": 724,
+      "end": 736
+    },
+    {
+      "name": "bgPointerRef",
+      "isConst": false,
+      "isExported": false,
+      "start": 737,
+      "end": 754
+    },
+    {
+      "name": "edgePointerRef",
+      "isConst": false,
+      "isExported": false,
+      "start": 755,
+      "end": 774
+    },
+    {
+      "name": "toggle",
+      "isExported": false,
+      "isAsync": false,
+      "start": 775,
+      "end": 1383,
+      "parameters": [
+        {
+          "name": "key",
+          "start": 791,
+          "end": 794
+        }
+      ],
+      "variables": []
+    },
+    {
+      "name": "activeElement",
+      "isConst": false,
+      "isExported": false,
+      "start": 1384,
+      "end": 1409
+    },
+    {
+      "name": "updatePointerPos",
+      "isExported": true,
+      "isAsync": false,
+      "start": 1410,
+      "end": 1743,
+      "parameters": [],
+      "variables": [
+        {
+          "name": "{ top, left, height, width }",
+          "isConst": true,
+          "isExported": false,
+          "start": 1495,
+          "end": 1570
+        },
+        {
+          "name": "{ top: menuTop, left: menuLeft }",
+          "isConst": true,
+          "isExported": false,
+          "start": 1573,
+          "end": 1646
+        }
+      ]
+    },
+    {
+      "name": "cleanup",
+      "isConst": false,
+      "isExported": false,
+      "start": 1798,
+      "end": 1817
+    },
+    {
+      "name": "ro",
+      "isConst": true,
+      "isExported": false,
+      "start": 1882,
+      "end": 1930
+    },
+    {
+      "name": "io",
+      "isConst": true,
+      "isExported": false,
+      "start": 1970,
+      "end": 2024
+    },
+    {
+      "name": "pointerPos",
+      "isConst": false,
+      "isExported": false,
+      "start": 2193,
+      "end": 2215
+    },
+    {
+      "name": "items2",
+      "isConst": true,
+      "isExported": false,
+      "start": 2391,
+      "end": 2440
+    },
+    {
+      "name": "activeElements",
+      "isConst": true,
+      "isExported": false,
+      "start": 2447,
+      "end": 2571
+    },
+    {
+      "name": "{ top, left, height, width }",
+      "isConst": true,
+      "isExported": false,
+      "start": 2800,
+      "end": 2848
+    },
+    {
+      "name": "transitionEnd",
+      "isExported": false,
+      "isAsync": false,
+      "start": 3616,
+      "end": 3681,
+      "parameters": [],
+      "variables": []
+    }
+  ],
+  "resources": [],
+  "usages": [
+    "dispatch",
+    "createEventDispatcher",
+    "items",
+    "$",
+    "itemsWithoutDividers",
+    "item",
+    "active",
+    "multiple",
+    "maxSelected",
+    "nullable",
+    "tabs",
+    "backgroundPointer",
+    "edgePointer",
+    "edgePosition",
+    "color",
+    "size",
+    "shape",
+    "validColor",
+    "Colors",
+    "validSize",
+    "Sizes",
+    "menuRef",
+    "bgPointerRef",
+    "edgePointerRef",
+    "key",
+    "k",
+    "activeElement",
+    "top",
+    "left",
+    "height",
+    "width",
+    "menuTop",
+    "menuLeft",
+    "pointerPos",
+    "updatePointerPos",
+    "cleanup",
+    "ro",
+    "ResizeObserver",
+    "io",
+    "IntersectionObserver",
+    "items2",
+    "activeElements",
+    "Array"
+  ]
+}

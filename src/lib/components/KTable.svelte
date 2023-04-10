@@ -2,24 +2,46 @@
 	import { Colors, Sizes, type Color, type Size } from '../types.d';
 	import KThemeProvider from './KThemeProvider.svelte';
 
+	/**
+	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
+	 */
 	export let size: Size | string = 'md';
 	export let bordered = true;
 	export let rowBorder = true;
 	export let colBorder = true;
+	/**
+	 * @type {string | undefined}
+	 */
 	export let caption: string | undefined = undefined;
+	/**
+	 * @type {'top' | 'bottom'}
+	 */
 	export let captionSide: 'top' | 'bottom' = 'top';
+	/**
+	 * @type {'start' | 'center' | 'end'}
+	 */
 	export let captionAlign: 'start' | 'center' | 'end' = 'start';
+	/**
+	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
+	 */
 	export let color: Color | string | undefined = undefined;
 	export let zebra = false;
 
 	$: validSize = Sizes.includes(size as Size);
 	$: validColor = !color || Colors.includes(color as Color);
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
 <table
-	class="k-table"
+	class="k-table {restClass ?? ''}"
+	{...restProps}
 	class:bordered
 	class:rowBorder
 	class:colBorder
@@ -110,6 +132,7 @@
 			caption-side: var(--caption-side);
 			text-align: var(--caption-align);
 			padding: var(--k-table-caption-padding);
+			font-size: 1.25em;
 		}
 		> :global(thead) {
 			> :global(tr) {

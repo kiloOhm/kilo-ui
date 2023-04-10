@@ -1,4 +1,8 @@
 <script lang="ts">
+	//Slots
+	/**
+	 * @slot icon - Inside the button
+	 */
 	import KIcon from './KIcon.svelte';
 	import IonLinkOutline from '~icons/ion/link-outline';
 	import KBtn from './KBtn.svelte';
@@ -9,11 +13,17 @@
 		const loc = location.href?.split('#')[0];
 		return navigator.clipboard?.writeText(loc + href);
 	}
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
-<div class="k-anchor" id={hash} tabindex="-1">
+<div class="k-anchor {restClass ?? ''}" {...restProps} id={hash} tabindex="-1">
 	<KBtn priority="tertiary" ariaLabel="copy link" size="xs" shape="circle" on:click={() => copy()}>
 		{#if $$slots.icon}
 			<slot name="icon" />

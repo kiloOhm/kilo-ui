@@ -28,7 +28,6 @@
 				child.style.transform = `translateY(${columnHeights[column]}px) translateX(${
 					column * columnWidth + column * columnGap
 				}px)`;
-				void child.offsetHeight; // force reflow
 				columnHeights[column] += child.offsetHeight + (i === numChildren - 1 ? 0 : rowGap);
 			}
 			const maxHeight = Math.max(...columnHeights);
@@ -62,11 +61,23 @@
 		});
 		recalcColumns();
 	})();
+	let restClass: string, restProps: any;
+	$: (() => {
+		const { class: _class, ...props } = $$restProps;
+		restClass = _class;
+		restProps = props;
+	})();
 </script>
 
 <KThemeProvider />
 
-<div bind:this={wrapperRef} style:--column-width={columnWidth} class:animated>
+<div
+	{...restProps}
+	class="k-masonry-layout {restClass ?? ''}"
+	bind:this={wrapperRef}
+	style:--column-width={columnWidth}
+	class:animated
+>
 	<slot />
 </div>
 

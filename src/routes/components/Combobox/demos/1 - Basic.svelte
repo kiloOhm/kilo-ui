@@ -23,5 +23,5 @@
 
 <div class="flex flex-col gap-2">
 	<KCombobox {items} bind:selected />
-	<p>Selected: <code>{JSON.stringify(selected)}</code></p>
+	<p>Selected: <code>{JSON.stringify(selected, null, 2)}</code></p>
 </div>
