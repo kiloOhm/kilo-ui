@@ -13,37 +13,36 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div class="k-blockquote {restClass ?? ''}" {...restProps}>
-		<KCard>
-			<blockquote {cite}>
-				<slot />
-			</blockquote>
-			<div class="source">
-				{#if $$slots.quotemark}
-					<slot name="quotemark" />
-				{:else}
-					<KIcon color="blue" class="k-blockquote__quotemark" size="4xl">
-						<IonQuote />
-					</KIcon>
-				{/if}
-				<div class="author">
-					<div class="text">
-						<div class="name">
-							<span>{name}</span>
-						</div>
-						{#if $$slots.cite}
-							<slot name="cite" />
-						{:else if cite}
-							<cite>{cite}</cite>
-						{/if}
+<KThemeProvider />
+<div class="k-blockquote {restClass ?? ''}" {...restProps}>
+	<KCard>
+		<blockquote {cite}>
+			<slot />
+		</blockquote>
+		<div class="source">
+			{#if $$slots.quotemark}
+				<slot name="quotemark" />
+			{:else}
+				<KIcon color="blue" class="k-blockquote__quotemark" size="4xl">
+					<IonQuote />
+				</KIcon>
+			{/if}
+			<div class="author">
+				<div class="text">
+					<div class="name">
+						<span>{name}</span>
 					</div>
-					<img src={avatarURL} alt={name} />
+					{#if $$slots.cite}
+						<slot name="cite" />
+					{:else if cite}
+						<cite>{cite}</cite>
+					{/if}
 				</div>
+				<img src={avatarURL} alt={name} />
 			</div>
-		</KCard>
-	</div>
-</KThemeProvider>
+		</div>
+	</KCard>
+</div>
 
 <style lang="scss">
 	.k-blockquote {

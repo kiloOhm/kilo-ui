@@ -35,40 +35,39 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-chip {restClass ?? ''}"
-		{...restProps}
-		class:ghost
-		data-shape={shape}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--color={_color}
+<KThemeProvider />
+<div
+	class="k-chip {restClass ?? ''}"
+	{...restProps}
+	class:ghost
+	data-shape={shape}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--color={_color}
+>
+	{#if $$slots.default}
+		<slot />
+	{:else}
+		<span>
+			{text}
+		</span>
+	{/if}
+	<KBtn
+		on:click={() => dispatch('close')}
+		size=".3em"
+		{color}
+		priority="tertiary"
+		shape="circle"
+		on:click={() => dispatch('close')}
 	>
-		{#if $$slots.default}
-			<slot />
+		{#if $$slots.close}
+			<slot name="close" />
 		{:else}
-			<span>
-				{text}
-			</span>
+			<KIcon size="2.5em">
+				<IonClose />
+			</KIcon>
 		{/if}
-		<KBtn
-			on:click={() => dispatch('close')}
-			size=".3em"
-			{color}
-			priority="tertiary"
-			shape="circle"
-			on:click={() => dispatch('close')}
-		>
-			{#if $$slots.close}
-				<slot name="close" />
-			{:else}
-				<KIcon size="2.5em">
-					<IonClose />
-				</KIcon>
-			{/if}
-		</KBtn>
-	</div>
-</KThemeProvider>
+	</KBtn>
+</div>
 
 <style lang="scss">
 	.k-chip {

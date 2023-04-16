@@ -69,21 +69,20 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		{...restProps}
-		class="k-masonry-layout {restClass ?? ''}"
-		bind:this={wrapperRef}
-		style:--column-width={columnWidth}
-		class:animated
-	>
-		<slot />
-	</div>
-</KThemeProvider>
+<KThemeProvider />
+<div
+	{...restProps}
+	class="k-masonry-layout {restClass ?? ''}"
+	bind:this={wrapperRef}
+	style:--column-width={columnWidth}
+	class:animated
+>
+	<slot />
+</div>
 
 <style lang="scss">
 	@use 'sass:math';
-	div {
+	.k-masonry-layout {
 		position: relative;
 		> :global(*) {
 			will-change: transform;

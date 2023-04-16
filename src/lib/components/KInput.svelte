@@ -229,192 +229,191 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-input {restClass ?? ''}"
-		{...restProps}
-		on:click
-		on:keypress
-		use:_focusTrap={focusTrap}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--color={!validColor
-			? color
-			: `var(--k-colors-${color}-darken-4, var(--k-colors-background-1)`}
-		class:focussed={focussed || message}
-		data-shape={shape}
-		class:disabled
-		data-autosize={autosize}
-	>
-		{#if label}
-			<label for={uid}>{label}</label>
+<KThemeProvider />
+<div
+	class="k-input {restClass ?? ''}"
+	{...restProps}
+	on:click
+	on:keypress
+	use:_focusTrap={focusTrap}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--color={!validColor
+		? color
+		: `var(--k-colors-${color}-darken-4, var(--k-colors-background-1)`}
+	class:focussed={focussed || message}
+	data-shape={shape}
+	class:disabled
+	data-autosize={autosize}
+>
+	{#if label}
+		<label for={uid}>{label}</label>
+	{/if}
+	<div class="input-wrapper">
+		{#if $$slots.before}
+			<div class="before" style:align-items={textarea ? 'start' : 'center'}>
+				<slot name="before" />
+			</div>
 		{/if}
-		<div class="input-wrapper">
-			{#if $$slots.before}
-				<div class="before" style:align-items={textarea ? 'start' : 'center'}>
-					<slot name="before" />
-				</div>
-			{/if}
-			{#if textarea}
-				<textarea
-					bind:this={textareaRef}
-					id={uid}
-					{disabled}
-					{readonly}
-					{placeholder}
-					{value}
-					{autocomplete}
-					{autocapitalize}
-					rows={minRows}
-					on:input={handleInput}
-					on:focus={_focus}
-					on:blur={_blur}
-				/>
-			{:else}
-				<input
-					bind:this={inputRef}
-					id={uid}
-					type={showPassword ? 'text' : type}
-					{disabled}
-					{readonly}
-					{placeholder}
-					{value}
-					{autocomplete}
-					{autocapitalize}
-					on:input={handleInput}
-					on:focus={_focus}
-					on:blur={_blur}
-				/>
-			{/if}
-			{#if $$slots.after || type === 'number' || type === 'password' || copyable || clearable || max !== null}
-				<div class="after" style:align-items={textarea ? 'start' : 'center'}>
-					{#if type === 'number'}
-						<div class="num-controls">
-							<KBtn
-								ariaLabel={`add ${step}`}
-								shape="pill"
-								priority="tertiary"
-								size="3xs"
-								on:click={increment}
-							>
-								{#if $$slots.plus}
-									<slot name="plus" />
-								{:else}
-									<KIcon size="xs">
-										<IonPlus />
-									</KIcon>
-								{/if}
-							</KBtn>
-							<KBtn
-								ariaLabel={`subtract ${step}`}
-								shape="pill"
-								priority="tertiary"
-								size="3xs"
-								on:click={decrement}
-							>
-								{#if $$slots.minus}
-									<slot name="minus" />
-								{:else}
-									<KIcon size="xs">
-										<IonMinus />
-									</KIcon>
-								{/if}
-							</KBtn>
-						</div>
-					{:else if type === 'password'}
-						<div class="password-controls">
-							{#if showPassword}
-								<KBtn
-									ariaLabel="hide password"
-									shape="pill"
-									priority="tertiary"
-									size="3xs"
-									on:click={hidePassword}
-								>
-									{#if $$slots['pw-visible']}
-										<slot name="pw-visible" />
-									{:else}
-										<KIcon size="xs">
-											<IonEye />
-										</KIcon>
-									{/if}
-								</KBtn>
-							{:else}
-								<KBtn
-									ariaLabel="show password"
-									shape="pill"
-									priority="tertiary"
-									size="3xs"
-									on:click={_showPassword}
-								>
-									{#if $$slots['pw-hidden']}
-										<slot name="pw-hidden" />
-									{:else}
-										<KIcon size="xs">
-											<IonEyeOff />
-										</KIcon>
-									{/if}
-								</KBtn>
-							{/if}
-						</div>
-					{/if}
-					{#if clearable && value}
-						<div class="clear-controls">
-							<KBtn
-								ariaLabel="clear input"
-								shape="pill"
-								priority="tertiary"
-								size="3xs"
-								on:click={clear}
-							>
-								{#if $$slots.clear}
-									<slot name="clear" />
-								{:else}
-									<KIcon size="xs">
-										<IonClose />
-									</KIcon>
-								{/if}
-							</KBtn>
-						</div>
-					{/if}
-					{#if copyable && value && navigator?.clipboard}
-						<div class="copy-controls">
-							{#if !copied}
-								<KBtn
-									ariaLabel="copy to clipboard"
-									shape="pill"
-									priority="tertiary"
-									size="3xs"
-									on:click={copy}
-								>
-									{#if $$slots.copy}
-										<slot name="copy" />
-									{:else}
-										<KIcon size="xs">
-											<IonCopyOutline />
-										</KIcon>
-									{/if}
-								</KBtn>
-							{:else if $$slots.copy}
-								<slot name="copied" />
+		{#if textarea}
+			<textarea
+				bind:this={textareaRef}
+				id={uid}
+				{disabled}
+				{readonly}
+				{placeholder}
+				{value}
+				{autocomplete}
+				{autocapitalize}
+				rows={minRows}
+				on:input={handleInput}
+				on:focus={_focus}
+				on:blur={_blur}
+			/>
+		{:else}
+			<input
+				bind:this={inputRef}
+				id={uid}
+				type={showPassword ? 'text' : type}
+				{disabled}
+				{readonly}
+				{placeholder}
+				{value}
+				{autocomplete}
+				{autocapitalize}
+				on:input={handleInput}
+				on:focus={_focus}
+				on:blur={_blur}
+			/>
+		{/if}
+		{#if $$slots.after || type === 'number' || type === 'password' || copyable || clearable || max !== null}
+			<div class="after" style:align-items={textarea ? 'start' : 'center'}>
+				{#if type === 'number'}
+					<div class="num-controls">
+						<KBtn
+							ariaLabel={`add ${step}`}
+							shape="pill"
+							priority="tertiary"
+							size="3xs"
+							on:click={increment}
+						>
+							{#if $$slots.plus}
+								<slot name="plus" />
 							{:else}
 								<KIcon size="xs">
-									<IonCheckmark />
+									<IonPlus />
 								</KIcon>
 							{/if}
-						</div>
-					{/if}
-					{#if type === 'text' && max}
-						<span class="max">{value.length}/{max}</span>
-					{/if}
-					<slot name="after" />
-				</div>
-			{/if}
-		</div>
-		{#if message}
-			<span class="msg">{message}</span>
+						</KBtn>
+						<KBtn
+							ariaLabel={`subtract ${step}`}
+							shape="pill"
+							priority="tertiary"
+							size="3xs"
+							on:click={decrement}
+						>
+							{#if $$slots.minus}
+								<slot name="minus" />
+							{:else}
+								<KIcon size="xs">
+									<IonMinus />
+								</KIcon>
+							{/if}
+						</KBtn>
+					</div>
+				{:else if type === 'password'}
+					<div class="password-controls">
+						{#if showPassword}
+							<KBtn
+								ariaLabel="hide password"
+								shape="pill"
+								priority="tertiary"
+								size="3xs"
+								on:click={hidePassword}
+							>
+								{#if $$slots['pw-visible']}
+									<slot name="pw-visible" />
+								{:else}
+									<KIcon size="xs">
+										<IonEye />
+									</KIcon>
+								{/if}
+							</KBtn>
+						{:else}
+							<KBtn
+								ariaLabel="show password"
+								shape="pill"
+								priority="tertiary"
+								size="3xs"
+								on:click={_showPassword}
+							>
+								{#if $$slots['pw-hidden']}
+									<slot name="pw-hidden" />
+								{:else}
+									<KIcon size="xs">
+										<IonEyeOff />
+									</KIcon>
+								{/if}
+							</KBtn>
+						{/if}
+					</div>
+				{/if}
+				{#if clearable && value}
+					<div class="clear-controls">
+						<KBtn
+							ariaLabel="clear input"
+							shape="pill"
+							priority="tertiary"
+							size="3xs"
+							on:click={clear}
+						>
+							{#if $$slots.clear}
+								<slot name="clear" />
+							{:else}
+								<KIcon size="xs">
+									<IonClose />
+								</KIcon>
+							{/if}
+						</KBtn>
+					</div>
+				{/if}
+				{#if copyable && value && navigator?.clipboard}
+					<div class="copy-controls">
+						{#if !copied}
+							<KBtn
+								ariaLabel="copy to clipboard"
+								shape="pill"
+								priority="tertiary"
+								size="3xs"
+								on:click={copy}
+							>
+								{#if $$slots.copy}
+									<slot name="copy" />
+								{:else}
+									<KIcon size="xs">
+										<IonCopyOutline />
+									</KIcon>
+								{/if}
+							</KBtn>
+						{:else if $$slots.copy}
+							<slot name="copied" />
+						{:else}
+							<KIcon size="xs">
+								<IonCheckmark />
+							</KIcon>
+						{/if}
+					</div>
+				{/if}
+				{#if type === 'text' && max}
+					<span class="max">{value.length}/{max}</span>
+				{/if}
+				<slot name="after" />
+			</div>
 		{/if}
 	</div>
-</KThemeProvider>
+	{#if message}
+		<span class="msg">{message}</span>
+	{/if}
+</div>
 
 <style lang="scss">
 	.k-input {

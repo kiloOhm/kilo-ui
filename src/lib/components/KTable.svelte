@@ -37,29 +37,26 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<table
-		class="k-table {restClass ?? ''}"
-		{...restProps}
-		class:bordered
-		class:rowBorder
-		class:colBorder
-		style:--caption-align={captionAlign}
-		style:--caption-side={captionSide}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--color={!validColor
-			? color
-			: `var(--k-colors-${color}-darken-4, var(--k-colors-border-0)`}
-		data-zebra={zebra}
-	>
-		{#if caption}
-			<caption>
-				<span>{caption}</span>
-			</caption>
-		{/if}
-		<slot />
-	</table>
-</KThemeProvider>
+<KThemeProvider />
+<table
+	class="k-table {restClass ?? ''}"
+	{...restProps}
+	class:bordered
+	class:rowBorder
+	class:colBorder
+	style:--caption-align={captionAlign}
+	style:--caption-side={captionSide}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--color={!validColor ? color : `var(--k-colors-${color}-darken-4, var(--k-colors-border-0)`}
+	data-zebra={zebra}
+>
+	{#if caption}
+		<caption>
+			<span>{caption}</span>
+		</caption>
+	{/if}
+	<slot />
+</table>
 
 <style lang="scss">
 	table {

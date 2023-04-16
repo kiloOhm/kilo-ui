@@ -58,11 +58,10 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div class="k-accordion {restClass ?? ''}" {...restProps}>
-		<slot />
-	</div>
-</KThemeProvider>
+<KThemeProvider />
+<div class="k-accordion {restClass ?? ''}" {...restProps}>
+	<slot />
+</div>
 
 <style lang="scss">
 	.k-accordion {

@@ -31,69 +31,68 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-checkbox {restClass ?? ''}"
-		{...restProps}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--border-radius={shape === 'round'
-			? '9999px'
-			: shape === 'sharp'
-			? '0'
-			: 'var(--k-checkbox-border-radius)'}
-		style:--color={_color}
-		data-checked={checked?.toString() ?? 'indeterminate'}
-		class:disabled
-		on:click={() => (checked = !checked)}
-		on:keyup={(e) => {
-			if (e.key === 'Enter') {
-				checked = !checked;
-			}
-		}}
-	>
-		{#if $$slots.label}
-			<label
-				for={uid}
-				on:click={() => (checked = !checked)}
-				on:keyup={(e) => {
-					if (e.key === 'Enter') {
-						checked = !checked;
-					}
-				}}
-			>
-				<slot name="label" />
-			</label>
-		{/if}
-		<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />
-		<div class="track">
-			<div class="mark">
-				<div class="checked">
-					{#if $$slots['mark-checked']}
-						<slot name="mark-checked" />
-					{:else}
-						<KIcon size="var(--k-checkbox-mark-scale)">
-							<IonCheckmark />
-						</KIcon>
-					{/if}
-				</div>
-				<div class="indeterminate">
-					{#if $$slots['mark-indeterminate']}
-						<slot name="mark-indeterminate" />
-					{:else}
-						<KIcon size="var(--k-checkbox-mark-scale)">
-							<IonMinusRound />
-						</KIcon>
-					{/if}
-				</div>
-				<div class="unchecked">
-					{#if $$slots['mark-unchecked']}
-						<slot name="mark-unchecked" />
-					{/if}
-				</div>
+<KThemeProvider />
+<div
+	class="k-checkbox {restClass ?? ''}"
+	{...restProps}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--border-radius={shape === 'round'
+		? '9999px'
+		: shape === 'sharp'
+		? '0'
+		: 'var(--k-checkbox-border-radius)'}
+	style:--color={_color}
+	data-checked={checked?.toString() ?? 'indeterminate'}
+	class:disabled
+	on:click={() => (checked = !checked)}
+	on:keyup={(e) => {
+		if (e.key === 'Enter') {
+			checked = !checked;
+		}
+	}}
+>
+	{#if $$slots.label}
+		<label
+			for={uid}
+			on:click={() => (checked = !checked)}
+			on:keyup={(e) => {
+				if (e.key === 'Enter') {
+					checked = !checked;
+				}
+			}}
+		>
+			<slot name="label" />
+		</label>
+	{/if}
+	<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />
+	<div class="track">
+		<div class="mark">
+			<div class="checked">
+				{#if $$slots['mark-checked']}
+					<slot name="mark-checked" />
+				{:else}
+					<KIcon size="var(--k-checkbox-mark-scale)">
+						<IonCheckmark />
+					</KIcon>
+				{/if}
+			</div>
+			<div class="indeterminate">
+				{#if $$slots['mark-indeterminate']}
+					<slot name="mark-indeterminate" />
+				{:else}
+					<KIcon size="var(--k-checkbox-mark-scale)">
+						<IonMinusRound />
+					</KIcon>
+				{/if}
+			</div>
+			<div class="unchecked">
+				{#if $$slots['mark-unchecked']}
+					<slot name="mark-unchecked" />
+				{/if}
 			</div>
 		</div>
 	</div>
-</KThemeProvider>
+</div>
 
 <style lang="scss">
 	.k-checkbox {

@@ -79,60 +79,52 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-collapse {restClass ?? ''}"
-		{...restProps}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--color={!validColor
-			? color
-			: `var(--k-colors-${color}-darken-4, var(--k-colors-border-0)`}
-		style:border-color={bordered && (show || title || $$slots.header)
-			? 'var(--color)'
-			: 'transparent'}
-	>
-		{#if $$slots.header || title}
-			<header>
-				{#if $$slots.header}
-					<slot name="header" />
-				{:else if title}
-					<div
-						class="premade"
-						on:click={toggle}
-						on:keypress={toggle}
-						data-caret-pos={caretPosition}
-					>
-						<div class="caret-wrapper" style:transform={`rotate(${show ? 180 : 0}deg)`}>
-							{#if $$slots.caret}
-								<slot name="caret" />
-							{:else}
-								<KIcon size={`calc(${size} / 2)`}>
-									<IonIosArrowUp />
-								</KIcon>
-							{/if}
-						</div>
-						<h3>{title}</h3>
+<KThemeProvider />
+<div
+	class="k-collapse {restClass ?? ''}"
+	{...restProps}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--color={!validColor ? color : `var(--k-colors-${color}-darken-4, var(--k-colors-border-0)`}
+	style:border-color={bordered && (show || title || $$slots.header)
+		? 'var(--color)'
+		: 'transparent'}
+>
+	{#if $$slots.header || title}
+		<header>
+			{#if $$slots.header}
+				<slot name="header" />
+			{:else if title}
+				<div class="premade" on:click={toggle} on:keypress={toggle} data-caret-pos={caretPosition}>
+					<div class="caret-wrapper" style:transform={`rotate(${show ? 180 : 0}deg)`}>
+						{#if $$slots.caret}
+							<slot name="caret" />
+						{:else}
+							<KIcon size={`calc(${size} / 2)`}>
+								<IonIosArrowUp />
+							</KIcon>
+						{/if}
 					</div>
-				{/if}
-			</header>
-		{/if}
-		<div
-			bind:this={ref}
-			style:height={show ? height : '0'}
-			style:opacity={show ? 1 : 0}
-			class="collapse-container"
-		>
-			<div class="content-container">
-				<slot />
-			</div>
-		</div>
-		<div class="offscreen" style:width bind:this={offscreenRef}>
-			<div>
-				<slot />
-			</div>
+					<h3>{title}</h3>
+				</div>
+			{/if}
+		</header>
+	{/if}
+	<div
+		bind:this={ref}
+		style:height={show ? height : '0'}
+		style:opacity={show ? 1 : 0}
+		class="collapse-container"
+	>
+		<div class="content-container">
+			<slot />
 		</div>
 	</div>
-</KThemeProvider>
+	<div class="offscreen" style:width bind:this={offscreenRef}>
+		<div>
+			<slot />
+		</div>
+	</div>
+</div>
 
 <style lang="scss">
 	.k-collapse {

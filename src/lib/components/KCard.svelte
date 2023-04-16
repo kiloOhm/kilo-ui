@@ -20,31 +20,30 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-card {restClass ?? ''}"
-		{...restProps}
-		data-bordered={bordered}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--color={_color}
-	>
-		{#if $$slots.header}
-			<header>
-				<slot name="header" />
-			</header>
-		{/if}
-		{#if $$slots.default}
-			<main>
-				<slot />
-			</main>
-		{/if}
-		{#if $$slots.footer}
-			<footer>
-				<slot name="footer" />
-			</footer>
-		{/if}
-	</div>
-</KThemeProvider>
+<KThemeProvider />
+<div
+	class="k-card {restClass ?? ''}"
+	{...restProps}
+	data-bordered={bordered}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--color={_color}
+>
+	{#if $$slots.header}
+		<header>
+			<slot name="header" />
+		</header>
+	{/if}
+	{#if $$slots.default}
+		<main>
+			<slot />
+		</main>
+	{/if}
+	{#if $$slots.footer}
+		<footer>
+			<slot name="footer" />
+		</footer>
+	{/if}
+</div>
 
 <style lang="scss">
 	.k-card {

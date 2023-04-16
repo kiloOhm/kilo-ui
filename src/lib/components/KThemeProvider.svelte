@@ -6,7 +6,6 @@
 	const overridden = getContext('--k-theme-overridden') as string;
 	const hash = simpleHash(JSON.stringify(overrides) || '');
 	if (!overridden || overridden !== hash) {
-		console.log('no override, setting context', hash);
 		setContext('--k-theme-overridden', hash);
 	}
 	let vars = getThemeVars(overrides);
@@ -48,9 +47,11 @@
 	{/if}
 </svelte:head>
 
-<div style={overrides ? style : undefined} class="k-theme-provider">
-	<slot />
-</div>
+{#if $$slots.default}
+	<div style={overrides ? style : undefined} class="k-theme-provider">
+		<slot />
+	</div>
+{/if}
 
 <style lang="scss">
 	.k-theme-provider {

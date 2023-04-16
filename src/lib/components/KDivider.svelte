@@ -17,24 +17,23 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-divider {restClass ?? ''}"
-		{...restProps}
-		class:vertical
-		style:flex-direction={vertical ? 'column' : 'row'}
-		style:--line-width={width}
-		style:--color={_color}
-	>
+<KThemeProvider />
+<div
+	class="k-divider {restClass ?? ''}"
+	{...restProps}
+	class:vertical
+	style:flex-direction={vertical ? 'column' : 'row'}
+	style:--line-width={width}
+	style:--color={_color}
+>
+	<hr />
+	{#if $$slots.default}
+		<div class="content-container">
+			<slot />
+		</div>
 		<hr />
-		{#if $$slots.default}
-			<div class="content-container">
-				<slot />
-			</div>
-			<hr />
-		{/if}
-	</div>
-</KThemeProvider>
+	{/if}
+</div>
 
 <style lang="scss">
 	.k-divider {

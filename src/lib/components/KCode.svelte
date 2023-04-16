@@ -32,34 +32,33 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div class="k-code {restClass ?? ''}" {...restProps} class:bordered>
-		<div class="wrapper">
-			{#if showLanguage || showCopy}
-				<header>
-					{#if showLanguage}
-						<span class="language-name">{language}</span>
-					{/if}
-					{#if showCopy}
-						<KBtn priority="tertiary" shape="circle" size="xs" on:click={() => copy()}>
-							<KIcon>
-								<IonCopyOutline />
-							</KIcon>
-						</KBtn>
-					{/if}
-				</header>
-			{/if}
-			<pre><code
-					style:white-space={wrap ? 'pre-wrap' : 'pre'}
-					style:tab-size={tabSize}
-					style:-moz-tab-size={tabSize}
-					style:-o-tab-size={tabSize}
-					class={`language-${language}`}>
+<KThemeProvider />
+<div class="k-code {restClass ?? ''}" {...restProps} class:bordered>
+	<div class="wrapper">
+		{#if showLanguage || showCopy}
+			<header>
+				{#if showLanguage}
+					<span class="language-name">{language}</span>
+				{/if}
+				{#if showCopy}
+					<KBtn priority="tertiary" shape="circle" size="xs" on:click={() => copy()}>
+						<KIcon>
+							<IonCopyOutline />
+						</KIcon>
+					</KBtn>
+				{/if}
+			</header>
+		{/if}
+		<pre><code
+				style:white-space={wrap ? 'pre-wrap' : 'pre'}
+				style:tab-size={tabSize}
+				style:-moz-tab-size={tabSize}
+				style:-o-tab-size={tabSize}
+				class={`language-${language}`}>
 						{@html html}
 				</code></pre>
-		</div>
 	</div>
-</KThemeProvider>
+</div>
 
 <style lang="scss">
 	.k-code {

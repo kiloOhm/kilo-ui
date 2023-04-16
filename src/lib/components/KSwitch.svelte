@@ -39,49 +39,48 @@
 	})();
 </script>
 
-<KThemeProvider>
-	<div
-		class="k-switch {restClass ?? ''}"
-		{...restProps}
-		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-		style:--border-radius={shape === 'pill'
-			? '9999px'
-			: shape === 'sharp'
-			? '0'
-			: 'var(--k-switch-border-radius)'}
-		style:--track-color={checked ? _checkedColor : _uncheckedColor}
-		class:checked
-		class:disabled
-		on:click={() => toggle()}
-		on:keyup={(e) => {
-			if (e.key === 'Enter') {
-				toggle();
-			}
-		}}
-	>
-		{#if $$slots.default}
-			<label
-				for={uid}
-				on:click={() => toggle()}
-				on:keyup={(e) => {
-					if (e.key === 'Enter') {
-						toggle();
-					}
-				}}
-			>
-				<slot />
-			</label>
-		{/if}
-		<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />
-		<div class="track">
-			<div class="thumb">
-				{#if $$slots.thumb}
-					<slot name="thumb" />
-				{/if}
-			</div>
+<KThemeProvider />
+<div
+	class="k-switch {restClass ?? ''}"
+	{...restProps}
+	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--border-radius={shape === 'pill'
+		? '9999px'
+		: shape === 'sharp'
+		? '0'
+		: 'var(--k-switch-border-radius)'}
+	style:--track-color={checked ? _checkedColor : _uncheckedColor}
+	class:checked
+	class:disabled
+	on:click={() => toggle()}
+	on:keyup={(e) => {
+		if (e.key === 'Enter') {
+			toggle();
+		}
+	}}
+>
+	{#if $$slots.default}
+		<label
+			for={uid}
+			on:click={() => toggle()}
+			on:keyup={(e) => {
+				if (e.key === 'Enter') {
+					toggle();
+				}
+			}}
+		>
+			<slot />
+		</label>
+	{/if}
+	<input {disabled} type="checkbox" class="k-switch__input" id={uid} bind:checked />
+	<div class="track">
+		<div class="thumb">
+			{#if $$slots.thumb}
+				<slot name="thumb" />
+			{/if}
 		</div>
 	</div>
-</KThemeProvider>
+</div>
 
 <style lang="scss">
 	.k-switch {
