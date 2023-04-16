@@ -11,9 +11,9 @@
 </svelte:head>
 
 <main class="p-4 flex flex-col gap-8">
-	<h1 class="text-2xl">Documentation</h1>
+	<h1 class="text-2xl font-bold">Documentation</h1>
 	<section class="flex flex-col gap-2">
-		<h2 class="text-lg">Getting Started</h2>
+		<h2 class="text-xl font-semibold">Getting Started</h2>
 		<p>To get started, install the package from npm:</p>
 		<KCode language="bash" code={`npm i kilo-ui;`} />
 		<GithubQuote>
@@ -22,12 +22,12 @@
 	</section>
 	<KDivider />
 	<section class="flex flex-col gap-2">
-		<h2 class="text-lg">Typescript</h2>
+		<h2 class="text-xl font-semibold">Typescript</h2>
 		<p>We highly recommend using Typescript with KUI. We have not yet tested without Typescript.</p>
 	</section>
 	<KDivider />
 	<section class="flex flex-col gap-2">
-		<h2 class="text-lg">Tailwind</h2>
+		<h2 class="text-xl font-semibold">Tailwind</h2>
 		<p>
 			KUI doesn't depend on Tailwind. We use it in our docs, but you can use any CSS framework you
 			want.
@@ -37,7 +37,7 @@
 	</section>
 	<KDivider />
 	<section class="flex flex-col gap-2">
-		<h2 class="text-lg">Credits</h2>
+		<h2 class="text-xl font-semibold">Credits</h2>
 		<p>
 			This library was inspired by <a href="https://naiveui.com" target="_blank">Naive UI</a>
 		</p>

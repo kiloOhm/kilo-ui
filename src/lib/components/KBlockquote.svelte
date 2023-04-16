@@ -1,6 +1,7 @@
 <script lang="ts">
 	import IonQuote from '~icons/ion/quote';
 	import { KCard, KIcon } from '.';
+	import KThemeProvider from './KThemeProvider.svelte';
 	export let cite = '';
 	export let name = '';
 	export let avatarURL = '';
@@ -12,35 +13,37 @@
 	})();
 </script>
 
-<div class="k-blockquote {restClass ?? ''}" {...restProps}>
-	<KCard>
-		<blockquote {cite}>
-			<slot />
-		</blockquote>
-		<div class="source">
-			{#if $$slots.quotemark}
-				<slot name="quotemark" />
-			{:else}
-				<KIcon color="blue" class="k-blockquote__quotemark" size="4xl">
-					<IonQuote />
-				</KIcon>
-			{/if}
-			<div class="author">
-				<div class="text">
-					<div class="name">
-						<span>{name}</span>
+<KThemeProvider>
+	<div class="k-blockquote {restClass ?? ''}" {...restProps}>
+		<KCard>
+			<blockquote {cite}>
+				<slot />
+			</blockquote>
+			<div class="source">
+				{#if $$slots.quotemark}
+					<slot name="quotemark" />
+				{:else}
+					<KIcon color="blue" class="k-blockquote__quotemark" size="4xl">
+						<IonQuote />
+					</KIcon>
+				{/if}
+				<div class="author">
+					<div class="text">
+						<div class="name">
+							<span>{name}</span>
+						</div>
+						{#if $$slots.cite}
+							<slot name="cite" />
+						{:else if cite}
+							<cite>{cite}</cite>
+						{/if}
 					</div>
-					{#if $$slots.cite}
-						<slot name="cite" />
-					{:else if cite}
-						<cite>{cite}</cite>
-					{/if}
+					<img src={avatarURL} alt={name} />
 				</div>
-				<img src={avatarURL} alt={name} />
 			</div>
-		</div>
-	</KCard>
-</div>
+		</KCard>
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-blockquote {

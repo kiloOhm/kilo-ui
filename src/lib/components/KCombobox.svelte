@@ -14,6 +14,7 @@
 	import KChip from './KChip.svelte';
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher } from 'svelte';
+	import KThemeProvider from './KThemeProvider.svelte';
 	const dispatch = createEventDispatcher();
 
 	/**
@@ -167,69 +168,71 @@
 	})();
 </script>
 
-<div
-	class="k-combobox {restClass ?? ''}"
-	{...restProps}
-	use:outclick={_outclick}
-	style:--cursor={searchable || allowNew ? undefined : 'pointer'}
->
-	<KPopover {show} {placement} {sameWidth} arrow={false} trigger="manual">
-		<!-- svelte-ignore a11y-click-events-have-key-events - using custom keypress action -->
-		<div class="input-wrapper" slot="trigger" on:click={toggle} use:keypress={{ Enter: toggle }}>
-			<KInput
-				focusTrap={show}
-				bind:value={inputValue}
-				bind:this={inputRef}
-				placeholder={_placeholder}
-				{readonly}
-				autosize="horizontal"
-				{label}
-				{message}
-				{color}
-				{size}
-				{shape}
-			>
-				<div class="before" slot="before">
-					{#if chips}
-						{#each chips as i}
-							<KChip text={i.label} size="xs" ghost on:close={() => deselect(i.key)} />
-						{/each}
+<KThemeProvider>
+	<div
+		class="k-combobox {restClass ?? ''}"
+		{...restProps}
+		use:outclick={_outclick}
+		style:--cursor={searchable || allowNew ? undefined : 'pointer'}
+	>
+		<KPopover {show} {placement} {sameWidth} arrow={false} trigger="manual">
+			<!-- svelte-ignore a11y-click-events-have-key-events - using custom keypress action -->
+			<div class="input-wrapper" slot="trigger" on:click={toggle} use:keypress={{ Enter: toggle }}>
+				<KInput
+					focusTrap={show}
+					bind:value={inputValue}
+					bind:this={inputRef}
+					placeholder={_placeholder}
+					{readonly}
+					autosize="horizontal"
+					{label}
+					{message}
+					{color}
+					{size}
+					{shape}
+				>
+					<div class="before" slot="before">
+						{#if chips}
+							{#each chips as i}
+								<KChip text={i.label} size="xs" ghost on:close={() => deselect(i.key)} />
+							{/each}
+						{/if}
+					</div>
+				</KInput>
+				<div class="after">
+					{#if clearable && selected?.length}
+						<KBtn priority="tertiary" shape="pill" size="3xs" on:click={clear}>
+							<KIcon size="xs">
+								<IonClose />
+							</KIcon>
+						</KBtn>
+					{/if}
+					{#if showCaret}
+						<div class="caret" style:transform={`rotate(${show ? 180 : 0}deg)`}>
+							<KIcon size="sm">
+								<IonIosArrowUp />
+							</KIcon>
+						</div>
 					{/if}
 				</div>
-			</KInput>
-			<div class="after">
-				{#if clearable && selected?.length}
-					<KBtn priority="tertiary" shape="pill" size="3xs" on:click={clear}>
-						<KIcon size="xs">
-							<IonClose />
-						</KIcon>
-					</KBtn>
-				{/if}
-				{#if showCaret}
-					<div class="caret" style:transform={`rotate(${show ? 180 : 0}deg)`}>
-						<KIcon size="sm">
-							<IonIosArrowUp />
-						</KIcon>
-					</div>
-				{/if}
 			</div>
-		</div>
-		<div class="menu-wrapper" bind:this={menuWrapperRef}>
-			<KMenu
-				bind:this={menuRef}
-				items={searchResults}
-				bind:active
-				on:select={({ detail }) => select(detail)}
-				multiple
-				nullable
-				maxSelected={multiple ? undefined : 1}
-				{color}
-				{size}
-				{shape}
-			/>
-		</div>
-	</KPopover>
-</div>
+			<div class="menu-wrapper" bind:this={menuWrapperRef}>
+				<KMenu
+					bind:this={menuRef}
+					items={searchResults}
+					bind:active
+					on:select={({ detail }) => select(detail)}
+					multiple
+					nullable
+					maxSelected={multiple ? undefined : 1}
+					{color}
+					{size}
+					{shape}
+				/>
+			</div>
+		</KPopover>
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.menu-wrapper {

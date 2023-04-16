@@ -21,7 +21,7 @@ export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 			}
 		}
 	}
-	function objToCSSVarsRecursively(obj: any, prefix = '--k-'): string[] {
+	function objToCSSVarsRecursively(obj: any, prefix = '--k-'): [string, string][] {
 		return Object.entries(obj).reduce((acc, [key, value]) => {
 			if (typeof value === 'object') {
 				return [...acc, ...objToCSSVarsRecursively(value, `${prefix}${key}-`)];
@@ -35,25 +35,21 @@ export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 					//lighten
 					variants.set(`${prefix}${key}-lighten-2`, `${color.lighten(0.2).rgb().string()}`);
 					variants.set(`${prefix}${key}-lighten-4`, `${color.lighten(0.4).rgb().string()}`);
-					variants.set(`${prefix}${key}-lighten-6`, `${color.lighten(0.6).rgb().string()}`);
 					//darken
 					variants.set(`${prefix}${key}-darken-2`, `${color.darken(0.2).rgb().string()}`);
 					variants.set(`${prefix}${key}-darken-4`, `${color.darken(0.4).rgb().string()}`);
 					variants.set(`${prefix}${key}-darken-6`, `${color.darken(0.6).rgb().string()}`);
 					//alpha
-					variants.set(`${prefix}${key}-alpha-2`, `${color.alpha(0.2).rgb().string()}`);
-					variants.set(`${prefix}${key}-alpha-4`, `${color.alpha(0.4).rgb().string()}`);
-					variants.set(`${prefix}${key}-alpha-6`, `${color.alpha(0.6).rgb().string()}`);
 					variants.set(`${prefix}${key}-alpha-8`, `${color.alpha(0.8).rgb().string()}`);
 				} catch {
 					//not a color
 				}
-				const _variants = [...variants.entries()].map(([key, value]) => `${key}: ${value};`);
+				const _variants = [...variants.entries()];
 				return [...acc, ..._variants];
 			} else {
 				return acc;
 			}
-		}, [] as string[]);
+		}, [] as [string, string][]);
 	}
 	return objToCSSVarsRecursively(theme);
 });

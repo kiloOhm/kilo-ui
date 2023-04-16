@@ -1,18 +1,20 @@
 <script lang="ts">
 	import type { DeepPartial } from '$lib/util/types';
 	import { getContext, setContext } from 'svelte';
-	import { getThemeVars, type Theme } from '../util';
+	import { getThemeVars, simpleHash, type Theme } from '../util';
 	export let overrides: DeepPartial<Theme> | undefined = undefined;
-	const overridden = getContext('--k-theme-overridden');
-	if (!overridden) {
-		setContext('--k-theme-overridden', true);
-	} else {
+	const overridden = getContext('--k-theme-overridden') as string;
+	const hash = simpleHash(JSON.stringify(overrides) || '');
+	if (!overridden || overridden !== hash) {
+		console.log('no override, setting context', hash);
+		setContext('--k-theme-overridden', hash);
 	}
 	let vars = getThemeVars(overrides);
+	$: style = vars.map(([key, val]) => `${key}: ${val};`).join('\n');
 	$: html = `
-  <style id="k-theme"> 
+  <style class="k-theme"> 
     :root {
-			${vars.join('\n')};
+			${style};
 	    font-family: var(--k-font-family);
 		  background: var(--k-colors-background-1);
 		  color: var(--k-colors-text-0);
@@ -46,4 +48,12 @@
 	{/if}
 </svelte:head>
 
-<slot />
+<div style={overrides ? style : undefined} class="k-theme-provider">
+	<slot />
+</div>
+
+<style lang="scss">
+	.k-theme-provider {
+		display: contents;
+	}
+</style>

@@ -9,13 +9,13 @@
 </svelte:head>
 
 <WipBanner class="mt-4">
-	<h3 class="text-lg">A11y is WIP</h3>
+	<h3 class="text-xl">A11y is WIP</h3>
 	<p>Components have not yet been audited for ARIA Compliance</p>
 </WipBanner>
-<main class="m-4 flex flex-col gap-2">
-	<h1 class="text-2xl">Components</h1>
-	<div>
-		<h2 class="text-lg">Usage</h2>
+<main class="m-4 flex flex-col gap-4">
+	<h1 class="text-2xl font-bold">Components</h1>
+	<div class="flex flex-col gap-2">
+		<h2 class="text-xl font-semibold">Usage</h2>
 		<KCode code={`import { KBtn } from 'kilo-ui';`} />
 	</div>
 </main>

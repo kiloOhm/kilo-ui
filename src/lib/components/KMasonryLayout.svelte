@@ -69,17 +69,17 @@
 	})();
 </script>
 
-<KThemeProvider />
-
-<div
-	{...restProps}
-	class="k-masonry-layout {restClass ?? ''}"
-	bind:this={wrapperRef}
-	style:--column-width={columnWidth}
-	class:animated
->
-	<slot />
-</div>
+<KThemeProvider>
+	<div
+		{...restProps}
+		class="k-masonry-layout {restClass ?? ''}"
+		bind:this={wrapperRef}
+		style:--column-width={columnWidth}
+		class:animated
+	>
+		<slot />
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	@use 'sass:math';

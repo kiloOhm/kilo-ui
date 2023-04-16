@@ -1,10 +1,9 @@
+import { loadComponentDemos } from '../../../util/demos';
 import type { PageLoad } from './$types';
 
 export const load = (async () => {
-	return {
-		demo: (((await import('./demo.svelte?raw')) as any).default as string).replaceAll(
-			'$lib',
-			'kilo-ui'
-		)
-	};
+	return loadComponentDemos(
+		import.meta.glob('./demos/*.svelte', { query: 'raw' }),
+		import.meta.glob('./demos/*.svelte')
+	);
 }) satisfies PageLoad;

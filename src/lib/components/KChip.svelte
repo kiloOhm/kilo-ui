@@ -4,6 +4,7 @@
 	import IonClose from '~icons/ion/close';
 	import { createEventDispatcher } from 'svelte';
 	import { Colors, Sizes, type Color, type Size } from '../types.d';
+	import KThemeProvider from './KThemeProvider.svelte';
 	const dispatch = createEventDispatcher();
 
 	/**
@@ -34,38 +35,40 @@
 	})();
 </script>
 
-<div
-	class="k-chip {restClass ?? ''}"
-	{...restProps}
-	class:ghost
-	data-shape={shape}
-	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={_color}
->
-	{#if $$slots.default}
-		<slot />
-	{:else}
-		<span>
-			{text}
-		</span>
-	{/if}
-	<KBtn
-		on:click={() => dispatch('close')}
-		size=".3em"
-		{color}
-		priority="tertiary"
-		shape="circle"
-		on:click={() => dispatch('close')}
+<KThemeProvider>
+	<div
+		class="k-chip {restClass ?? ''}"
+		{...restProps}
+		class:ghost
+		data-shape={shape}
+		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+		style:--color={_color}
 	>
-		{#if $$slots.close}
-			<slot name="close" />
+		{#if $$slots.default}
+			<slot />
 		{:else}
-			<KIcon size="2.5em">
-				<IonClose />
-			</KIcon>
+			<span>
+				{text}
+			</span>
 		{/if}
-	</KBtn>
-</div>
+		<KBtn
+			on:click={() => dispatch('close')}
+			size=".3em"
+			{color}
+			priority="tertiary"
+			shape="circle"
+			on:click={() => dispatch('close')}
+		>
+			{#if $$slots.close}
+				<slot name="close" />
+			{:else}
+				<KIcon size="2.5em">
+					<IonClose />
+				</KIcon>
+			{/if}
+		</KBtn>
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-chip {

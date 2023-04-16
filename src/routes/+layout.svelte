@@ -7,6 +7,7 @@
 	import { setContext } from 'svelte';
 	import { afterNavigate, goto, preloadData } from '$app/navigation';
 	import KuiLogo from '../components/themed-kui-logo.svelte';
+	import IonLogoGithub from '~icons/ion/logo-github';
 	import type { LayoutServerData } from './$types';
 	import KPageTransitionProvider from '../components/KPageTransitionProvider.svelte';
 	export let data: LayoutServerData;
@@ -83,8 +84,14 @@
 						<a
 							href="https://github.com/kiloOhm/kilo-ui-svelte"
 							target="_blank"
-							style="color: var(--k-colors-text-2);">v{APP_VERSION}</a
+							style="color: var(--k-colors-text-2);"
+							class="flex items-center gap-1"
 						>
+							<KIcon size="sm">
+								<IonLogoGithub />
+							</KIcon>
+							v{APP_VERSION}
+						</a>
 					</div>
 				</header>
 				<main class="flex-grow overflow-hidden">

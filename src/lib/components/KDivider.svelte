@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { type Color, Colors } from '../types.d';
+	import KThemeProvider from './KThemeProvider.svelte';
 
 	export let vertical: boolean = false;
 	export let width: string = '1px';
@@ -16,22 +17,24 @@
 	})();
 </script>
 
-<div
-	class="k-divider {restClass ?? ''}"
-	{...restProps}
-	class:vertical
-	style:flex-direction={vertical ? 'column' : 'row'}
-	style:--line-width={width}
-	style:--color={_color}
->
-	<hr />
-	{#if $$slots.default}
-		<div class="content-container">
-			<slot />
-		</div>
+<KThemeProvider>
+	<div
+		class="k-divider {restClass ?? ''}"
+		{...restProps}
+		class:vertical
+		style:flex-direction={vertical ? 'column' : 'row'}
+		style:--line-width={width}
+		style:--color={_color}
+	>
 		<hr />
-	{/if}
-</div>
+		{#if $$slots.default}
+			<div class="content-container">
+				<slot />
+			</div>
+			<hr />
+		{/if}
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-divider {

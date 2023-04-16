@@ -128,52 +128,52 @@
 	})();
 </script>
 
-<KThemeProvider />
-
-<button
-	class="k-btn {restClass ?? ''}"
-	{...restProps}
-	type={submit ? 'submit' : 'button'}
-	role={href ? 'link' : undefined}
-	bind:this={buttonRef}
-	data-priority={priority}
-	data-shape={shape}
-	aria-label={restAriaLabel ?? text}
-	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={_color}
-	style:--text-color={textColor ??
-		(color !== 'var(--k-colors-text-0)'
-			? 'var(--k-colors-text-0)'
-			: 'var(--k-colors-background-0)')}
-	class:ripple
-	class:ghost
-	{disabled}
-	on:click={click}
-	on:mousedown={down}
-	on:keydown={down}
-	on:mouseup={up}
-	on:keyup={up}
-	on:mouseenter={() => hover()}
-	on:mouseleave={up}
-	on:touchstart|passive={(e) => {
-		hover();
-		down(e);
-	}}
-	on:touchend|passive={up}
-	on:touchcancel|passive={up}
->
-	<div class="background" />
-	<div class="content-container">
-		{#if $$slots.default}
-			<slot />
-		{:else if text}
-			<span class="text">{text}</span>
-		{/if}
-	</div>
-	<div class="ripple-container">
-		<div bind:this={rippleShapeRef} class="ripple-shape" />
-	</div>
-</button>
+<KThemeProvider>
+	<button
+		class="k-btn {restClass ?? ''}"
+		{...restProps}
+		type={submit ? 'submit' : 'button'}
+		role={href ? 'link' : undefined}
+		bind:this={buttonRef}
+		data-priority={priority}
+		data-shape={shape}
+		aria-label={restAriaLabel ?? text}
+		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+		style:--color={_color}
+		style:--text-color={textColor ??
+			(color !== 'var(--k-colors-text-0)'
+				? 'var(--k-colors-text-0)'
+				: 'var(--k-colors-background-0)')}
+		class:ripple
+		class:ghost
+		{disabled}
+		on:click={click}
+		on:mousedown={down}
+		on:keydown={down}
+		on:mouseup={up}
+		on:keyup={up}
+		on:mouseenter={() => hover()}
+		on:mouseleave={up}
+		on:touchstart|passive={(e) => {
+			hover();
+			down(e);
+		}}
+		on:touchend|passive={up}
+		on:touchcancel|passive={up}
+	>
+		<div class="background" />
+		<div class="content-container">
+			{#if $$slots.default}
+				<slot />
+			{:else if text}
+				<span class="text">{text}</span>
+			{/if}
+		</div>
+		<div class="ripple-container">
+			<div bind:this={rippleShapeRef} class="ripple-shape" />
+		</div>
+	</button>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-btn {

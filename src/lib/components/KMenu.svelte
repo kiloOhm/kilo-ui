@@ -176,61 +176,61 @@
 	})();
 </script>
 
-<KThemeProvider />
-
-<div
-	class="k-menu {restClass ?? ''}"
-	{...restProps}
-	bind:this={menuRef}
-	class:tabs
-	data-edge-pos={edgePosition}
-	data-shape={shape}
-	style:--color={!validColor ? color : `var(--k-colors-${color}, var(--k-colors-blue)`}
-	style:--size={!validSize ? size : `var(--k-sizes-${size}, var(--k-sizes-md)`}
->
-	{#each items as item}
-		{#if item.type === 'divider'}
-			{#if item.label}
-				<KDivider vertical={tabs}>
-					{item.label}
-				</KDivider>
-			{:else}
-				<KDivider vertical={tabs} />
-			{/if}
-		{:else if item.type === 'item'}
-			{@const { key } = item}
-			<div
-				class="item"
-				data-key={key}
-				class:active={active?.includes(key)}
-				on:click={() => toggle(key)}
-				on:keypress={() => toggle(key)}
-				on:mouseenter={() => dispatch('hover', { key })}
-				on:touchstart={() => dispatch('hover', { key })}
-			>
-				<span>
-					{item.label ?? item.key}
-				</span>
-				{#if multiple}
-					{#if backgroundPointer}
-						<div class="pointer bg" on:transitionend={transitionEnd} />
-					{/if}
-					{#if edgePointer}
-						<div class="pointer edge" on:transitionend={transitionEnd} />
-					{/if}
+<KThemeProvider>
+	<div
+		class="k-menu {restClass ?? ''}"
+		{...restProps}
+		bind:this={menuRef}
+		class:tabs
+		data-edge-pos={edgePosition}
+		data-shape={shape}
+		style:--color={!validColor ? color : `var(--k-colors-${color}, var(--k-colors-blue)`}
+		style:--size={!validSize ? size : `var(--k-sizes-${size}, var(--k-sizes-md)`}
+	>
+		{#each items as item}
+			{#if item.type === 'divider'}
+				{#if item.label}
+					<KDivider vertical={tabs}>
+						{item.label}
+					</KDivider>
+				{:else}
+					<KDivider vertical={tabs} />
 				{/if}
-			</div>
+			{:else if item.type === 'item'}
+				{@const { key } = item}
+				<div
+					class="item"
+					data-key={key}
+					class:active={active?.includes(key)}
+					on:click={() => toggle(key)}
+					on:keypress={() => toggle(key)}
+					on:mouseenter={() => dispatch('hover', { key })}
+					on:touchstart={() => dispatch('hover', { key })}
+				>
+					<span>
+						{item.label ?? item.key}
+					</span>
+					{#if multiple}
+						{#if backgroundPointer}
+							<div class="pointer bg" on:transitionend={transitionEnd} />
+						{/if}
+						{#if edgePointer}
+							<div class="pointer edge" on:transitionend={transitionEnd} />
+						{/if}
+					{/if}
+				</div>
+			{/if}
+		{/each}
+		{#if !multiple}
+			{#if backgroundPointer}
+				<div class="pointer bg" bind:this={bgPointerRef} on:transitionend={transitionEnd} />
+			{/if}
+			{#if edgePointer}
+				<div class="pointer edge" bind:this={edgePointerRef} on:transitionend={transitionEnd} />
+			{/if}
 		{/if}
-	{/each}
-	{#if !multiple}
-		{#if backgroundPointer}
-			<div class="pointer bg" bind:this={bgPointerRef} on:transitionend={transitionEnd} />
-		{/if}
-		{#if edgePointer}
-			<div class="pointer edge" bind:this={edgePointerRef} on:transitionend={transitionEnd} />
-		{/if}
-	{/if}
-</div>
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-menu {

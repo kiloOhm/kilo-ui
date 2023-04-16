@@ -94,39 +94,39 @@
 	})();
 </script>
 
-<KThemeProvider />
-
-<div class="k-popover {restClass ?? ''}" {...restProps}>
-	<div
-		class="trigger"
-		on:mouseenter={enter}
-		on:touchstart={enter}
-		on:focus={enter}
-		on:mouseleave={leave}
-		on:touchend={leave}
-		on:blur={leave}
-		aria-describedby={`k-popover_${uid}_content`}
-		bind:this={triggerRef}
-	>
-		<slot name="trigger" />
+<KThemeProvider>
+	<div class="k-popover {restClass ?? ''}" {...restProps}>
+		<div
+			class="trigger"
+			on:mouseenter={enter}
+			on:touchstart={enter}
+			on:focus={enter}
+			on:mouseleave={leave}
+			on:touchend={leave}
+			on:blur={leave}
+			aria-describedby={`k-popover_${uid}_content`}
+			bind:this={triggerRef}
+		>
+			<slot name="trigger" />
+		</div>
+		<div
+			on:mouseenter={enter}
+			on:touchstart={enter}
+			on:focus={enter}
+			on:mouseleave={leave}
+			on:touchend={leave}
+			on:blur={leave}
+			class="content"
+			id={`k-popover_${uid}_content`}
+			role="tooltip"
+			bind:this={contentRef}
+			style:padding={comboboxCtx ? '0' : undefined}
+		>
+			<slot />
+			<div class="arrow" style:display={arrow ? 'block' : 'none'} bind:this={arrowRef} />
+		</div>
 	</div>
-	<div
-		on:mouseenter={enter}
-		on:touchstart={enter}
-		on:focus={enter}
-		on:mouseleave={leave}
-		on:touchend={leave}
-		on:blur={leave}
-		class="content"
-		id={`k-popover_${uid}_content`}
-		role="tooltip"
-		bind:this={contentRef}
-		style:padding={comboboxCtx ? '0' : undefined}
-	>
-		<slot />
-		<div class="arrow" style:display={arrow ? 'block' : 'none'} bind:this={arrowRef} />
-	</div>
-</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-popover {

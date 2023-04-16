@@ -21,26 +21,32 @@
 	})();
 </script>
 
-<KThemeProvider />
-
-<div class="k-anchor {restClass ?? ''}" {...restProps} id={hash} tabindex="-1">
-	<KBtn priority="tertiary" ariaLabel="copy link" size="xs" shape="circle" on:click={() => copy()}>
-		{#if $$slots.icon}
-			<slot name="icon" />
-		{:else}
-			<KIcon>
-				<IonLinkOutline />
-			</KIcon>
-		{/if}
-	</KBtn>
-	<a {href}>
-		{#if $$slots.default}
-			<slot />
-		{:else}
-			<span>{hash}</span>
-		{/if}
-	</a>
-</div>
+<KThemeProvider>
+	<div class="k-anchor {restClass ?? ''}" {...restProps} id={hash} tabindex="-1">
+		<KBtn
+			priority="tertiary"
+			ariaLabel="copy link"
+			size="xs"
+			shape="circle"
+			on:click={() => copy()}
+		>
+			{#if $$slots.icon}
+				<slot name="icon" />
+			{:else}
+				<KIcon>
+					<IonLinkOutline />
+				</KIcon>
+			{/if}
+		</KBtn>
+		<a {href}>
+			{#if $$slots.default}
+				<slot />
+			{:else}
+				<span>{hash}</span>
+			{/if}
+		</a>
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-anchor {

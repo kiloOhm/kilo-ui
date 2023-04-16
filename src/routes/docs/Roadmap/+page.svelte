@@ -78,6 +78,7 @@
 	<meta name="description" content="KUI Roadmap" />
 </svelte:head>
 
-<main class="p-4">
+<main class="p-4 flex flex-col gap-4">
+	<h1 class="text-2xl font-bold">Roadmap</h1>
 	<KRoadmap hideUpvotes {items} />
 </main>

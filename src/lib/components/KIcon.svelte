@@ -19,17 +19,17 @@
 	})();
 </script>
 
-<KThemeProvider />
-
-<div
-	class="k-icon {restClass ?? ''}"
-	{...restProps}
-	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
-	style:--color={`var(--k-colors-${color}, currentColor)`}
-	class:noColorCorrection
->
-	<slot />
-</div>
+<KThemeProvider>
+	<div
+		class="k-icon {restClass ?? ''}"
+		{...restProps}
+		style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+		style:--color={`var(--k-colors-${color}, currentColor)`}
+		class:noColorCorrection
+	>
+		<slot />
+	</div>
+</KThemeProvider>
 
 <style lang="scss">
 	.k-icon {
