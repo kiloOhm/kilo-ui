@@ -1,5 +1,4 @@
 <script lang="ts">
-	import KCode from '$lib/components/KCode.svelte';
 	import GithubQuote from '../../../components/GithubQuote.svelte';
 	import 'prism-svelte';
 	import type { PageData } from './$types';
@@ -23,6 +22,7 @@
 				<svelte:component this={demo.module} />
 			</ComponentDemo>
 		{/each}
+		<p>wrap your app in a <code>KThemeProvider</code> to apply the theme</p>
 	</section>
 	<GithubQuote>
 		Every component is wrapped in its own <code>KThemeProvider</code>, so if you're happy with the
