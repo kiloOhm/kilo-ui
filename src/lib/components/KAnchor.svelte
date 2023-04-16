@@ -4,7 +4,6 @@
 	 * @slot icon - Inside the button
 	 */
 	import KIcon from './KIcon.svelte';
-	import IonLinkOutline from '~icons/ion/link-outline';
 	import KBtn from './KBtn.svelte';
 	import { KThemeProvider } from '.';
 	export let hash: string = '';
@@ -28,7 +27,16 @@
 			<slot name="icon" />
 		{:else}
 			<KIcon>
-				<IonLinkOutline />
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"
+					><path
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="36"
+						d="M208 352h-64a96 96 0 0 1 0-192h64m96 0h64a96 96 0 0 1 0 192h-64m-140.71-96h187.42"
+					/></svg
+				>
 			</KIcon>
 		{/if}
 	</KBtn>

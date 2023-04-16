@@ -8,13 +8,6 @@
 	import { randomString } from '$lib/util';
 	import { Colors, Sizes, type Color, type Size } from '../types.d';
 	import KBtn from './KBtn.svelte';
-	import IonPlus from '~icons/ion/plus';
-	import IonMinus from '~icons/ion/minus';
-	import IonEye from '~icons/ion/eye';
-	import IonEyeOff from '~icons/ion/eye-off';
-	import IonClose from '~icons/ion/close';
-	import IonCopyOutline from '~icons/ion/copy-outline';
-	import IonCheckmark from '~icons/ion/checkmark';
 	import { KIcon } from '.';
 	import { createEventDispatcher } from 'svelte';
 	import { KUIError } from '$lib/util/console';
@@ -300,7 +293,16 @@
 								<slot name="plus" />
 							{:else}
 								<KIcon size="xs">
-									<IonPlus />
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 512 512"
+										><path
+											d="M448 224H288V64h-64v160H64v64h160v160h64V288h160z"
+											fill="currentColor"
+										/></svg
+									>
 								</KIcon>
 							{/if}
 						</KBtn>
@@ -315,7 +317,12 @@
 								<slot name="minus" />
 							{:else}
 								<KIcon size="xs">
-									<IonMinus />
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 512 512"><path d="M64 224h384v64H64z" fill="currentColor" /></svg
+									>
 								</KIcon>
 							{/if}
 						</KBtn>
@@ -334,7 +341,16 @@
 									<slot name="pw-visible" />
 								{:else}
 									<KIcon size="xs">
-										<IonEye />
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="32"
+											height="32"
+											viewBox="0 0 512 512"
+											><circle cx="256" cy="256" r="64" fill="currentColor" /><path
+												fill="currentColor"
+												d="M490.84 238.6c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.66 96c-42.52 0-84.33 12.15-124.27 36.11c-40.73 24.43-77.63 60.12-109.68 106.07a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.4 76.14 98.28 100.65C162 402 207.9 416 255.66 416c46.71 0 93.81-14.43 136.2-41.72c38.46-24.77 72.72-59.66 99.08-100.92a32.2 32.2 0 0 0-.1-34.76ZM256 352a96 96 0 1 1 96-96a96.11 96.11 0 0 1-96 96Z"
+											/></svg
+										>
 									</KIcon>
 								{/if}
 							</KBtn>
@@ -350,7 +366,19 @@
 									<slot name="pw-hidden" />
 								{:else}
 									<KIcon size="xs">
-										<IonEyeOff />
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="32"
+											height="32"
+											viewBox="0 0 512 512"
+											><path
+												fill="currentColor"
+												d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448ZM248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39Zm16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39Z"
+											/><path
+												fill="currentColor"
+												d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.54 226.54 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.81 343.81 0 0 0 67.24-77.4ZM256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.22 238.22 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352Z"
+											/></svg
+										>
 									</KIcon>
 								{/if}
 							</KBtn>
@@ -370,7 +398,16 @@
 								<slot name="clear" />
 							{:else}
 								<KIcon size="xs">
-									<IonClose />
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 512 512"
+										><path
+											fill="currentColor"
+											d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z"
+										/></svg
+									>
 								</KIcon>
 							{/if}
 						</KBtn>
@@ -390,7 +427,31 @@
 									<slot name="copy" />
 								{:else}
 									<KIcon size="xs">
-										<IonCopyOutline />
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="32"
+											height="32"
+											viewBox="0 0 512 512"
+											><rect
+												width="336"
+												height="336"
+												x="128"
+												y="128"
+												fill="none"
+												stroke="currentColor"
+												stroke-linejoin="round"
+												stroke-width="32"
+												rx="57"
+												ry="57"
+											/><path
+												fill="none"
+												stroke="currentColor"
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="32"
+												d="m383.5 128l.5-24a56.16 56.16 0 0 0-56-56H112a64.19 64.19 0 0 0-64 64v216a56.16 56.16 0 0 0 56 56h24"
+											/></svg
+										>
 									</KIcon>
 								{/if}
 							</KBtn>
@@ -398,7 +459,16 @@
 							<slot name="copied" />
 						{:else}
 							<KIcon size="xs">
-								<IonCheckmark />
+								<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"
+									><path
+										fill="none"
+										stroke="currentColor"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="32"
+										d="M416 128L192 384l-96-96"
+									/></svg
+								>
 							</KIcon>
 						{/if}
 					</div>

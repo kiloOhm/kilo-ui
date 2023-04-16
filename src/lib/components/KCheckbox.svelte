@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { Colors, KIcon, Sizes, type Color, type Size } from '..';
 	import KThemeProvider from './KThemeProvider.svelte';
-	import IonMinusRound from '~icons/ion/minus-round';
-	import IonCheckmark from '~icons/ion/checkmark';
 	const uid = crypto.randomUUID();
 	/**
 	 * @type {boolean | null}
@@ -72,7 +70,16 @@
 					<slot name="mark-checked" />
 				{:else}
 					<KIcon size="var(--k-checkbox-mark-scale)">
-						<IonCheckmark />
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"
+							><path
+								fill="none"
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="32"
+								d="M416 128L192 384l-96-96"
+							/></svg
+						>
 					</KIcon>
 				{/if}
 			</div>
@@ -81,7 +88,12 @@
 					<slot name="mark-indeterminate" />
 				{:else}
 					<KIcon size="var(--k-checkbox-mark-scale)">
-						<IonMinusRound />
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"
+							><path
+								d="M417.4 224H94.6C77.7 224 64 238.3 64 256s13.7 32 30.6 32h322.8c16.9 0 30.6-14.3 30.6-32s-13.7-32-30.6-32z"
+								fill="currentColor"
+							/></svg
+						>
 					</KIcon>
 				{/if}
 			</div>
