@@ -6,11 +6,19 @@
 	 * @event {MouseEvent | TouchEvent | KeyboardEvent} down - fires on MouseDown, TouchStart and Keydown
 	 * @event {MouseEvent | TouchEvent | KeyboardEvent} up - fires on MouseUp, MouseLeave, TouchEnd and Keyup
 	 */
-	import { type Color, type Size, Sizes, Colors } from '..';
+	import { type KColor, type Size, Sizes, KColors, useTheme } from '..';
 	import { createEventDispatcher } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
 	import { debounce } from 'lodash-es';
 	import type { ButtonPriority } from './KBtn';
+	import Color from 'color';
+
+	const {
+		colors: { text: t_text, background: t_background, ...t_colors },
+		button: t_button,
+		size: t_size,
+		transition: { duration: t_duration }
+	} = useTheme();
 
 	/**
 	 * @type {'primary' | 'secondary' | 'tertiary'}
@@ -23,7 +31,7 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string = 'var(--k-colors-text-0)';
+	export let color: KColor | string = t_text[0];
 	/**
 	 * @type {string | undefined}
 	 */
@@ -102,9 +110,7 @@
 			rippleShapeRef.style.top = `${pos.y}px`;
 			if (color) {
 				rippleShapeRef.style.scale = '2.5';
-				const rippleAlpha =
-					getComputedStyle(rippleShapeRef).getPropertyValue('--k-button-ripple-alpha');
-				rippleShapeRef.style.opacity = rippleAlpha;
+				rippleShapeRef.style.opacity = t_button.ripple.alpha.toString();
 			} else {
 				rippleShapeRef.style.opacity = '0';
 				rippleShapeRef.style.scale = '0';
@@ -113,12 +119,43 @@
 		300,
 		{ leading: true, trailing: true }
 	);
-	$: validSize = Sizes.includes(size as Size);
-	$: _color = Colors.includes(color as Color)
-		? priority === 'primary' && !ghost
-			? `var(--k-colors-${color}-darken-4)`
-			: `var(--k-colors-${color})`
-		: color;
+	$: _size = Sizes.includes(size as Size) ? t_size[size as Size] : size;
+	let _color: string;
+	$: (() => {
+		if (KColors.includes(color as KColor)) {
+			if (priority === 'primary' && !ghost) {
+				if (Color(t_text[0]).isLight()) {
+					_color = Color(t_colors[color as KColor])
+						.darken(0.4)
+						.hexa();
+				} else {
+					_color = Color(t_colors[color as KColor])
+						.lighten(0.4)
+						.hexa();
+				}
+			} else {
+				_color = t_colors[color as KColor];
+			}
+		} else {
+			_color = t_text[0];
+		}
+	})();
+	let _textColor: string;
+	$: (() => {
+		if (textColor) {
+			_textColor = textColor;
+			return;
+		}
+		if (ghost) {
+			_textColor = _color;
+			return;
+		}
+		if (_color === t_text[0]) {
+			_textColor = t_background[0];
+		} else {
+			_textColor = t_text[0];
+		}
+	})();
 	let restAriaLabel: string, restClass: string, restProps: any;
 	$: (() => {
 		const { class: _class, ariaLabel, ...props } = $$restProps;
@@ -138,12 +175,25 @@
 	data-priority={priority}
 	data-shape={shape}
 	aria-label={restAriaLabel ?? text}
-	style:--size={`var(--k-size-${validSize ? size : 'X'}, ${size})`}
+	style:--size={_size}
 	style:--color={_color}
-	style:--text-color={textColor ??
-		(color !== 'var(--k-colors-text-0)'
-			? 'var(--k-colors-text-0)'
-			: 'var(--k-colors-background-0)')}
+	style:--text-color={_textColor}
+	style:padding={t_button.padding}
+	style:--border-radius={t_button.border.radius}
+	style:--border-width={t_button.border.width}
+	style:--border-style={t_button.border.style}
+	style:--secondary-bg={t_text[1]}
+	style:--disabled-alpha={t_button.disabled.alpha}
+	style:--hover-brightness={t_button.hover.brightness}
+	style:--hover-scale={t_button.hover.scale}
+	style:--active-brightness={t_button.active.brightness}
+	style:--active-scale={t_button.active.scale}
+	style:--border-1={t_colors.border[1]}
+	style:--background-2={t_background[2]}
+	style:--ripple-color={t_button.ripple.color}
+	style:--t-dur={t_duration}
+	style:--ripple-dur-expand={t_button.ripple.duration.expand}
+	style:--ripple-dur-fade={t_button.ripple.duration.fade}
 	class:ripple
 	class:ghost
 	{disabled}
@@ -183,14 +233,13 @@
 		font-size: var(--size);
 		margin: 0;
 		color: var(--text-color);
-		padding: var(--k-button-padding);
-		border-radius: var(--k-button-border-radius);
+		border-radius: var(--border-radius);
 		transition-property: filter, background-color, border-color, outline-color, transform;
 		> .background {
 			position: absolute;
 			inset: 0;
-			border-radius: var(--k-button-border-radius);
-			background-color: var(--k-colors-text-1);
+			border-radius: var(--border-radius);
+			background-color: var(--secondary-bg);
 		}
 		&[data-shape='pill'] {
 			border-radius: 9999px;
@@ -213,26 +262,25 @@
 		}
 		&:disabled {
 			cursor: not-allowed;
-			opacity: var(--k-button-disabled-alpha);
+			opacity: var(--disabled-alpha);
 		}
 		&:hover:not(:disabled) {
 			cursor: pointer;
 			> .background {
-				filter: brightness(var(--k-button-hover-brightness));
+				filter: brightness(var(--hover-brightness));
 			}
-			transform: scale(var(--k-button-hover-scale));
+			transform: scale(var(--hover-scale));
 		}
 		&:active:not(:disabled) {
 			> .background {
-				filter: brightness(var(--k-button-active-brightness));
+				filter: brightness(var(--active-brightness));
 			}
-			transform: scale(var(--k-button-active-scale));
+			transform: scale(var(--active-scale));
 		}
 		&.ghost {
 			> .background {
-				border-width: var(--k-button-border-width);
-				border-style: var(--k-button-border-style);
-				border-color: var(--k-colors-blue);
+				border-width: var(--border-width);
+				border-style: var(--border-style);
 				background-color: transparent;
 			}
 			&[data-priority='primary'] {
@@ -246,7 +294,7 @@
 			}
 			&[data-priority='secondary'] {
 				> .background {
-					border-color: var(--k-colors-border-1);
+					border-color: var(--border-1);
 				}
 				color: var(--color);
 			}
@@ -257,7 +305,7 @@
 				}
 				&:hover {
 					> .background {
-						border-color: var(--k-colors-border-1);
+						border-color: var(--border-1);
 					}
 				}
 				color: var(--color);
@@ -271,7 +319,7 @@
 			}
 			&[data-priority='secondary'] {
 				> .background {
-					background-color: var(--k-colors-background-2);
+					background-color: var(--background-2);
 				}
 				color: var(--color);
 			}
@@ -281,7 +329,7 @@
 				}
 				&:hover:not(:disabled) {
 					> .background {
-						background-color: var(--k-colors-background-2);
+						background-color: var(--background-2);
 					}
 				}
 				color: var(--color);
@@ -291,13 +339,9 @@
 			position: absolute;
 			inset: 0;
 			> .ripple-shape {
-				background-color: var(--k-button-ripple-color);
-				--t-dur-expand: calc(
-					var(--k-transition-duration) * var(--k-button-ripple-duration-expand) * 1ms
-				);
-				--t-dur-fade: calc(
-					var(--k-transition-duration) * var(--k-button-ripple-duration-fade) * 1ms
-				);
+				background-color: var(--ripple-color);
+				--t-dur-expand: calc(var(--t-dur) * var(--ripple-dur-expand) * 1ms);
+				--t-dur-fade: calc(var(--t-dur) * var(--ripple-dur-fade) * 1ms);
 				transition: scale var(--t-dur-expand), opacity var(--t-dur-fade);
 				pointer-events: none;
 				position: absolute;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { KThemeProvider } from '.';
-	import { Sizes, type Size, type Color } from '..';
+	import { Sizes, type Size, type KColor } from '..';
 	/**
 	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
 	 */
@@ -8,7 +8,7 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | undefined = undefined;
+	export let color: KColor | undefined = undefined;
 	export let noColorCorrection: boolean = false;
 	$: validSize = Sizes.includes(size as Size);
 	let restClass: string, restProps: any;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { KIcon } from '.';
-	import { Colors, Sizes, type Color, type Size } from '../types.d';
+	import { KColors, Sizes, type KColor, type Size } from '../types.d';
 	import { getContext, onDestroy } from 'svelte';
 	import KThemeProvider from './KThemeProvider.svelte';
 
@@ -17,7 +17,7 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string | undefined = undefined;
+	export let color: KColor | string | undefined = undefined;
 	export let bordered = false;
 	/**
 	 * @type {'start' | 'end' }
@@ -58,7 +58,7 @@
 		}
 	}
 	$: validSize = Sizes.includes(size as Size);
-	$: validColor = !color || Colors.includes(color as Color);
+	$: validColor = !color || KColors.includes(color as KColor);
 	const accordionCTX = getContext('k-accordion-ctx') as (callback: (active: boolean) => void) => {
 		cleanup(): void;
 		toggle(): void;

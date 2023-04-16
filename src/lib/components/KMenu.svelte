@@ -8,7 +8,7 @@
 	import KThemeProvider from './KThemeProvider.svelte';
 	import { type MenuItemMixed, type MenuItem, KDivider } from '.';
 	import { createEventDispatcher } from 'svelte';
-	import { Colors, Sizes, type Color, type Size } from '../types.d';
+	import { KColors, Sizes, type KColor, type Size } from '../types.d';
 	const dispatch = createEventDispatcher();
 
 	export let items: MenuItemMixed[];
@@ -31,9 +31,9 @@
 	 */
 	export let edgePosition: 'start' | 'end' = 'start';
 	/**
-	 * @type {Color | string | undefined}
+	 * @type {KColor | string | undefined}
 	 */
-	export let color: Color | string | undefined = undefined;
+	export let color: KColor | string | undefined = undefined;
 	/**
 	 * @type {Size | string}
 	 */
@@ -58,7 +58,7 @@
 		};
 	}
 
-	$: validColor = !color || Colors.includes(color as Color);
+	$: validColor = !color || KColors.includes(color as KColor);
 	$: validSize = Sizes.includes(size as Size);
 
 	let menuRef: HTMLElement;

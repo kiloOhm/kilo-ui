@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { KThemeProvider, KBtn, KIcon } from '$lib';
+	import { KThemeProvider, KBtn, KIcon, setThemeOverrides } from '$lib';
 	import KDrawerProvider from '../components/KDrawerProvider.svelte';
 	import '../app.css';
 	import IonMdList from '~icons/ion/md-list';

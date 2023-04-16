@@ -2,6 +2,24 @@ import type { Size } from '$lib/types';
 import { memoize, merge } from 'lodash-es';
 import type { DeepPartial } from './types';
 import Color from 'color';
+import { getContext, setContext } from 'svelte';
+
+export function useTheme() {
+	const overrides = getContext('--k-theme-overrides') as DeepPartial<Theme> | undefined;
+	const theme = defaultTheme;
+	if (overrides) {
+		merge(theme, overrides);
+	}
+	return theme;
+}
+
+export function setThemeOverrides(overrides: DeepPartial<Theme>) {
+	const context = getContext('--k-theme-overrides') as DeepPartial<Theme> | undefined;
+	if (context) {
+		overrides = merge(context, overrides);
+	}
+	return setContext('--k-theme-overrides', overrides);
+}
 
 export const getThemeVars = memoize((overrides?: DeepPartial<Theme>) => {
 	const theme = defaultTheme;

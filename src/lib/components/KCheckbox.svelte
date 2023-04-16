@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Colors, KIcon, Sizes, type Color, type Size } from '..';
+	import { KColors, KIcon, Sizes, type KColor, type Size } from '..';
 	import KThemeProvider from './KThemeProvider.svelte';
 	const uid = crypto.randomUUID();
 	/**
@@ -18,9 +18,9 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string = 'var(--k-colors-green-darken-4)';
+	export let color: KColor | string = 'var(--k-colors-green-darken-4)';
 	$: validSize = Sizes.includes(size as Size);
-	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
+	$: _color = KColors.includes(color as KColor) ? `var(--k-colors-${color}-darken-4)` : color;
 	let restClass: string, restProps: any;
 	$: (() => {
 		const { class: _class, ...props } = $$restProps;

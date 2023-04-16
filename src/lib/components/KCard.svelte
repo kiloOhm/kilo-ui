@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { KThemeProvider } from '.';
-	import { Sizes, type Size, type Color, Colors } from '..';
+	import { Sizes, type Size, type KColor, KColors } from '..';
 	export let bordered = true;
 	/**
 	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
@@ -9,9 +9,9 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string | undefined}
 	 */
-	export let color: Color | string = 'var(--k-colors-border-0)';
+	export let color: KColor | string = 'var(--k-colors-border-0)';
 	$: validSize = Sizes.includes(size as Size);
-	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
+	$: _color = KColors.includes(color as KColor) ? `var(--k-colors-${color}-darken-4)` : color;
 	let restClass: string, restProps: any;
 	$: (() => {
 		const { class: _class, ...props } = $$restProps;

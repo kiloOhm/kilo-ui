@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Color, Colors } from '../types.d';
+	import { type KColor, KColors } from '../types.d';
 	import KThemeProvider from './KThemeProvider.svelte';
 
 	export let vertical: boolean = false;
@@ -7,8 +7,8 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string = 'var(--k-colors-border-1)';
-	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
+	export let color: KColor | string = 'var(--k-colors-border-1)';
+	$: _color = KColors.includes(color as KColor) ? `var(--k-colors-${color}-darken-4)` : color;
 	let restClass: string, restProps: any;
 	$: (() => {
 		const { class: _class, ...props } = $$restProps;

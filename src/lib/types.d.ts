@@ -17,8 +17,8 @@ export const Sizes = [
 ] as const;
 export type Size = (typeof Sizes)[number];
 
-export const Colors = ['blue', 'purple', 'green', 'yellow', 'red'] as const;
-export type Color = (typeof Colors)[number];
+export const KColors = ['blue', 'purple', 'green', 'yellow', 'red'] as const;
+export type KColor = (typeof KColors)[number];
 
 export const Directions = ['top', 'right', 'bottom', 'left'] as const;
 export type Direction = (typeof Directions)[number];

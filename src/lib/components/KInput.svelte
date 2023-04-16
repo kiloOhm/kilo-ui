@@ -6,12 +6,10 @@
 	 * @event {FocusEvent} blur
 	 */
 	import { randomString } from '$lib/util';
-	import { Colors, Sizes, type Color, type Size } from '../types.d';
-	import KBtn from './KBtn.svelte';
-	import { KIcon } from '.';
+	import { KBtn, KIcon } from '.';
 	import { createEventDispatcher } from 'svelte';
 	import { KUIError } from '$lib/util/console';
-	import { focusTrap as _focusTrap } from '..';
+	import { focusTrap as _focusTrap, Sizes, type Size, type KColor, KColors } from '..';
 	import KThemeProvider from './KThemeProvider.svelte';
 	const uid = randomString(8);
 
@@ -48,7 +46,7 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string = 'blue';
+	export let color: KColor | string = 'blue';
 	/**
 	 * @type {'pill' | 'sharp' | undefined}
 	 */
@@ -70,8 +68,7 @@
 	export let focusTrap: boolean = false;
 
 	/**
-	 * @type {() => void}
-	 */
+	KColor */
 	export function focus() {
 		if (inputRef) inputRef.focus();
 		if (textareaRef) textareaRef.focus();
@@ -90,7 +87,7 @@
 	const dispatch = createEventDispatcher();
 
 	$: validSize = Sizes.includes(size as Size);
-	$: validColor = !color || Colors.includes(color as Color);
+	$: validColor = !color || KColors.includes(color as KColor);
 
 	$: (() => {
 		if (min !== null && type === 'number' && Number(value) < min) {

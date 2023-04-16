@@ -6,6 +6,7 @@
 	import KAdaptiveNav from '../../components/KAdaptiveNav.svelte';
 	import KPageTransitionProvider from '../../components/KPageTransitionProvider.svelte';
 	import type { LayoutData } from './$types';
+	import { setThemeOverrides, useTheme } from '$lib';
 	const pages = Object.entries(import.meta.glob('./**/*.svelte'))
 		.map(([path, _]) => path.split('/')[1])
 		.filter((name) => !name.startsWith('+'))

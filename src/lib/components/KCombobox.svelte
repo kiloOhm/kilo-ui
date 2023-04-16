@@ -8,7 +8,7 @@
 	import { setContext } from 'svelte';
 	import { KInput, KPopover, type MenuItemMixed, KMenu, KBtn, KIcon } from '.';
 	import { extractIfSingle } from '$lib/util/arrays';
-	import { keypress, outclick, type Color, type Size } from '..';
+	import { keypress, outclick, type KColor, type Size } from '..';
 	import KChip from './KChip.svelte';
 	import Fuse from 'fuse.js';
 	import { createEventDispatcher } from 'svelte';
@@ -49,14 +49,14 @@
 	 * @type {string | null}
 	 */
 	export let message: string | null = null;
-	/**
+	/**KColor
 	 * @type {'3xs' | '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl' | string}
 	 */
 	export let size: Size | string = 'md';
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string | undefined = 'blue';
+	export let color: KColor | string | undefined = 'blue';
 	/**
 	 * @type {'pill' | 'sharp' | undefined}
 	 */

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Colors, Sizes, type Color, type Size } from '../types.d';
+	import { KColors, Sizes, type KColor, type Size } from '../types.d';
 	import KThemeProvider from './KThemeProvider.svelte';
 
 	/**
@@ -24,11 +24,11 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string | undefined = undefined;
+	export let color: KColor | string | undefined = undefined;
 	export let zebra = false;
 
 	$: validSize = Sizes.includes(size as Size);
-	$: validColor = !color || Colors.includes(color as Color);
+	$: validColor = !color || KColors.includes(color as KColor);
 	let restClass: string, restProps: any;
 	$: (() => {
 		const { class: _class, ...props } = $$restProps;

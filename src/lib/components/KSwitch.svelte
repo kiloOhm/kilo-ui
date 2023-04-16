@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Colors, Sizes, type Color, type Size } from '..';
+	import { KColors, Sizes, type KColor, type Size } from '..';
 	import KThemeProvider from './KThemeProvider.svelte';
 	const uid = crypto.randomUUID();
 	export let checked = false;
@@ -15,16 +15,16 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let checkedColor: Color | string = 'var(--k-colors-green-darken-4)';
+	export let checkedColor: KColor | string = 'var(--k-colors-green-darken-4)';
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let uncheckedColor: Color | string = 'var(--k-colors-background-2)';
+	export let uncheckedColor: KColor | string = 'var(--k-colors-background-2)';
 	$: validSize = Sizes.includes(size as Size);
-	$: _checkedColor = Colors.includes(checkedColor as Color)
+	$: _checkedColor = KColors.includes(checkedColor as KColor)
 		? `var(--k-colors-${checkedColor}-darken-4)`
 		: checkedColor;
-	$: _uncheckedColor = Colors.includes(uncheckedColor as Color)
+	$: _uncheckedColor = KColors.includes(uncheckedColor as KColor)
 		? `var(--k-colors-${uncheckedColor}-darken-4)`
 		: uncheckedColor;
 	function toggle() {

@@ -2,8 +2,8 @@
 	import KBtn from './KBtn.svelte';
 	import KIcon from './KIcon.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { Colors, Sizes, type Color, type Size } from '../types.d';
-	import KThemeProvider from './KThemeProvider.svelte';
+	import { KColors, Sizes, type KColor, type Size } from '../types.d';
+	import { KThemeProvider } from '.';
 	const dispatch = createEventDispatcher();
 
 	/**
@@ -18,15 +18,15 @@
 	/**
 	 * @type {'blue' | 'purple' | 'green' | 'yellow' | 'red' | string}
 	 */
-	export let color: Color | string = 'var(--k-colors-text-0)';
+	export let color: KColor | string = 'var(--k-colors-text-0)';
 	/**
-	 * @type {'pill' | 'circle' | 'sharp' | undefined}
+	 * @type {'pill' | 'circle' KColorarp' | undefined}
 	 */
 	export let shape: 'sharp' | 'pill' | null = null;
 
 	$: validSize = Sizes.includes(size as Size);
-	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
-	let restClass: string, restProps: any;
+	$: _color = KColors.includes(color as KColor) ? `var(--k-colors-${color}-darken-4)` : color;
+	let restClass: string, restProps: Record<string, any>;
 	$: (() => {
 		const { class: _class, ...props } = $$restProps;
 		restClass = _class;
