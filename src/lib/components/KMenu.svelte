@@ -97,11 +97,24 @@
 			cleanup?.();
 			const ro = new ResizeObserver(updatePointerPos);
 			ro.observe(activeElement);
-			const io = new IntersectionObserver(updatePointerPos);
+			const wheelListener = (e: WheelEvent) => {
+				if (e.target === menuRef) {
+					updatePointerPos();
+				}
+			};
+			const io = new IntersectionObserver(updatePointerPos, {
+				root: menuRef,
+				rootMargin: '0px',
+				threshold: 1.0
+			});
 			io.observe(activeElement);
+			menuRef.addEventListener('wheel', wheelListener, {
+				passive: true
+			});
 			cleanup = () => {
 				ro.disconnect();
 				io.disconnect();
+				menuRef.removeEventListener('wheel', wheelListener);
 			};
 		} else {
 			pointerPos = null;
@@ -225,7 +238,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		overflow: hidden;
+		overflow: auto;
 		font-size: var(--size);
 		&.tabs {
 			flex-direction: row;
@@ -241,7 +254,7 @@
 			user-select: none;
 			transition-property: background-color;
 			&:hover {
-				background: var(--k-colors-background-1-lighten-1);
+				background: var(--k-colors-background-1-lighten-4);
 			}
 			&.active {
 				color: var(--color);

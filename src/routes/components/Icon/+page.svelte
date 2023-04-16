@@ -16,8 +16,9 @@
 	<svelte:fragment slot="header">Icon</svelte:fragment>
 	<p slot="comment">
 		This component "normalizes" svg icons. It overrides color and size to match the design system. I
-		reccomend using <a href="https://github.com/antfu/unplugin-icons">unplugin-icons</a> and
-		<a href="https://icones.js.org/">Icônes</a>
+		reccomend using <a href="https://github.com/antfu/unplugin-icons">unplugin-icons</a> along with
+		<a href="https://icones.js.org/">Icônes</a> because
+		<a href="https://github.com/antfu">Anthony Fu</a> makes great stuff.
 	</p>
 	{#each data.demos as demo}
 		<ComponentDemo title={demo.path.split('/').pop()?.split('.').shift()} code={demo.code}>

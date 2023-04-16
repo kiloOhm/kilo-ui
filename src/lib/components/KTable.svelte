@@ -62,6 +62,7 @@
 <style lang="scss">
 	table {
 		font-size: var(--size);
+		border-style: solid;
 		border-collapse: separate;
 		border-spacing: 0;
 		background-color: var(--color);

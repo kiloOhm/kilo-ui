@@ -2,6 +2,8 @@
 	import { KCard, KMasonryLayout, KMenu } from '$lib';
 	import KDivider from '$lib/components/KDivider.svelte';
 	import KTable from '$lib/components/KTable.svelte';
+	import GithubQuote from '../components/GithubQuote.svelte';
+	import WipBanner from '../components/WIPBanner.svelte';
 	import type { SveldJson } from '../util/types';
 
 	export let sveld: SveldJson | null = null;
@@ -15,24 +17,18 @@
 	$: activeTab = active?.[0];
 </script>
 
-<div class="m-4 h-full">
+<div class="m-4">
 	<header class="flex gap-2 items-center mb-4">
 		<h1 class="text-2xl">
 			<slot name="header" />
 		</h1>
 	</header>
 
-	<section aria-label="comment">
+	<section class="mb-4" aria-label="comment">
 		{#if $$slots.comment}
-			<div class="mb-4">
-				<KCard bordered={false}>
-					<div slot="header">
-						{#if $$slots.comment}
-							<slot name="comment" />
-						{/if}
-					</div>
-				</KCard>
-			</div>
+			<GithubQuote>
+				<slot name="comment" />
+			</GithubQuote>
 		{/if}
 	</section>
 
@@ -160,7 +156,7 @@
 			</section>
 		{:else if activeTab === 'A11y'}
 			<section aria-label="A11y">
-				<h2>WIP</h2>
+				<WipBanner>WIP</WipBanner>
 			</section>
 		{/if}
 	</main>

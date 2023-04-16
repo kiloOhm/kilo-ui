@@ -1,18 +1,49 @@
+<script>
+	import { KCode } from '$lib';
+	import KDivider from '$lib/components/KDivider.svelte';
+	import GithubQuote from '../../components/GithubQuote.svelte';
+	import 'prismjs/components/prism-bash.min.js';
+</script>
+
 <svelte:head>
 	<title>KUI Docs</title>
 	<meta name="description" content="WIP - Kilo UI Documentation" />
 </svelte:head>
 
-<div class="p-4">
-	Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum in necessitatibus non soluta
-	quod consequuntur, quas nisi placeat eveniet atque doloremque vitae corrupti enim est nulla.
-	Accusantium modi a corrupti tempora reiciendis nostrum! Ex quis illo repellat ipsam dicta
-	voluptatum eaque et sequi consequuntur. Voluptates quibusdam repellendus hic. Quas voluptatem nam
-	modi dolorem nesciunt? Voluptatum quam laborum perspiciatis, mollitia quod totam nihil id
-	distinctio delectus nostrum quasi nobis, error sit voluptates suscipit commodi harum. Ex incidunt
-	temporibus autem quae vitae recusandae dignissimos accusantium beatae voluptatem odio sint illum,
-	cupiditate, possimus rerum assumenda fuga? Id molestiae perferendis esse saepe obcaecati illo quia
-	accusamus quis magni ducimus, unde soluta aliquam reprehenderit et voluptatem. Pariatur nobis
-	iure, doloribus rem magni neque illo officia est laudantium, error quae nihil. Obcaecati,
-	asperiores odit.
-</div>
+<main class="p-4 flex flex-col gap-8">
+	<h1 class="text-2xl">Documentation</h1>
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg">Getting Started</h2>
+		<p>To get started, install the package from npm:</p>
+		<KCode language="bash" code={`npm i kilo-ui;`} />
+		<GithubQuote>
+			Setting up a library like this should be as frictionless as possible. Just import and go.
+		</GithubQuote>
+	</section>
+	<KDivider />
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg">Typescript</h2>
+		<p>We highly recommend using Typescript with KUI. We have not yet tested without Typescript.</p>
+	</section>
+	<KDivider />
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg">Tailwind</h2>
+		<p>
+			KUI doesn't depend on Tailwind. We use it in our docs, but you can use any CSS framework you
+			want.
+		</p>
+		<p>We test with and without preflight to make sure there are no collisions.</p>
+		<GithubQuote>Tailwind is awesome, but not everyone wants to / is able to use it.</GithubQuote>
+	</section>
+	<KDivider />
+	<section class="flex flex-col gap-2">
+		<h2 class="text-lg">Credits</h2>
+		<p>
+			This library was inspired by <a href="https://naiveui.com" target="_blank">Naive UI</a>
+		</p>
+		<GithubQuote>
+			<a href="https://naiveui.com" target="_blank">Naive UI</a> is my all time favourite Vue 3
+			Framework. I use it in every project. Thanks <a href="https://www.tusimple.com/">ToSimple</a> ❤️</GithubQuote
+		>
+	</section>
+</main>

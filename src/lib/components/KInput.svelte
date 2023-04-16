@@ -459,12 +459,14 @@
 			padding: var(--k-input-padding);
 			> input,
 			> textarea {
+				border: none;
 				transition: none;
 				position: relative;
 				flex-grow: 1;
 				min-width: 1px;
 				background: none;
 				outline: none;
+				color: var(--k-colors-text);
 				/* Chrome, Safari, Edge, Opera */
 				&::-webkit-outer-spin-button,
 				&::-webkit-inner-spin-button {

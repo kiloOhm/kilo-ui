@@ -80,6 +80,7 @@
 		border-radius: var(--k-chip-border-radius);
 		border-color: transparent;
 		border-width: var(--k-chip-border-width);
+		border-style: solid;
 		transition-property: border-color;
 		&[data-shape='pill'] {
 			border-radius: 9999px;

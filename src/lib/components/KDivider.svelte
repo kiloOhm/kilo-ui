@@ -47,6 +47,7 @@
 		}
 		> .content-container {
 			padding: 0 0.5em;
+			white-space: nowrap;
 		}
 		&.vertical {
 			> hr {

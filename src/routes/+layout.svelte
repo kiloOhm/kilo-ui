@@ -5,10 +5,9 @@
 	import IonMdList from '~icons/ion/md-list';
 	import { fade } from 'svelte/transition';
 	import { setContext } from 'svelte';
-	import { afterNavigate, goto } from '$app/navigation';
+	import { afterNavigate, goto, preloadData } from '$app/navigation';
 	import KuiLogo from '../components/themed-kui-logo.svelte';
 	import type { LayoutServerData } from './$types';
-	import type { Transition } from '../components/KPageTransitionProvider';
 	import KPageTransitionProvider from '../components/KPageTransitionProvider.svelte';
 	export let data: LayoutServerData;
 
@@ -27,42 +26,6 @@
 	setContext('header-set-hamburger', (show: boolean) => (collapsible = show));
 	const hamburgerClickSubscribers: (() => void)[] = [];
 	setContext('header-on-hamburger-click', (fn: () => void) => hamburgerClickSubscribers.push(fn));
-	const duration = 200;
-	$: amountX = (typeof window === 'undefined' ? 0 : window.innerWidth) / 3;
-	$: amountY = (typeof window === 'undefined' ? 0 : window.innerHeight) / 3;
-	function ruleFn(
-		from: string,
-		to: string
-	):
-		| {
-				in: Transition;
-				out: Transition;
-		  }
-		| undefined {
-		switch (from) {
-			case '/':
-			case '':
-				switch (to) {
-					case '/components':
-						return {
-							in: { type: 'fly', direction: 'up', amount: amountY, duration },
-							out: { type: 'fly', direction: 'up', amount: amountY, duration }
-						};
-				}
-				break;
-			case '/components':
-				switch (to) {
-					case '/':
-					case '':
-						return {
-							in: { type: 'fly', direction: 'down', amount: amountY, duration },
-							out: { type: 'fly', direction: 'down', amount: amountY, duration }
-						};
-				}
-				break;
-		}
-		return undefined;
-	}
 	$: path = data.pathname.split('/')[1];
 	let overlay: HTMLDivElement;
 	$: overlay
@@ -109,6 +72,7 @@
 						class="flex gap-2 items-baseline cursor-pointer"
 						on:click={() => goto('/')}
 						on:keypress={() => goto('/')}
+						on:mouseenter={() => preloadData('/')}
 					>
 						<KIcon noColorCorrection size="3xl">
 							<KuiLogo />
@@ -124,7 +88,7 @@
 					</div>
 				</header>
 				<main class="flex-grow overflow-hidden">
-					<KPageTransitionProvider {ruleFn} {path}>
+					<KPageTransitionProvider {path}>
 						<slot />
 					</KPageTransitionProvider>
 				</main>

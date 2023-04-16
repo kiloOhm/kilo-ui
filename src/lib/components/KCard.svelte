@@ -52,6 +52,7 @@
 		flex-direction: column;
 		font-size: var(--size);
 		background-color: var(--k-colors-background-1);
+		border-style: solid;
 		border-radius: var(--k-card-border-radius);
 		&[data-bordered='true'] {
 			border-width: var(--k-card-border-width);
@@ -60,8 +61,8 @@
 		> header {
 			padding: var(--k-card-header-padding);
 			background-color: var(--color);
-			border-top-left-radius: var(--k-card-border-radius);
-			border-top-right-radius: var(--k-card-border-radius);
+			border-top-left-radius: calc(var(--k-card-border-radius) * 0.65);
+			border-top-right-radius: calc(var(--k-card-border-radius) * 0.65);
 			&:only-child {
 				border-radius: var(--k-card-border-radius);
 			}
@@ -73,22 +74,22 @@
 				border-radius: var(--k-card-border-radius);
 			}
 			&:first-child {
-				border-top-left-radius: var(--k-card-border-radius);
-				border-top-right-radius: var(--k-card-border-radius);
+				border-top-left-radius: calc(var(--k-card-border-radius) * 0.65);
+				border-top-right-radius: calc(var(--k-card-border-radius) * 0.65);
 			}
 			&:last-child {
-				border-bottom-left-radius: var(--k-card-border-radius);
-				border-bottom-right-radius: var(--k-card-border-radius);
+				border-bottom-left-radius: calc(var(--k-card-border-radius) * 0.65);
+				border-bottom-right-radius: calc(var(--k-card-border-radius) * 0.65);
 			}
 		}
 		> footer {
 			color: var(--text-color);
 			padding: var(--k-card-footer-padding);
 			background-color: var(--color);
-			border-bottom-left-radius: var(--k-card-border-radius);
-			border-bottom-right-radius: var(--k-card-border-radius);
+			border-bottom-left-radius: calc(var(--k-card-border-radius) * 0.65);
+			border-bottom-right-radius: calc(var(--k-card-border-radius) * 0.65);
 			&:only-child {
-				border-radius: var(--k-card-border-radius);
+				border-radius: calc(var(--k-card-border-radius) * 0.65);
 			}
 		}
 	}

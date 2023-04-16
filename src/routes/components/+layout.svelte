@@ -17,10 +17,23 @@
 		}, [] as string[]);
 	let show = false;
 	let collapsible = false;
-	const items: AdaptiveNavItem[] = pages.map((name) => ({
-		type: 'item',
-		key: name
-	}));
+	const items: AdaptiveNavItem[] = [
+		{
+			type: 'item',
+			key: 'Documentation'
+		},
+		{
+			type: 'item',
+			key: 'Components'
+		},
+		{
+			type: 'divider'
+		},
+		...pages.map((name) => ({
+			type: 'item',
+			key: name
+		}))
+	];
 	const setHamburger = getContext('header-set-hamburger') as (show: boolean) => void;
 	$: setHamburger(collapsible);
 	const setHamBurgerClickCallback = getContext('header-on-hamburger-click') as (
@@ -30,12 +43,24 @@
 	let active: string[] = pages.includes($page.route.id?.split('/')?.pop() ?? '')
 		? $page.route.id?.split('/')?.pop()
 			? [$page.route.id?.split('/')?.pop()!]
-			: ['Button']
-		: ['Button'];
+			: ['Components']
+		: ['Components'];
 	$: (() => {
 		if (typeof window === 'undefined') return;
 		if (active) {
-			goto('/components/' + active).then(() => {
+			let target;
+			switch (active[0]) {
+				case 'Documentation':
+					target = '/docs';
+					break;
+				case 'Components':
+					target = '/components';
+					break;
+				default:
+					target = '/components/' + active;
+			}
+			if (!target) return;
+			goto(target).then(() => {
 				show = false;
 			});
 		}
@@ -43,7 +68,14 @@
 	const loaded = new Set();
 	function hover(key: string) {
 		if (loaded.has(key)) return;
-		preloadData(`/components/${key}`).then(() => {
+		let url = `/components/${key}`;
+		if (key === 'Documentation') {
+			url = '/docs';
+		}
+		if (key === 'Components') {
+			url = '/components';
+		}
+		preloadData(url).then(() => {
 			loaded.add(key);
 		});
 	}

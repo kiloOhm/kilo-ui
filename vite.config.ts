@@ -9,7 +9,8 @@ export default defineConfig({
 		APP_VERSION: JSON.stringify(process.env.npm_package_version)
 	},
 	server: {
-		host: true
+		host: true,
+		port: 5174
 	},
 	ssr: {
 		noExternal: ['@popperjs/core']

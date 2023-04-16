@@ -10,11 +10,16 @@
 	export let active: string[] | null = null;
 </script>
 
-<nav class="py-8 px-2 overflow-auto">
+<nav class="px-2 overflow-auto">
 	{#if $$slots.before}
 		<slot name="before" />
 	{/if}
-	<KMenu {items} bind:active on:hover={(e) => dispatch('hover', { key: e.detail.key })} />
+	<KMenu
+		class="pt-8"
+		{items}
+		bind:active
+		on:hover={(e) => dispatch('hover', { key: e.detail.key })}
+	/>
 	{#if $$slots.after}
 		<slot name="after" />
 	{/if}
@@ -22,6 +27,7 @@
 
 <style>
 	nav {
+		overflow: auto;
 		display: flex;
 		flex-direction: column;
 		background-color: var(--k-colors-background-1);

@@ -114,7 +114,11 @@
 		{ leading: true, trailing: true }
 	);
 	$: validSize = Sizes.includes(size as Size);
-	$: _color = Colors.includes(color as Color) ? `var(--k-colors-${color}-darken-4)` : color;
+	$: _color = Colors.includes(color as Color)
+		? priority === 'primary' && !ghost
+			? `var(--k-colors-${color}-darken-4)`
+			: `var(--k-colors-${color})`
+		: color;
 	let restAriaLabel: string, restClass: string, restProps: any;
 	$: (() => {
 		const { class: _class, ariaLabel, ...props } = $$restProps;
@@ -173,6 +177,8 @@
 
 <style lang="scss">
 	.k-btn {
+		background: transparent;
+		border: none;
 		position: relative;
 		overflow: hidden;
 		font-size: var(--size);

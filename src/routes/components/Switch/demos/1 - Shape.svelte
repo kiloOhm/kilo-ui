@@ -6,7 +6,7 @@
 	<KSwitch>
 		<span>Default</span>
 	</KSwitch>
-	<KSwitch shape="round">
+	<KSwitch shape="pill">
 		<span>Round</span>
 	</KSwitch>
 	<KSwitch shape="sharp">

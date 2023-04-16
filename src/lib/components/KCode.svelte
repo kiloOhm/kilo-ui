@@ -21,7 +21,8 @@
 		language.toLowerCase()
 	);
 	function copy() {
-		return navigator.clipboard.writeText(code);
+		if (typeof navigator === 'undefined') return;
+		return navigator.clipboard?.writeText(code);
 	}
 	let restClass: string, restProps: any;
 	$: (() => {
@@ -35,12 +36,12 @@
 
 <div class="k-code {restClass ?? ''}" {...restProps} class:bordered>
 	<div class="wrapper">
-		{#if showLanguage || (navigator.clipboard && showCopy)}
+		{#if showLanguage || showCopy}
 			<header>
 				{#if showLanguage}
 					<span class="language-name">{language}</span>
 				{/if}
-				{#if navigator.clipboard && showCopy}
+				{#if showCopy}
 					<KBtn priority="tertiary" shape="circle" size="xs" on:click={() => copy()}>
 						<KIcon>
 							<IonCopyOutline />
@@ -49,16 +50,14 @@
 				{/if}
 			</header>
 		{/if}
-		<pre>
-				<code
+		<pre><code
 				style:white-space={wrap ? 'pre-wrap' : 'pre'}
 				style:tab-size={tabSize}
 				style:-moz-tab-size={tabSize}
 				style:-o-tab-size={tabSize}
 				class={`language-${language}`}>
 					{@html html}
-				</code>
-			</pre>
+			</code></pre>
 	</div>
 </div>
 

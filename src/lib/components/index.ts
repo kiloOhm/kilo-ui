@@ -19,3 +19,4 @@ export { default as KAccordion } from './KAccordion.svelte';
 export { default as KInput } from './KInput.svelte';
 export { default as KCombobox } from './KCombobox.svelte';
 export { default as KChip } from './KChip.svelte';
+export { default as KBlockquote } from './KBlockquote.svelte';

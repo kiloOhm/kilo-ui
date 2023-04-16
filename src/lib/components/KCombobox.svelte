@@ -114,11 +114,12 @@
 				const item = items.find((y) => (y as any).key === x);
 				return {
 					key: x,
-					label: item ? (item as any).label : x
+					label: item?.label ?? x
 				};
 		  })
 		: null;
 
+	$: console.log(chips);
 	let inputRef: InstanceType<typeof KInput> | null = null;
 	let menuWrapperRef: HTMLElement | null = null;
 	let menuRef: InstanceType<typeof KMenu> | null = null;
@@ -233,6 +234,7 @@
 <style lang="scss">
 	.menu-wrapper {
 		padding: 0.25rem;
+		cursor: pointer;
 	}
 	.k-combobox {
 		min-width: none;

@@ -16,7 +16,8 @@
 	<svelte:fragment slot="header">Anchor</svelte:fragment>
 	<div class="flex flex-col gap-2" slot="comment">
 		<p>
-			Utility wrapper around the <code>&lt;a&gt;</code> tag. Hyperlink button copies link to clipboard
+			This is a utility wrapper around the <code>&lt;a&gt;</code> tag. Hyperlink button copies link to
+			clipboard
 		</p>
 	</div>
 	{#each data.demos as demo}
