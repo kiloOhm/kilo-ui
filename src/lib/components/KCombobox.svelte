@@ -118,7 +118,6 @@
 		  })
 		: null;
 
-	$: console.log(chips);
 	let inputRef: InstanceType<typeof KInput> | null = null;
 	let menuWrapperRef: HTMLElement | null = null;
 	let menuRef: InstanceType<typeof KMenu> | null = null;
